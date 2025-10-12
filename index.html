@@ -1,228 +1,111 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abdiwahid Said Abdirahman — Portfolio</title>
-  <meta name="description" content="Persönliche Website von Abdiwahid — Projekte, Bio und Kontakt." />
-  <link rel="icon" href="data:," />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Abdiwahid — Persönliches Portfolio</title>
+  <meta name="description" content="Portfolio von Abdiwahid aus Krefeld, Deutschland — Projekte, Kontakt und Nachrichten." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0f1724;
-      --card: #0b1220;
-      --muted: #94a3b8;
-      --accent: #7c3aed;
-      --glass: rgba(255, 255, 255, 0.04);
-      --radius: 14px;
-      color-scheme: dark;
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      --bg:#0f1724; --card:#0b1220; --muted:#94a3b8;
+      --accent:#06b6d4; --glass:rgba(255,255,255,0.04); --radius:14px;
+      color-scheme: dark; font-family: 'Inter', system-ui, sans-serif;
     }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; background: linear-gradient(180deg, var(--bg) 0%, #06111a 100%); color: #e6eef8; }
-    a { color: inherit; text-decoration: none; }
-    header {
-      backdrop-filter: blur(6px);
-      position: sticky;
-      top: 16px;
-      margin: 16px auto;
-      max-width: 1000px;
-      padding: 10px;
-      border-radius: 12px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#06111a);color:#e6eef8}
+    header,footer,.card{max-width:1000px;margin:auto;padding:20px;border-radius:var(--radius);}
+    header{display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(6px);}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo img{width:48px;height:48px;border-radius:12px;border:2px solid var(--accent)}
+    a{color:inherit;text-decoration:none}
+    .btn{padding:8px 12px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.05);cursor:pointer;}
+    .hero{display:flex;flex-wrap:wrap;align-items:center;gap:20px;background:var(--card);margin-top:30px;}
+    .hero img{width:120px;height:120px;border-radius:16px;object-fit:cover;border:2px solid var(--accent);}
+    .muted{color:var(--muted)}
+    form input,form textarea,form button{
+      width:100%;margin-top:8px;padding:10px;border-radius:10px;
+      border:1px solid rgba(255,255,255,0.05);background:transparent;color:inherit;
     }
-    .container { max-width: 1000px; margin: 28px auto; padding: 0 20px; }
-    .logo { display: flex; gap: 12px; align-items: center; }
-    .nav { display: flex; gap: 12px; align-items: center; }
-    .btn { padding: 8px 12px; border-radius: 10px; background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.04); cursor: pointer; }
-
-    .hero { display: grid; grid-template-columns: 1fr; gap: 18px; align-items: center; padding: 34px; border-radius: var(--radius); background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow: 0 6px 30px rgba(2,6,23,0.6); }
-    .hero h1 { font-size: clamp(26px, 4vw, 44px); margin: 0; }
-    .muted { color: var(--muted); }
-    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-    .card { background: var(--card); padding: 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.03); }
-
-    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
-    .project { padding: 14px; border-radius: 10px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.03); }
-    .project h3 { margin: 6px 0; }
-    .chips { display: flex; gap: 8px; flex-wrap: wrap; }
-    .chip { padding: 6px 8px; border-radius: 999px; font-size: 12px; background: var(--glass); border: 1px solid rgba(255,255,255,0.03); }
-
-    footer { margin: 34px auto 80px; max-width: 1000px; padding: 16px; color: var(--muted); display: flex; align-items: center; justify-content: space-between; }
-
-    @media (max-width: 880px) {
-      .grid { grid-template-columns: 1fr; }
-      .hero { padding: 18px; }
-      header { margin: 10px; padding: 8px; }
-      .nav { display: none; }
-    }
-
-    .age-badge { position: fixed; right: 18px; bottom: 18px; padding: 10px 12px; border-radius: 12px; background: linear-gradient(90deg, var(--accent), #06b6d4); font-weight: 600; color: white; box-shadow: 0 8px 30px rgba(124,58,237,0.18); }
-
-    form input, form textarea { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.04); background: transparent; color: inherit; margin-top: 8px; }
-    form button { margin-top: 12px; padding: 10px 14px; border-radius: 10px; border: 0; background: linear-gradient(90deg, var(--accent), #06b6d4); color: white; font-weight: 600; cursor: pointer; }
-
-    .project:hover { transform: translateY(-6px); transition: transform .25s; }
+    form button{background:linear-gradient(90deg,var(--accent),#7c3aed);border:0;font-weight:600;cursor:pointer}
+    .upload-preview{margin-top:10px;display:flex;justify-content:center;}
+    .upload-preview img{max-width:160px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);}
+    footer{color:var(--muted);text-align:center;margin:40px auto;}
   </style>
 </head>
 <body>
-  <header class="container">
+
+  <header>
     <div class="logo">
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g filter="url(#shadow)">
-          <path d="M22 4L4 15V29L22 40L40 29V15L22 4Z" fill="#0f1724" stroke="#e0e0e0" stroke-width="2"/>
-          <path d="M15 15L22 22L29 15" fill="none" stroke="#00bcd4" stroke-width="3"/>
-          <path d="M15 29L22 22L29 29" fill="none" stroke="#00bcd4" stroke-width="3"/>
-          <circle cx="22" cy="22" r="2" fill="#e0e0e0"/>
-        </g>
-        <text x="22" y="38" font-size="10" text-anchor="middle" fill="#94a3b8">ASA</text>
-        <defs>
-          <filter id="shadow" x="0" y="0" width="44" height="44" filterUnits="userSpaceOnUse">
-            <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#2c2c2c"/>
-          </filter>
-        </defs>
-      </svg>
+      <img src="IMG_1295.jpeg" alt="Abdiwahid">
       <div>
-        <div style="font-weight:700">ABDIWAHID.DE</div>
-        <div class="muted" style="font-size:12px">by Abdiwahid — persönliches Portfolio</div>
+        <div style="font-weight:700;font-size:18px;">Abdiwahid</div>
+        <div class="muted" style="font-size:13px;">Entwickler aus Krefeld, Deutschland</div>
       </div>
     </div>
-    <nav class="nav">
-      <a class="btn" href="#about">Über</a>
-      <a class="btn" href="#projects">Projekte</a>
-      <a class="btn" href="#contact">Kontakt</a>
-    </nav>
+    <a class="btn" href="#contact">Kontakt</a>
   </header>
 
-  <main class="container">
+  <main style="max-width:1000px;margin:auto;padding:20px">
     <section class="hero card">
-      <div style="gap:18px; align-items:center;">
-        <div>
-          <h1>Hey — ich bin Abdiwahid. <span class="muted">19 Jahre</span></h1>
-          <p class="muted">Motivierter Schüler der Internationalen Förderklasse mit dem Ziel, eine Ausbildung zum Fachinformatiker zu erlangen. Das ist meine persönliche Website — Projekte, Erfahrungen und Kontakt.</p>
-          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn" href="#projects">Meine Projekte</a>
-            <a class="btn" href="#contact">Sag Hi</a>
-          </div>
-        </div>
+      <img src="IMG_1295.jpeg" alt="Profilfoto">
+      <div>
+        <h1>Willkommen — Ich bin Abdiwahid</h1>
+        <p class="muted">Webentwickler & kreativer Denker. Hier kannst du mir eine Nachricht schicken oder ein Foto hochladen.</p>
       </div>
     </section>
 
-    <section id="about" style="margin-top:18px" class="card">
-      <h2>Über mich</h2>
-      <div class="grid" style="margin-top:12px">
-        <div>
-          <p class="muted">Geboren am 23. Oktober 2006 in Bualle, Somalia, lebe ich seit 2023 in Krefeld, NRW. Ich besuche die Internationale Förderklasse am Berufskolleg Glockenspitz, um den Hauptschulabschluss 2026 zu erlangen. Meine bisherigen Erfahrungen umfassen Praktika und Jobs in Produktion, Gastronomie und Café-Betrieb.</p>
-          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
-            <span class="chip">Deutsch (A1)</span>
-            <span class="chip">Englisch (fließend)</span>
-            <span class="chip">IT-Interesse</span>
-            <span class="chip">Teamarbeit</span>
-          </div>
-        </div>
-        <div>
-          <div class="card" style="background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));">
-            <strong>Kurzprofil</strong>
-            <p class="muted" style="margin:6px 0">Aktuell: Ausbildungsvorbereitung • Open to Collabs</p>
-            <p style="margin:8px 0"><strong>Adresse:</strong> Inratherstraße 325, 47803 Krefeld</p>
-            <p style="margin:8px 0"><strong>Telefon:</strong> 01521240058</p>
-            <p style="margin:8px 0"><strong>E-Mail:</strong> jamuus23@gmail.com</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <section id="contact" class="card" style="margin-top:24px">
+      <h2>Nachricht & Foto-Upload</h2>
+      <p class="muted">Sende mir eine Nachricht oder lade ein Foto hoch (optional).</p>
 
-    <section id="projects" style="margin-top:18px">
-      <h2 style="margin-bottom:12px">Projekte & Erfahrungen</h2>
-      <div class="projects">
-        <article class="project">
-          <h3>Ferienjob – Produktionsmitarbeiter</h3>
-          <p class="muted">07/2025 - 29.08.2025, ABBELLEN GmbH (über RIW Deinslastung Gruppe)<br>- Bedienung von Produktionsanlagen, Qualitätskontrollen, Dokumentation.</p>
-          <div style="margin-top:10px" class="chips">
-            <span class="chip">Produktion</span>
-            <span class="chip">Effizienzsteigerung</span>
-          </div>
-        </article>
-        <article class="project">
-          <h3>Minijob – McDonald’s</h3>
-          <p class="muted">04/2025 - 01.06.2025, Dießemer Bruch, Krefeld<br>- Kundenbedienung, Speisezubereitung, Kassentätigkeiten.</p>
-          <div style="margin-top:10px" class="chips">
-            <span class="chip">Gastronomie</span>
-            <span class="chip">Teamarbeit</span>
-          </div>
-        </article>
-        <article class="project">
-          <h3>Praktikum – CAFE BREW</h3>
-          <p class="muted">05.05.2025 - 16.05.2025, Speciality Coffee GmbH, Krefeld<br>- Kundenbedienung, Kaffeespezialitäten, Arbeitsumgebungspflege.</p>
-          <div style="margin-top:10px" class="chips">
-            <span class="chip">Service</span>
-            <span class="chip">Kommunikation</span>
-          </div>
-        </article>
-        <article class="project">
-          <h3>Portfolio (diese Seite)</h3>
-          <p class="muted">Ein sauberes Single-File-Portfolio mit Kali-X-Logo.</p>
-          <div style="margin-top:10px" class="chips">
-            <span class="chip">HTML</span>
-            <span class="chip">CSS</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="contact" style="margin-top:18px" class="card">
-      <h2>Kontakt</h2>
-      <p class="muted">Schick mir eine Nachricht — ich antworte schnell.</p>
-      <form onsubmit="sendMail(event)">
+      <form id="contactForm" onsubmit="sendMessage(event)">
         <label for="name">Dein Name</label>
-        <input id="name" type="text" placeholder="z. B. Anna" required />
+        <input type="text" id="name" placeholder="z. B. Ali" required>
+
         <label for="email">E-Mail</label>
-        <input id="email" type="email" placeholder="name@mail.de" required />
+        <input type="email" id="email" placeholder="name@mail.de" required>
+
         <label for="message">Nachricht</label>
-        <textarea id="message" rows="5" placeholder="Hey Abdiwahid, ..." required></textarea>
-        <button type="submit">E-Mail senden</button>
+        <textarea id="message" rows="4" placeholder="Hallo Abdiwahid, ..." required></textarea>
+
+        <label for="photo">Foto hochladen (optional)</label>
+        <input type="file" id="photo" accept="image/*" onchange="previewPhoto(event)">
+
+        <div class="upload-preview" id="preview"></div>
+
+        <button type="submit">Nachricht senden</button>
       </form>
+
       <script>
-        function sendMail(e) {
+        function previewPhoto(e){
+          const file = e.target.files[0];
+          const preview = document.getElementById('preview');
+          preview.innerHTML = '';
+          if(file){
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+            preview.appendChild(img);
+          }
+        }
+
+        function sendMessage(e){
           e.preventDefault();
-          const name = document.getElementById('name').value.trim();
-          const mail = document.getElementById('email').value.trim();
-          const msg = document.getElementById('message').value.trim();
-          const subject = encodeURIComponent('Kontakt von abdiwahid.de — ' + name);
-          const body = encodeURIComponent('Name: ' + name + '\nE-Mail: ' + mail + '\n\n' + msg);
-          window.location.href = `mailto:jamuus23@gmail.com?subject=${subject}&body=${body}`;
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const msg = document.getElementById('message').value;
+          const subject = encodeURIComponent("Neue Nachricht von " + name);
+          const body = encodeURIComponent("Name: "+name+"\nE-Mail: "+email+"\n\n"+msg);
+          window.location.href = `mailto:abdiwahid@mail.de?subject=${subject}&body=${body}`;
+          alert("Deine Nachricht wird über dein E-Mail-Programm gesendet.");
         }
       </script>
     </section>
   </main>
 
   <footer>
-    <div class="container" style="display:flex;justify-content:space-between;align-items:center">
-      <div class="muted">© Abdiwahid — Designed by Abdiwahid, Krefeld, 25. Aug. 2025</div>
-      <div style="display:flex;gap:12px;align-items:center">
-        <a class="muted" href="#">GitHub</a>
-        <a class="muted" href="#">Impressum</a>
-      </div>
-    </div>
+    <p>© 2025 — Developed by <strong>Abdiwahid</strong> in Krefeld, Germany.</p>
   </footer>
 
-  <div class="age-badge">19</div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const contactEmail = 'jamuus23@gmail.com';
-      document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
-        a.href = a.href.replace('your-email@example.com', contactEmail);
-      });
-    });
-    window.addEventListener('keydown', e => {
-      if (e.key === 'c' && !e.metaKey && !e.ctrlKey) {
-        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  </script>
 </body>
 </html>
