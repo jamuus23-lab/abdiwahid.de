@@ -1,110 +1,248 @@
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Abdiwahid Said Abdirahman — Website im Aufbau</title>
-<link rel="icon" href="data:," />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Abdiwahid — Immobilien & Projekte in Krefeld</title>
+  <meta name="description" content="Immobilien, Projekte und Services in Krefeld — Kontakt: info@abdiwahid.de" />
+  <link rel="icon" href="data:," />
 
-<style>
-:root {
-  --bg: #0f1724;
-  --card: #0b1220;
-  --muted: #94a3b8;
-  --accent: #7c3aed;
-  --glass: rgba(255,255,255,0.04);
-  --radius: 14px;
-  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-}
-
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg);color:#e6eef8;scroll-behavior:smooth;}
-a{color:inherit;text-decoration:none;}
-
-/* Banner */
-.banner {
-  background: linear-gradient(90deg, var(--accent), #06b6d4);
-  color: white;
-  text-align: center;
-  padding: 12px 16px;
-  font-weight: 600;
-  font-size: 16px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  animation: pulse 3s infinite;
-}
-@keyframes pulse {
-  0% {opacity: 1;}
-  50% {opacity: 0.8;}
-  100% {opacity: 1;}
-}
-
-/* Layout */
-.container{max-width:800px;margin:40px auto;padding:0 20px;text-align:center;}
-.card{background:var(--card);padding:24px;border-radius:12px;border:1px solid rgba(255,255,255,0.05);box-shadow:0 10px 30px rgba(0,0,0,0.5);}
-
-/* Typography */
-h1{margin-bottom:12px;color:var(--accent);}
-p{color:var(--muted);font-size:17px;line-height:1.6;}
-strong{color:white;}
-
-/* Contact section */
-.contact {
-  margin-top: 24px;
-  background: var(--glass);
-  padding: 16px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-
-.contact a {
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-/* Footer */
-footer {
-  margin-top: 24px;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-</style>
+  <!-- Modernes, simples CSS (mobile-first) -->
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0ea5a4;
+      --accent2:#7c3aed;
+      --radius:12px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color-scheme: light;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#f3f6fb,#eef2f7);color:#0f1724}
+    a{color:inherit}
+    header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1200px;margin:0 auto}
+    .brand{font-weight:700;color:var(--accent2);letter-spacing:0.02em}
+    nav{display:flex;gap:10px}
+    .btn{padding:8px 12px;border-radius:10px;border:0;background:transparent;cursor:pointer;font-weight:600;color:var(--muted)}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#06b6d4);color:white}
+    .container{max-width:1200px;margin:16px auto;padding:0 20px}
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr;gap:16px;align-items:center;margin-bottom:18px}
+    .hero-card{background:var(--card);border-radius:16px;overflow:hidden;box-shadow:0 12px 30px rgba(12,15,30,0.06)}
+    .hero-media{height:420px;background:#ddd;display:block;width:100%;object-fit:cover}
+    .hero-content{padding:22px}
+    .kicker{display:inline-block;background:linear-gradient(90deg,var(--accent2),var(--accent));color:white;padding:6px 10px;border-radius:999px;font-size:13px;font-weight:700;margin-bottom:12px}
+    h1{margin:0 0 8px 0;font-size:28px}
+    p.lead{color:var(--muted);margin:0 0 12px 0}
+    /* Listings grid */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media (max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:680px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 8px 22px rgba(12,15,30,0.05);display:flex;flex-direction:column}
+    .card img{width:100%;height:190px;object-fit:cover}
+    .card-body{padding:12px;flex:1;display:flex;flex-direction:column}
+    .price{font-weight:800;color:var(--accent2)}
+    .meta{color:var(--muted);font-size:13px;margin-top:6px}
+    .actions{display:flex;gap:8px;margin-top:12px}
+    .small-btn{padding:8px 10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent;cursor:pointer;font-weight:700}
+    /* Sidebar / contact */
+    .layout{display:grid;grid-template-columns:2fr 380px;gap:18px}
+    @media (max-width:980px){.layout{grid-template-columns:1fr}}
+    .panel{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 8px 22px rgba(12,15,30,0.05)}
+    .contact a{color:var(--accent2);font-weight:700}
+    /* map */
+    .map{border-radius:10px;border:1px solid rgba(0,0,0,0.06);overflow:hidden}
+    footer{max-width:1200px;margin:28px auto;padding:0 20px;color:var(--muted);font-size:14px}
+  </style>
 </head>
-
 <body>
 
-<!-- Top banner -->
-<div class="banner">
-  🚧 Diese Website wird derzeit überarbeitet — bitte haben Sie etwas Geduld! (Geplant: Fertigstellung in wenigen Wochen)
-</div>
+  <!-- header -->
+  <header>
+    <div class="brand">ABDIWAHID — Krefeld Properties</div>
+    <nav>
+      <a class="btn" href="#listings">Angebote</a>
+      <a class="btn" href="#about">Über mich</a>
+      <a class="btn" href="#kontakt">Kontakt</a>
+      <a class="btn primary" href="mailto:info@abdiwahid.de">E-Mail</a>
+    </nav>
+  </header>
 
-<main class="container">
-  <div class="card">
-    <h1>👋 Hallo, ich bin Abdiwahid Said Abdirahman</h1>
-    <p>Ich arbeite gerade an meiner neuen persönlichen Website mit Portfolio, Tools und Projekten.</p>
-    <p>In dieser Zeit ist meine Seite <strong>im Aufbau</strong> — bald wird sie wieder vollständig online sein!</p>
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero-card hero" aria-labelledby="site-hero">
+      <!-- dynamic Unsplash image queries: will fetch Krefeld / Germany images -->
+      <img class="hero-media" src="https://source.unsplash.com/1600x900/?krefeld,germany,city" alt="Krefeld city view">
+      <div class="hero-content">
+        <span class="kicker">Krefeld • Immobilien & Projekte</span>
+        <h1 id="site-hero">Top-Immobilien und Projekte in Krefeld</h1>
+        <p class="lead">Exklusive Angebote, maßgeschneiderte Beratung und lokale Marktkenntnis in Krefeld. Website betreut von <strong>Abdiwahid</strong>. In dringenden Fällen: <a href="mailto:info@abdiwahid.de">info@abdiwahid.de</a></p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn primary" href="#listings">Jetzt Angebote ansehen</a>
+          <a class="btn" href="#kontakt">Kontakt aufnehmen</a>
+        </div>
+      </div>
+    </section>
 
-    <div class="contact">
-      <p>📩 In dringenden Fällen oder bei Fragen erreichen Sie mich unter:</p>
-      <p><a href="mailto:info@abdiwahid.de">info@abdiwahid.de</a></p>
+    <!-- two-column layout -->
+    <div class="layout">
+
+      <!-- listings -->
+      <section id="listings">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin:6px 0 12px 0">
+          <h2 style="margin:0">Aktuelle Angebote</h2>
+          <div style="color:var(--muted)">Krefeld • Neueste Objekte</div>
+        </div>
+
+        <div class="grid">
+          <!-- Card 1 -->
+          <article class="card">
+            <img src="https://source.unsplash.com/800x600/?krefeld,house" alt="Objekt 1 Krefeld">
+            <div class="card-body">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <div style="font-size:15px;font-weight:700">Modernes Stadthaus</div>
+                  <div class="meta">Uerdingen • 4 Zimmer • 120 m²</div>
+                </div>
+                <div class="price">€ 420.000</div>
+              </div>
+              <p class="meta" style="margin-top:8px">Renoviert, gute Verkehrsanbindung, Rheinnähe.</p>
+              <div class="actions" style="margin-top:auto">
+                <button class="small-btn" onclick="viewDetails('Modernes Stadthaus','Ausführliche Beschreibung des Stadthauses...')">Details</button>
+                <a class="small-btn" href="mailto:info@abdiwahid.de?subject=Anfrage%20Modernes%20Stadthaus">Anfragen</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="card">
+            <img src="https://source.unsplash.com/800x600/?krefeld,apartment" alt="Objekt 2 Krefeld">
+            <div class="card-body">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <div style="font-size:15px;font-weight:700">Zentrales Apartment</div>
+                  <div class="meta">Innenstadt • 2 Zimmer • 65 m²</div>
+                </div>
+                <div class="price">€ 220.000</div>
+              </div>
+              <p class="meta" style="margin-top:8px">Ideal als Kapitalanlage oder Erstwohnung.</p>
+              <div class="actions" style="margin-top:auto">
+                <button class="small-btn" onclick="viewDetails('Zentrales Apartment','Kurzbeschreibung des Apartments...')">Details</button>
+                <a class="small-btn" href="mailto:info@abdiwahid.de?subject=Anfrage%20Zentrales%20Apartment">Anfragen</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="card">
+            <img src="https://source.unsplash.com/800x600/?krefeld,river" alt="Objekt 3 Krefeld">
+            <div class="card-body">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <div style="font-size:15px;font-weight:700">Rheinnähe – Baugrundstück</div>
+                  <div class="meta">Rheinufer • Grundstück • 480 m²</div>
+                </div>
+                <div class="price">auf Anfrage</div>
+              </div>
+              <p class="meta" style="margin-top:8px">Großzügiges Grundstück nahe dem Flussufer.</p>
+              <div class="actions" style="margin-top:auto">
+                <button class="small-btn" onclick="viewDetails('Rheinnähe – Baugrundstück','Informationen zum Grundstück...')">Details</button>
+                <a class="small-btn" href="mailto:info@abdiwahid.de?subject=Anfrage%20Baugrundstueck">Anfragen</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- sidebar -->
+      <aside class="panel">
+        <h3>Kontakt</h3>
+        <p class="contact">In Eile? Schreiben Sie eine E-Mail an <a href="mailto:info@abdiwahid.de">info@abdiwahid.de</a> oder rufen Sie an: <strong>+49 123 456789</strong> (Platzhalter)</p>
+
+        <hr style="margin:12px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
+
+        <h4>Service</h4>
+        <p class="meta">Beratung • Bewertung • Vermarktung • Projektentwicklung</p>
+
+        <hr style="margin:12px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
+
+        <h4>Karte — Krefeld</h4>
+        <div class="map" style="height:260px">
+          <!-- OpenStreetMap iframe centered roughly on Krefeld -->
+          <iframe width="100%" height="100%" frameborder="0"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=6.45%2C51.30%2C6.72%2C51.38&amp;layer=mapnik"
+            aria-label="Karte von Krefeld"></iframe>
+        </div>
+
+        <hr style="margin:12px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
+
+        <h4>Letzte Updates</h4>
+        <p class="meta" id="lastUpdate">–</p>
+      </aside>
+
+    </div> <!-- layout end -->
+
+    <!-- About / Footer -->
+    <section id="about" style="margin-top:20px">
+      <div class="panel">
+        <h3>Über Abdiwahid</h3>
+        <p class="meta">Hallo — ich bin Abdiwahid, Web- & Projektbetreuer in Krefeld. Diese Seite zeigt ausgewählte Angebote und Projektinformationen. Für Exposé-Anfragen oder Kooperationen: <a href="mailto:info@abdiwahid.de">info@abdiwahid.de</a></p>
+      </div>
+    </section>
+
+    <section id="kontakt" style="margin-top:12px">
+      <div class="panel">
+        <h3>Kontaktformular</h3>
+        <!-- Einfaches client-side Formular; ersetzt durch Formspree / Backend wenn nötig -->
+        <form id="contactForm" onsubmit="submitForm(event)">
+          <input type="text" id="name" placeholder="Ihr Name" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);margin-bottom:8px">
+          <input type="email" id="email" placeholder="E-Mail" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);margin-bottom:8px">
+          <textarea id="msg" placeholder="Nachricht" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);margin-bottom:8px"></textarea>
+          <div style="display:flex;gap:8px">
+            <button class="btn primary" type="submit">Nachricht senden</button>
+            <button class="btn" type="button" onclick="location.href='mailto:info@abdiwahid.de'">Per E-Mail</button>
+          </div>
+          <p id="formFeedback" style="margin-top:8px;color:var(--muted)"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 20px">
+      <div>© <strong>Abdiwahid</strong> — Krefeld • <a href="mailto:info@abdiwahid.de">info@abdiwahid.de</a></div>
+      <div style="color:var(--muted)">Impressum & Datenschutz: bitte ergänzen</div>
     </div>
+  </footer>
 
-    <footer>
-      <p>Letztes Update: <span id="update-date"></span></p>
-    </footer>
-  </div>
-</main>
+  <!-- Minimal JS: interaktiv, ohne Backend -->
+  <script>
+    // Set last update date
+    document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('de-DE', { year:'numeric', month:'long', day:'numeric' });
 
-<script>
-  // Show current update date
-  document.getElementById("update-date").textContent = new Date().toLocaleDateString("de-DE", {
-    year: "numeric", month: "long", day: "numeric"
-  });
-</script>
+    function viewDetails(title, desc){
+      alert(title + "\\n\\n" + desc + "\\n\\nKontakt: info@abdiwahid.de");
+    }
 
+    // Simple mailto send as fallback (client-side only)
+    function submitForm(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('msg').value.trim();
+      if(!name || !email || !msg){ document.getElementById('formFeedback').textContent = 'Bitte alle Felder ausfüllen.'; return; }
+
+      // Use mailto as quick fallback:
+      const subject = encodeURIComponent('Website-Anfrage von ' + name);
+      const body = encodeURIComponent(msg + '\\n\\nKontakt: ' + name + ' | ' + email);
+      window.location.href = 'mailto:info@abdiwahid.de?subject=' + subject + '&body=' + body;
+
+      document.getElementById('formFeedback').textContent = 'Ihr E-Mail-Client wurde geöffnet. Alternativ schreiben Sie an info@abdiwahid.de';
+    }
+  </script>
 </body>
 </html>
