@@ -1,198 +1,110 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>We're Working On It — Please Be Patient</title>
-  <meta name="description" content="This site is under construction. Please be patient while we make improvements." />
-  <style>
-    :root{
-      --bg:#0f1724; /* dark navy */
-      --card:#0b1220;
-      --accent:#6ee7b7; /* mint */
-      --muted:#94a3b8;
-      --glass: rgba(255,255,255,0.04);
-      --radius:16px;
-      --max-width:900px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      background: radial-gradient(1200px 600px at 10% 20%, rgba(108,99,255,0.08), transparent),
-                  radial-gradient(1000px 500px at 90% 80%, rgba(43,211,160,0.04), transparent),
-                  var(--bg);
-      color:#e6eef7;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:28px;
-    }
-    .card{
-      width:100%;
-      max-width:var(--max-width);
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-      border-radius:var(--radius);
-      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
-      padding:32px;
-      display:grid;
-      grid-template-columns: 1fr 360px;
-      gap:28px;
-      align-items:center;
-    }
-    .left{
-      padding-right:8px;
-    }
-    h1{margin:0 0 10px 0;font-size:28px;letter-spacing:-0.02em}
-    p.lead{margin:0 0 18px 0;color:var(--muted);line-height:1.5}
-    .muted{color:var(--muted);font-size:14px}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Abdiwahid Said Abdirahman — Website im Aufbau</title>
+<link rel="icon" href="data:," />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    /* Spinner */
-    .spinner-wrap{display:flex;gap:16px;align-items:center}
-    .spinner{
-      width:86px;height:86px;border-radius:20px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      display:flex;align-items:center;justify-content:center;position:relative;backdrop-filter: blur(6px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 6px 24px rgba(2,6,23,0.6);
-    }
-    .ring{
-      width:54px;height:54px;border-radius:50%;border:4px solid rgba(255,255,255,0.06);position:relative;display:flex;align-items:center;justify-content:center;
-      animation:spin 2.4s linear infinite;
-    }
-    .ring::after{content:"";position:absolute;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px rgba(110,231,183,0.28)}
-    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+<style>
+:root {
+  --bg: #0f1724;
+  --card: #0b1220;
+  --muted: #94a3b8;
+  --accent: #7c3aed;
+  --glass: rgba(255,255,255,0.04);
+  --radius: 14px;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
 
-    /* Right column */
-    .right{display:flex;flex-direction:column;gap:12px;align-items:flex-end}
-    .card-sub{background:var(--glass);padding:14px;border-radius:12px;width:100%;text-align:left}
-    .progress{height:10px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden}
-    .progress > i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),#60a5fa);border-radius:999px;transition:width 800ms cubic-bezier(.2,.9,.3,1)}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:#e6eef8;scroll-behavior:smooth;}
+a{color:inherit;text-decoration:none;}
 
-    /* Notify input */
-    .notify{
-      display:flex;gap:8px;align-items:center;margin-top:8px;width:100%
-    }
-    .notify input{flex:1;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;outline:none}
-    .btn{background:linear-gradient(90deg,var(--accent),#60a5fa);border:none;padding:10px 14px;border-radius:10px;color:#062022;font-weight:600;cursor:pointer}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.05);color:var(--muted)}
+/* Banner */
+.banner {
+  background: linear-gradient(90deg, var(--accent), #06b6d4);
+  color: white;
+  text-align: center;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  animation: pulse 3s infinite;
+}
+@keyframes pulse {
+  0% {opacity: 1;}
+  50% {opacity: 0.8;}
+  100% {opacity: 1;}
+}
 
-    footer.small{font-size:13px;color:var(--muted);margin-top:10px}
+/* Layout */
+.container{max-width:800px;margin:40px auto;padding:0 20px;text-align:center;}
+.card{background:var(--card);padding:24px;border-radius:12px;border:1px solid rgba(255,255,255,0.05);box-shadow:0 10px 30px rgba(0,0,0,0.5);}
 
-    /* Responsive */
-    @media (max-width:880px){
-      .card{grid-template-columns:1fr;padding:18px}
-      .right{align-items:stretch}
-      .spinner{margin-bottom:6px}
-    }
-  </style>
+/* Typography */
+h1{margin-bottom:12px;color:var(--accent);}
+p{color:var(--muted);font-size:17px;line-height:1.6;}
+strong{color:white;}
+
+/* Contact section */
+.contact {
+  margin-top: 24px;
+  background: var(--glass);
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.contact a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Footer */
+footer {
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+</style>
 </head>
+
 <body>
-  <main class="card" role="main" aria-labelledby="main-title">
-    <section class="left">
-      <div class="spinner-wrap" aria-hidden="true">
-        <div class="spinner" title="working...">
-          <div class="ring" aria-hidden="true"></div>
-        </div>
-        <div>
-          <h1 id="main-title">Hold tight — we're working on the site</h1>
-          <p class="lead">Thanks for visiting! We're making some improvements right now. Please be patient — we'll be back online in a bit with something better.</p>
-          <p class="muted">Want updates? Leave your email and we'll notify you when the site returns.</p>
-        </div>
-      </div>
-      <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;">
-        <button class="btn" id="notify-btn">Notify me</button>
-        <button class="btn ghost" id="learn-btn">Learn more</button>
-      </div>
-      <footer class="small">In a rush? Contact: <a href="mailto:hello@example.com" style="color:var(--accent);text-decoration:none">hello@example.com</a></footer>
-    </section>
 
-    <aside class="right" aria-label="status panel">
-      <div class="card-sub">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <strong>Progress</strong>
-          <span class="muted" id="progress-text">Setting up things...</span>
-        </div>
-        <div class="progress" aria-hidden="true">
-          <i id="progress-bar"></i>
-        </div>
-        <div style="margin-top:12px;display:flex;gap:8px;flex-direction:column">
-          <small class="muted">Estimated uptime: <strong id="eta">a few minutes</strong></small>
-          <small class="muted">Last updated: <span id="last-updated">just now</span></small>
-        </div>
-      </div>
+<!-- Top banner -->
+<div class="banner">
+  🚧 Diese Website wird derzeit überarbeitet — bitte haben Sie etwas Geduld! (Geplant: Fertigstellung in wenigen Wochen)
+</div>
 
-      <div style="width:100%" class="card-sub">
-        <strong style="display:block;margin-bottom:8px">Get notified</strong>
-        <form id="notify-form" class="notify" aria-label="subscribe form">
-          <input type="email" id="email" placeholder="your@email.com" aria-label="email address" required />
-          <button class="btn" type="submit">Subscribe</button>
-        </form>
-        <small class="muted" style="display:block;margin-top:8px">We won't spam — unsubscribe anytime.</small>
-      </div>
-    </aside>
-  </main>
+<main class="container">
+  <div class="card">
+    <h1>👋 Hallo, ich bin Abdiwahid Said Abdirahman</h1>
+    <p>Ich arbeite gerade an meiner neuen persönlichen Website mit Portfolio, Tools und Projekten.</p>
+    <p>In dieser Zeit ist meine Seite <strong>im Aufbau</strong> — bald wird sie wieder vollständig online sein!</p>
 
-  <script>
-    // Small interactive behavior: simulate progress and handle subscribe button
-    (function(){
-      const bar = document.getElementById('progress-bar');
-      const text = document.getElementById('progress-text');
-      const eta = document.getElementById('eta');
-      const last = document.getElementById('last-updated');
-      const notifyBtn = document.getElementById('notify-btn');
-      const learnBtn = document.getElementById('learn-btn');
+    <div class="contact">
+      <p>📩 In dringenden Fällen oder bei Fragen erreichen Sie mich unter:</p>
+      <p><a href="mailto:info@abdiwahid.de">info@abdiwahid.de</a></p>
+    </div>
 
-      let progress = 8;
-      function tick(){
-        progress = Math.min(100, progress + Math.floor(Math.random()*10)+2);
-        bar.style.width = progress + '%';
-        text.textContent = progress < 100 ? (progress + '% complete') : 'All done — launching';
-        eta.textContent = progress < 100 ? 'a few minutes' : 'now';
-        last.textContent = new Date().toLocaleString();
-        if(progress < 100) setTimeout(tick, 1200 + Math.random()*2200);
-      }
-      // start small delay to feel natural
-      setTimeout(tick, 800);
+    <footer>
+      <p>Letztes Update: <span id="update-date"></span></p>
+    </footer>
+  </div>
+</main>
 
-      // fake quick notify action
-      notifyBtn.addEventListener('click', ()=>{
-        document.getElementById('email').focus();
-      });
+<script>
+  // Show current update date
+  document.getElementById("update-date").textContent = new Date().toLocaleDateString("de-DE", {
+    year: "numeric", month: "long", day: "numeric"
+  });
+</script>
 
-      document.getElementById('notify-form').addEventListener('submit', (e)=>{
-        e.preventDefault();
-        const email = document.getElementById('email').value;
-        if(!email) return;
-        // Small UI feedback; the site owner should wire this to their backend or a service like Mailchimp
-        const old = notifyBtn.textContent;
-        notifyBtn.textContent = 'Subscribed ✓';
-        notifyBtn.disabled = true;
-        setTimeout(()=>{notifyBtn.textContent = old; notifyBtn.disabled = false; document.getElementById('email').value = ''}, 2400);
-        alert('Thanks! We will notify ' + email + ' when the site is back.');
-      });
-
-      learnBtn.addEventListener('click', ()=>{
-        alert('This page is a temporary "under construction" placeholder. Replace the contact email or link to your socials here.');
-      });
-
-      // Accessibility: reduce motion if requested
-      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-      if(mq.matches){
-        bar.style.transition = 'none';
-        document.querySelectorAll('.ring').forEach(r=>r.style.animation='none');
-      }
-    })();
-  </script>
-
-  <!--
-    How to use:
-    1) Save this file as "index.html" and drop it in your site's root while you work.
-    2) Customize the text, contact email, or colors near the top in the :root CSS.
-    3) To collect emails, wire the form to your backend or a mailing-list provider.
-
-    Need it in a different style (light theme, minimal text-only, or a WordPress-compatible template)? Tell me which and I'll adapt it.
-  -->
 </body>
 </html>
