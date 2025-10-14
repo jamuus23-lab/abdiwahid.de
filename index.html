@@ -8,7 +8,7 @@
   <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
+    :root {
       --bg: #0b0f14;
       --panel: #0f1720;
       --muted: #94a3b8;
@@ -18,120 +18,126 @@
       --glass: rgba(255,255,255,0.03);
       --radius: 12px;
       --maxw: 1100px;
-      --mono: 'Inter', ui-monospace, SFMono-Regular, Menlo, Monaco, 'Segoe UI Mono';
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
       background: radial-gradient(1200px 700px at 10% 10%, rgba(124,92,255,0.06), transparent 8%), radial-gradient(800px 500px at 90% 90%, rgba(0,212,255,0.03), transparent 8%), var(--bg);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:32px 20px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:20px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
     }
 
-    .site{
-      width:100%;
-      max-width:var(--maxw);
+    .site {
+      width: 100%;
+      max-width: var(--maxw);
       background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:18px;
+      border-radius: 18px;
       box-shadow: 0 10px 30px rgba(2,6,23,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,0.03);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.03);
     }
 
-    header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      padding:28px 32px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
-      backdrop-filter: blur(6px) saturate(120%);
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 28px 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
     }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
 
-    .avatar{
-      width:56px;height:56px;border-radius:12px;flex:0 0 56px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      display:grid;place-items:center;font-weight:700;color:#071026;font-size:20px;
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex: 0 0 56px;
       box-shadow: 0 6px 18px rgba(124,92,255,0.12);
     }
 
-    .brand h1{margin:0;font-size:18px;letter-spacing:0.2px}
-    .brand p{margin:0;font-size:13px;color:var(--muted)}
-
-    nav{display:flex;align-items:center;gap:12px}
-    .navlink{color:var(--muted);text-decoration:none;font-size:14px;padding:8px 12px;border-radius:10px}
-    .navlink:hover{background:var(--glass);color:var(--text)}
-
-    .actions{display:flex;gap:10px;align-items:center}
-    .btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:10px;color:var(--text);cursor:pointer}
-    .btn:hover{transform:translateY(-1px)}
-
-    main{display:grid;grid-template-columns:1fr 360px;gap:28px;padding:28px 32px}
-
-    .content{min-height:360px}
-    .hero{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:28px;border-radius:14px;border:1px solid rgba(255,255,255,0.02);}
-    .hero h2{margin:0;font-size:24px}
-    .hero p{color:var(--muted);margin-top:8px}
-
-    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-    .tag{background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
-
-    .posts{margin-top:20px;display:grid;gap:14px}
-    .post{padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.02)}
-    .post h3{margin:0;font-size:16px}
-    .post p{margin:8px 0 0;color:var(--muted);font-size:14px}
-    .meta{display:flex;gap:10px;color:var(--muted);font-size:13px;margin-top:10px}
-
-    .sidebar{position:relative}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);margin-bottom:14px}
-    .small{font-size:13px;color:var(--muted)}
-
-    .projects{display:grid;gap:10px}
-    .project{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);border:1px solid rgba(255,255,255,0.02)}
-    .project h4{margin:0;font-size:14px}
-    .project p{margin:6px 0 0;color:var(--muted);font-size:13px}
-
-    .subscribe input{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)}
-    .subscribe button{width:100%;margin-top:8px;padding:10px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#071026;font-weight:600}
-
-    footer{padding:18px 32px;background:linear-gradient(180deg, transparent, rgba(255,255,255,0.01));display:flex;justify-content:space-between;align-items:center}
-    .socials{display:flex;gap:12px}
-
-    @media (max-width:920px){
-      main{grid-template-columns:1fr}
-      .site{margin:20px}
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    a.ghost{color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px}
+    .brand h1 { margin: 0; font-size: 18px; }
+    .brand p { margin: 0; font-size: 13px; color: var(--muted); }
+
+    nav { display: flex; align-items: center; gap: 12px; }
+    .navlink { color: var(--muted); text-decoration: none; font-size: 14px; padding: 8px 12px; border-radius: 10px; }
+    .navlink:hover { background: var(--glass); color: var(--text); }
+
+    .actions { display: flex; gap: 10px; align-items: center; }
+    .btn { background: transparent; border: 1px solid rgba(255,255,255,0.04); padding: 8px 12px; border-radius: 10px; color: var(--text); cursor: pointer; }
+    .btn:hover { transform: translateY(-1px); }
+
+    main { display: grid; grid-template-columns: 1fr 360px; gap: 28px; padding: 28px 32px; }
+
+    .content { min-height: 360px; }
+    .hero {
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      padding: 28px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.02);
+    }
+
+    .hero h2 { margin: 0; font-size: 24px; }
+    .hero p { color: var(--muted); margin-top: 8px; }
+
+    .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .tag { background: rgba(255,255,255,0.02); padding: 6px 10px; border-radius: 999px; font-size: 13px; color: var(--muted); }
+
+    .posts { margin-top: 20px; display: grid; gap: 14px; }
+    .post { padding: 16px; border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); border: 1px solid rgba(255,255,255,0.02); }
+    .post h3 { margin: 0; font-size: 16px; }
+    .post p { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
+    .meta { display: flex; gap: 10px; color: var(--muted); font-size: 13px; margin-top: 10px; }
+
+    .sidebar .card { background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); padding: 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.02); margin-bottom: 14px; }
+    .small { font-size: 13px; color: var(--muted); }
+
+    .projects { display: grid; gap: 10px; }
+    .project { padding: 12px; border-radius: 10px; background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent); border: 1px solid rgba(255,255,255,0.02); }
+    .project h4 { margin: 0; font-size: 14px; }
+    .project p { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+
+    .subscribe input { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.04); background: transparent; color: var(--text); }
+    .subscribe button { width: 100%; margin-top: 8px; padding: 10px; border-radius: 10px; border: 0; background: linear-gradient(90deg,var(--accent),var(--accent-2)); color: #071026; font-weight: 600; }
+
+    footer { padding: 18px 32px; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.01)); }
+
+    @media (max-width: 920px) { main { grid-template-columns: 1fr; } }
+
+    a.ghost { color: var(--muted); text-decoration: none; padding: 6px 10px; border-radius: 8px; }
   </style>
 </head>
 <body>
-  <div class="site" role="document">
+  <div class="site">
     <header>
       <div class="brand">
-        <div class="avatar">AW</div>
+        <div class="avatar">
+          <img src="images/abdiwahid.jpg" alt="Abdiwahid" />
+        </div>
         <div>
           <h1>Abdiwahid</h1>
           <p>IT Engineer — Tech developments & short essays</p>
         </div>
       </div>
 
-      <nav aria-label="Primary" id="topNav">
+      <nav>
         <a class="navlink" href="#about">About</a>
         <a class="navlink" href="#posts">Articles</a>
         <a class="navlink" href="#projects">Projects</a>
@@ -139,8 +145,7 @@
       </nav>
 
       <div class="actions">
-        <button id="themeToggle" class="btn" aria-pressed="true" title="Toggle theme">🌙 Dark</button>
-        <a class="btn" href="#posts">Latest</a>
+        <button id="themeToggle" class="btn">🌙 Dark</button>
       </div>
     </header>
 
@@ -148,12 +153,12 @@
       <section class="content">
         <div class="hero" id="about">
           <h2>Hello — I'm Abdiwahid, an IT professional</h2>
-          <p>I write about system design, cloud-native tooling, observability, and tech experiments I build while learning new things. I publish short explainers and project updates.</p>
+          <p>I write about system design, automation, and modern infrastructure. This site shares my insights, mini-projects, and thoughts on tech developments.</p>
 
-          <div class="tags" aria-hidden>
+          <div class="tags">
             <div class="tag">Cloud</div>
-            <div class="tag">Kubernetes</div>
             <div class="tag">DevOps</div>
+            <div class="tag">Automation</div>
             <div class="tag">Web</div>
             <div class="tag">Security</div>
           </div>
@@ -162,20 +167,14 @@
         <div id="posts" class="posts">
           <article class="post">
             <h3>Why observability is more than logs</h3>
-            <p>Instrumentation, traces, metrics and the organiser approach — short notes from a recent migration.</p>
-            <div class="meta"><span>Oct 10, 2025</span><span>•</span><span>5 min read</span></div>
+            <p>Instrumentation, traces, metrics and smarter debugging strategies — quick notes from real-world migrations.</p>
+            <div class="meta"><span>Oct 10, 2025</span> • <span>5 min read</span></div>
           </article>
 
           <article class="post">
             <h3>Small infra patterns for resilient teams</h3>
-            <p>Practical patterns I've used to keep deployments safe and recoverable without heavy ops overhead.</p>
-            <div class="meta"><span>Sep 4, 2025</span><span>•</span><span>6 min read</span></div>
-          </article>
-
-          <article class="post">
-            <h3>Local dev environments that don't suck</h3>
-            <p>Fast reproducible environments using container tooling and lightweight service virtualization.</p>
-            <div class="meta"><span>Aug 18, 2025</span><span>•</span><span>4 min read</span></div>
+            <p>Simple architecture decisions that keep systems stable and maintainable with minimal overhead.</p>
+            <div class="meta"><span>Sep 4, 2025</span> • <span>6 min read</span></div>
           </article>
         </div>
       </section>
@@ -183,19 +182,19 @@
       <aside class="sidebar">
         <div class="card">
           <h3>About me</h3>
-          <p class="small">I'm an IT engineer with a focus on platform engineering and automation. I love building efficient systems and sharing my insights on <a class="ghost" href="https://abdiwahid.de">abdiwahid.de</a>.</p>
+          <p class="small">IT engineer passionate about platform engineering, automation, and continuous improvement. Visit <a class="ghost" href="https://abdiwahid.de">abdiwahid.de</a> for more.</p>
         </div>
 
-        <div class="card">
+        <div class="card" id="projects">
           <h4>Featured projects</h4>
           <div class="projects">
             <div class="project">
               <h4>infra-watch</h4>
-              <p>Lightweight infrastructure monitor for modern distributed systems.</p>
+              <p>Lightweight infrastructure monitor for distributed systems.</p>
             </div>
             <div class="project">
               <h4>auto-deploy</h4>
-              <p>Automatic deployment and rollback management with smart checks.</p>
+              <p>Smart deployment automation with integrated rollbacks.</p>
             </div>
           </div>
         </div>
@@ -215,7 +214,6 @@
           <p class="small">Email: <a class="ghost" href="mailto:info@abdiwahid.de">info@abdiwahid.de</a></p>
           <div class="socials">
             <a class="ghost" href="https://github.com/abdiwahid">GitHub</a>
-            <a class="ghost" href="https://twitter.com/abdiwahid">Twitter</a>
             <a class="ghost" href="https://linkedin.com/in/abdiwahid">LinkedIn</a>
           </div>
         </div>
@@ -233,46 +231,36 @@
     const root = document.documentElement;
     const initial = localStorage.getItem('theme') || 'dark';
 
-    function applyTheme(t){
-      if(t === 'dark'){
-        document.body.style.background = 'radial-gradient(1200px 700px at 10% 10%, rgba(124,92,255,0.06), transparent 8%), radial-gradient(800px 500px at 90% 90%, rgba(0,212,255,0.03), transparent 8%), var(--bg)';
+    function applyTheme(t) {
+      if (t === 'dark') {
+        document.body.style.background =
+          'radial-gradient(1200px 700px at 10% 10%, rgba(124,92,255,0.06), transparent 8%), radial-gradient(800px 500px at 90% 90%, rgba(0,212,255,0.03), transparent 8%), var(--bg)';
         btn.textContent = '🌙 Dark';
-        btn.setAttribute('aria-pressed','true');
       } else {
         document.body.style.background = 'linear-gradient(180deg,#f3f6ff,#fff)';
         btn.textContent = '☀️ Light';
-        btn.setAttribute('aria-pressed','false');
-        root.style.setProperty('--bg','#f6f8fb');
-        root.style.setProperty('--panel','#ffffff');
-        root.style.setProperty('--muted','#5b6b7a');
-        root.style.setProperty('--text','#071026');
+        root.style.setProperty('--bg', '#f6f8fb');
+        root.style.setProperty('--text', '#071026');
       }
     }
 
     applyTheme(initial);
 
-    btn.addEventListener('click', ()=>{
+    btn.addEventListener('click', () => {
       const cur = localStorage.getItem('theme') || 'dark';
       const next = cur === 'dark' ? 'light' : 'dark';
       localStorage.setItem('theme', next);
       location.reload();
     });
 
-    function subscribe(){
+    function subscribe() {
       const email = document.getElementById('email').value;
       const msg = document.getElementById('subMsg');
-      if(!email) return;
+      if (!email) return;
       msg.style.display = 'block';
       msg.textContent = `Thanks — ${email}. I’ll reach out when there’s new content.`;
-      setTimeout(()=>{msg.style.opacity = 0;},4000);
+      setTimeout(() => { msg.style.opacity = 0; }, 4000);
     }
-
-    document.querySelectorAll('a.navlink').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        e.preventDefault(); const id = a.getAttribute('href').slice(1); const el = document.getElementById(id);
-        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-      })
-    });
   </script>
 </body>
 </html>
