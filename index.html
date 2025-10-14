@@ -1,248 +1,426 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Abdiwahid — Immobilien & Projekte in Krefeld</title>
-  <meta name="description" content="Immobilien, Projekte und Services in Krefeld — Kontakt: info@abdiwahid.de" />
-  <link rel="icon" href="data:," />
-
-  <!-- Modernes, simples CSS (mobile-first) -->
-  <style>
-    :root{
-      --bg:#f6f7fb;
-      --card:#ffffff;
-      --muted:#6b7280;
-      --accent:#0ea5a4;
-      --accent2:#7c3aed;
-      --radius:12px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color-scheme: light;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,#f3f6fb,#eef2f7);color:#0f1724}
-    a{color:inherit}
-    header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1200px;margin:0 auto}
-    .brand{font-weight:700;color:var(--accent2);letter-spacing:0.02em}
-    nav{display:flex;gap:10px}
-    .btn{padding:8px 12px;border-radius:10px;border:0;background:transparent;cursor:pointer;font-weight:600;color:var(--muted)}
-    .btn.primary{background:linear-gradient(90deg,var(--accent),#06b6d4);color:white}
-    .container{max-width:1200px;margin:16px auto;padding:0 20px}
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1fr;gap:16px;align-items:center;margin-bottom:18px}
-    .hero-card{background:var(--card);border-radius:16px;overflow:hidden;box-shadow:0 12px 30px rgba(12,15,30,0.06)}
-    .hero-media{height:420px;background:#ddd;display:block;width:100%;object-fit:cover}
-    .hero-content{padding:22px}
-    .kicker{display:inline-block;background:linear-gradient(90deg,var(--accent2),var(--accent));color:white;padding:6px 10px;border-radius:999px;font-size:13px;font-weight:700;margin-bottom:12px}
-    h1{margin:0 0 8px 0;font-size:28px}
-    p.lead{color:var(--muted);margin:0 0 12px 0}
-    /* Listings grid */
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    @media (max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:680px){.grid{grid-template-columns:1fr}}
-    .card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 8px 22px rgba(12,15,30,0.05);display:flex;flex-direction:column}
-    .card img{width:100%;height:190px;object-fit:cover}
-    .card-body{padding:12px;flex:1;display:flex;flex-direction:column}
-    .price{font-weight:800;color:var(--accent2)}
-    .meta{color:var(--muted);font-size:13px;margin-top:6px}
-    .actions{display:flex;gap:8px;margin-top:12px}
-    .small-btn{padding:8px 10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent;cursor:pointer;font-weight:700}
-    /* Sidebar / contact */
-    .layout{display:grid;grid-template-columns:2fr 380px;gap:18px}
-    @media (max-width:980px){.layout{grid-template-columns:1fr}}
-    .panel{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 8px 22px rgba(12,15,30,0.05)}
-    .contact a{color:var(--accent2);font-weight:700}
-    /* map */
-    .map{border-radius:10px;border:1px solid rgba(0,0,0,0.06);overflow:hidden}
-    footer{max-width:1200px;margin:28px auto;padding:0 20px;color:var(--muted);font-size:14px}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Abdiwahid — Immobilien Krefeld (Vollfunktional)</title>
+<meta name="description" content="Immobilien in Krefeld — Kontakt: info@abdiwahid.de" />
+<link rel="icon" href="data:," />
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="" crossorigin=""/>
+<style>
+  :root{
+    --bg:#f6f8fb; --card:#fff; --accent:#7c3aed; --accent2:#06b6d4; --muted:#6b7280;
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; color-scheme: light;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,#f3f6fb,#eef2f7);color:#0f1724}
+  header{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;max-width:1200px;margin:0 auto}
+  .brand{font-weight:800;color:var(--accent)}
+  nav{display:flex;gap:8px}
+  .btn{padding:8px 10px;border-radius:8px;background:transparent;border:0;cursor:pointer;font-weight:700;color:var(--muted)}
+  .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:white}
+  .container{max-width:1200px;margin:18px auto;padding:0 18px}
+  .layout{display:grid;grid-template-columns:2fr 380px;gap:16px}
+  @media (max-width:980px){.layout{grid-template-columns:1fr}}
+  .hero{border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(2,6,23,0.06);background:var(--card)}
+  .hero img{width:100%;height:360px;object-fit:cover;display:block}
+  .hero .content{padding:18px}
+  h1{margin:0 0 6px 0}
+  p.lead{color:var(--muted);margin:0}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+  @media (max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:680px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 8px 22px rgba(2,6,23,0.04);display:flex;flex-direction:column}
+  .card img{width:100%;height:160px;object-fit:cover}
+  .card-body{padding:12px;display:flex;flex-direction:column;flex:1}
+  .price{font-weight:800;color:var(--accent)}
+  .meta{color:var(--muted);font-size:13px;margin-top:6px}
+  .actions{display:flex;gap:8px;margin-top:12px}
+  .small-btn{padding:8px 10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent;cursor:pointer;font-weight:700}
+  .panel{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 8px 22px rgba(2,6,23,0.04)}
+  .map{height:260px;border-radius:8px;overflow:hidden}
+  input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);margin-top:8px}
+  footer{max-width:1200px;margin:24px auto;padding:0 18px;color:var(--muted);font-size:14px}
+  .admin-badge{background:#111827;color:white;padding:6px 8px;border-radius:8px;font-weight:700}
+  .hidden{display:none}
+  .img-preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .img-preview img{width:84px;height:64px;object-fit:cover;border-radius:6px;border:1px solid rgba(0,0,0,0.06)}
+</style>
 </head>
 <body>
 
-  <!-- header -->
-  <header>
-    <div class="brand">ABDIWAHID — Krefeld Properties</div>
-    <nav>
-      <a class="btn" href="#listings">Angebote</a>
-      <a class="btn" href="#about">Über mich</a>
-      <a class="btn" href="#kontakt">Kontakt</a>
-      <a class="btn primary" href="mailto:info@abdiwahid.de">E-Mail</a>
-    </nav>
-  </header>
+<header>
+  <div class="brand">ABDIWAHID — Immobilien Krefeld</div>
+  <nav>
+    <button class="btn" onclick="scrollToId('listings')">Angebote</button>
+    <button class="btn" onclick="scrollToId('about')">Über</button>
+    <button class="btn" onclick="scrollToId('kontakt')">Kontakt</button>
+    <button class="btn primary" id="adminBtn">Admin</button>
+  </nav>
+</header>
 
-  <main class="container">
-    <!-- Hero -->
-    <section class="hero-card hero" aria-labelledby="site-hero">
-      <!-- dynamic Unsplash image queries: will fetch Krefeld / Germany images -->
-      <img class="hero-media" src="https://source.unsplash.com/1600x900/?krefeld,germany,city" alt="Krefeld city view">
-      <div class="hero-content">
-        <span class="kicker">Krefeld • Immobilien & Projekte</span>
-        <h1 id="site-hero">Top-Immobilien und Projekte in Krefeld</h1>
-        <p class="lead">Exklusive Angebote, maßgeschneiderte Beratung und lokale Marktkenntnis in Krefeld. Website betreut von <strong>Abdiwahid</strong>. In dringenden Fällen: <a href="mailto:info@abdiwahid.de">info@abdiwahid.de</a></p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn primary" href="#listings">Jetzt Angebote ansehen</a>
-          <a class="btn" href="#kontakt">Kontakt aufnehmen</a>
-        </div>
+<main class="container">
+  <!-- hero -->
+  <section class="hero" id="hero">
+    <img id="heroImg" src="https://source.unsplash.com/1600x900/?krefeld,germany,city" alt="Krefeld">
+    <div class="content">
+      <h1>Top Immobilien & Projekte in Krefeld</h1>
+      <p class="lead">Exklusive Angebote, lokale Marktkenntnis. Kontakt: <a href="mailto:info@abdiwahid.de">info@abdiwahid.de</a></p>
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn primary" onclick="scrollToId('listings')">Angebote ansehen</button>
+        <button class="btn" onclick="openCreate()">Anzeige erstellen</button>
       </div>
+    </div>
+  </section>
+
+  <div class="layout" style="margin-top:16px">
+    <!-- listings -->
+    <section id="listings">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2>Aktuelle Angebote</h2>
+        <div id="status" class="meta">Lade...</div>
+      </div>
+
+      <div id="listGrid" class="grid"></div>
     </section>
 
-    <!-- two-column layout -->
-    <div class="layout">
-
-      <!-- listings -->
-      <section id="listings">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin:6px 0 12px 0">
-          <h2 style="margin:0">Aktuelle Angebote</h2>
-          <div style="color:var(--muted)">Krefeld • Neueste Objekte</div>
-        </div>
-
-        <div class="grid">
-          <!-- Card 1 -->
-          <article class="card">
-            <img src="https://source.unsplash.com/800x600/?krefeld,house" alt="Objekt 1 Krefeld">
-            <div class="card-body">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <div>
-                  <div style="font-size:15px;font-weight:700">Modernes Stadthaus</div>
-                  <div class="meta">Uerdingen • 4 Zimmer • 120 m²</div>
-                </div>
-                <div class="price">€ 420.000</div>
-              </div>
-              <p class="meta" style="margin-top:8px">Renoviert, gute Verkehrsanbindung, Rheinnähe.</p>
-              <div class="actions" style="margin-top:auto">
-                <button class="small-btn" onclick="viewDetails('Modernes Stadthaus','Ausführliche Beschreibung des Stadthauses...')">Details</button>
-                <a class="small-btn" href="mailto:info@abdiwahid.de?subject=Anfrage%20Modernes%20Stadthaus">Anfragen</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 2 -->
-          <article class="card">
-            <img src="https://source.unsplash.com/800x600/?krefeld,apartment" alt="Objekt 2 Krefeld">
-            <div class="card-body">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <div>
-                  <div style="font-size:15px;font-weight:700">Zentrales Apartment</div>
-                  <div class="meta">Innenstadt • 2 Zimmer • 65 m²</div>
-                </div>
-                <div class="price">€ 220.000</div>
-              </div>
-              <p class="meta" style="margin-top:8px">Ideal als Kapitalanlage oder Erstwohnung.</p>
-              <div class="actions" style="margin-top:auto">
-                <button class="small-btn" onclick="viewDetails('Zentrales Apartment','Kurzbeschreibung des Apartments...')">Details</button>
-                <a class="small-btn" href="mailto:info@abdiwahid.de?subject=Anfrage%20Zentrales%20Apartment">Anfragen</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 3 -->
-          <article class="card">
-            <img src="https://source.unsplash.com/800x600/?krefeld,river" alt="Objekt 3 Krefeld">
-            <div class="card-body">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <div>
-                  <div style="font-size:15px;font-weight:700">Rheinnähe – Baugrundstück</div>
-                  <div class="meta">Rheinufer • Grundstück • 480 m²</div>
-                </div>
-                <div class="price">auf Anfrage</div>
-              </div>
-              <p class="meta" style="margin-top:8px">Großzügiges Grundstück nahe dem Flussufer.</p>
-              <div class="actions" style="margin-top:auto">
-                <button class="small-btn" onclick="viewDetails('Rheinnähe – Baugrundstück','Informationen zum Grundstück...')">Details</button>
-                <a class="small-btn" href="mailto:info@abdiwahid.de?subject=Anfrage%20Baugrundstueck">Anfragen</a>
-              </div>
-            </div>
-          </article>
-
-        </div>
-      </section>
-
-      <!-- sidebar -->
-      <aside class="panel">
+    <!-- sidebar -->
+    <aside style="position:relative">
+      <div class="panel">
         <h3>Kontakt</h3>
-        <p class="contact">In Eile? Schreiben Sie eine E-Mail an <a href="mailto:info@abdiwahid.de">info@abdiwahid.de</a> oder rufen Sie an: <strong>+49 123 456789</strong> (Platzhalter)</p>
-
-        <hr style="margin:12px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
-
-        <h4>Service</h4>
-        <p class="meta">Beratung • Bewertung • Vermarktung • Projektentwicklung</p>
-
-        <hr style="margin:12px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
-
+        <p class="meta">Schnellkontakt: <a href="mailto:info@abdiwahid.de">info@abdiwahid.de</a></p>
+        <hr/>
         <h4>Karte — Krefeld</h4>
-        <div class="map" style="height:260px">
-          <!-- OpenStreetMap iframe centered roughly on Krefeld -->
-          <iframe width="100%" height="100%" frameborder="0"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=6.45%2C51.30%2C6.72%2C51.38&amp;layer=mapnik"
-            aria-label="Karte von Krefeld"></iframe>
-        </div>
-
-        <hr style="margin:12px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
-
-        <h4>Letzte Updates</h4>
-        <p class="meta" id="lastUpdate">–</p>
-      </aside>
-
-    </div> <!-- layout end -->
-
-    <!-- About / Footer -->
-    <section id="about" style="margin-top:20px">
-      <div class="panel">
-        <h3>Über Abdiwahid</h3>
-        <p class="meta">Hallo — ich bin Abdiwahid, Web- & Projektbetreuer in Krefeld. Diese Seite zeigt ausgewählte Angebote und Projektinformationen. Für Exposé-Anfragen oder Kooperationen: <a href="mailto:info@abdiwahid.de">info@abdiwahid.de</a></p>
+        <div id="map" class="map"></div>
+        <hr/>
+        <h4>Letztes Update</h4>
+        <div id="lastUpdate" class="meta">–</div>
       </div>
-    </section>
 
-    <section id="kontakt" style="margin-top:12px">
-      <div class="panel">
-        <h3>Kontaktformular</h3>
-        <!-- Einfaches client-side Formular; ersetzt durch Formspree / Backend wenn nötig -->
-        <form id="contactForm" onsubmit="submitForm(event)">
-          <input type="text" id="name" placeholder="Ihr Name" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);margin-bottom:8px">
-          <input type="email" id="email" placeholder="E-Mail" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);margin-bottom:8px">
-          <textarea id="msg" placeholder="Nachricht" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);margin-bottom:8px"></textarea>
-          <div style="display:flex;gap:8px">
-            <button class="btn primary" type="submit">Nachricht senden</button>
+      <div class="panel" style="margin-top:12px">
+        <h4>Kontaktformular</h4>
+        <form id="contactForm" onsubmit="contactSubmit(event)">
+          <input id="cname" placeholder="Ihr Name" required/>
+          <input id="cemail" placeholder="E-Mail" type="email" required/>
+          <textarea id="cmsg" rows="4" placeholder="Nachricht..." required></textarea>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn primary" type="submit">Senden</button>
             <button class="btn" type="button" onclick="location.href='mailto:info@abdiwahid.de'">Per E-Mail</button>
           </div>
-          <p id="formFeedback" style="margin-top:8px;color:var(--muted)"></p>
+          <div id="cfeedback" class="meta" style="margin-top:8px"></div>
         </form>
       </div>
-    </section>
+    </aside>
+  </div>
 
-  </main>
-
-  <footer>
-    <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 20px">
-      <div>© <strong>Abdiwahid</strong> — Krefeld • <a href="mailto:info@abdiwahid.de">info@abdiwahid.de</a></div>
-      <div style="color:var(--muted)">Impressum & Datenschutz: bitte ergänzen</div>
+  <!-- About -->
+  <section id="about" style="margin-top:18px">
+    <div class="panel">
+      <h3>Über Abdiwahid</h3>
+      <p class="meta">Ich betreue Immobilien-Listings und Projekte in Krefeld. Für Exposés oder Kooperationen: <a href="mailto:info@abdiwahid.de">info@abdiwahid.de</a></p>
     </div>
-  </footer>
+  </section>
 
-  <!-- Minimal JS: interaktiv, ohne Backend -->
-  <script>
-    // Set last update date
-    document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('de-DE', { year:'numeric', month:'long', day:'numeric' });
+  <!-- Create/Edit Modal (simple overlay) -->
+  <div id="modal" class="panel hidden" style="position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:92%;max-width:720px;z-index:9999">
+    <h3 id="modalTitle">Neue Anzeige</h3>
+    <form id="itemForm" onsubmit="saveItem(event)">
+      <input id="title" placeholder="Titel (z. B. Modernes Stadthaus)" required/>
+      <input id="location" placeholder="Ort/Bezirk (z. B. Uerdingen)" required/>
+      <input id="rooms" placeholder="Zimmer" type="number" min="0" required/>
+      <input id="area" placeholder="Fläche (m²)" type="number" min="0" required/>
+      <input id="price" placeholder="Preis (z. B. 420000)" type="number" min="0" required/>
+      <textarea id="desc" rows="4" placeholder="Beschreibung"></textarea>
+      <label style="margin-top:8px">Bilder (mehrfach möglich)</label>
+      <input id="images" type="file" accept="image/*" multiple />
+      <div class="img-preview" id="imgPreview"></div>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <button class="btn primary" type="submit">Speichern</button>
+        <button class="btn" type="button" onclick="closeModal()">Abbrechen</button>
+        <button class="btn" id="deleteBtn" type="button" onclick="deleteItem()" style="margin-left:auto;background:#fee2e2;color:#b91c1c">Löschen</button>
+      </div>
+      <div id="formStatus" class="meta" style="margin-top:8px"></div>
+    </form>
+  </div>
 
-    function viewDetails(title, desc){
-      alert(title + "\\n\\n" + desc + "\\n\\nKontakt: info@abdiwahid.de");
+</main>
+
+<footer>
+  <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:10px 18px">
+    <div>© <strong>Abdiwahid</strong> — Krefeld • <a href="mailto:info@abdiwahid.de">info@abdiwahid.de</a></div>
+    <div style="color:var(--muted)">Impressum & Datenschutz ergänzen</div>
+  </div>
+</footer>
+
+<!-- Dependencies -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+
+<script>
+/* ============================
+  CONFIGURE FIREBASE BELOW
+  Replace the firebaseConfig object with your project values.
+  If you don't want to use Firebase yet, leave as-is: the site will run in demo mode.
+============================ */
+const firebaseConfig = {
+  apiKey: "REPLACE_API_KEY",
+  authDomain: "REPLACE_AUTH_DOMAIN",
+  projectId: "REPLACE_PROJECT_ID",
+  storageBucket: "REPLACE_STORAGE_BUCKET",
+  messagingSenderId: "REPLACE_SENDER_ID",
+  appId: "REPLACE_APP_ID"
+};
+
+let useFirebase = true;
+try {
+  if(firebaseConfig.apiKey.includes("REPLACE")) useFirebase = false;
+} catch(e){ useFirebase = false; }
+
+if(useFirebase){
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const storage = firebase.storage();
+  window._db = db;
+  window._storage = storage;
+}
+
+/* ===== Demo fallback data (used if Firebase isn't configured) ===== */
+const demoListings = [
+  {
+    id: "demo1",
+    title: "Modernes Stadthaus",
+    location: "Uerdingen",
+    rooms: 4, area: 120, price: 420000,
+    desc: "Renoviert, gute Verkehrsanbindung, Rheinnähe.",
+    images: ["https://source.unsplash.com/800x600/?krefeld,house","data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='100%' height='100%' fill='%23ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%237c3aed' font-size='28'>Krefeld - Demo Bild</text></svg>"],
+    coords: [51.333, 6.566]
+  },
+  {
+    id: "demo2",
+    title: "Zentrales Apartment",
+    location: "Innenstadt", rooms:2, area:65, price:220000,
+    desc: "Ideal als Kapitalanlage oder Erstwohnung.",
+    images: ["https://source.unsplash.com/800x600/?krefeld,apartment"],
+    coords: [51.328,6.563]
+  }
+];
+
+let listings = [];
+let currentEditId = null;
+
+/* ===== UI helpers ===== */
+function scrollToId(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+function formatPrice(v){ if(!v) return 'auf Anfrage'; return '€ ' + Number(v).toLocaleString('de-DE'); }
+function getNowStr(){ return new Date().toLocaleString('de-DE', {year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
+document.getElementById('lastUpdate').textContent = getNowStr();
+
+/* ===== Map (Leaflet) ===== */
+const map = L.map('map').setView([51.333, 6.566], 12);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);
+let markers = L.layerGroup().addTo(map);
+
+/* ===== Load listings (Firestore or demo) ===== */
+async function loadListings(){
+  document.getElementById('status').textContent = 'Lade...';
+  if(useFirebase){
+    try{
+      const snap = await _db.collection('listings').orderBy('createdAt','desc').get();
+      listings = snap.docs.map(d=>({id:d.id,...d.data()}));
+    }catch(err){
+      console.error(err);
+      listings = demoListings;
     }
+  }else{
+    listings = demoListings;
+  }
+  renderListings();
+}
 
-    // Simple mailto send as fallback (client-side only)
-    function submitForm(e){
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const msg = document.getElementById('msg').value.trim();
-      if(!name || !email || !msg){ document.getElementById('formFeedback').textContent = 'Bitte alle Felder ausfüllen.'; return; }
+function renderListings(){
+  const grid = document.getElementById('listGrid');
+  grid.innerHTML = '';
+  markers.clearLayers();
+  if(listings.length === 0){ grid.innerHTML = '<p class="meta">Keine Einträge.</p>'; document.getElementById('status').textContent = '0 Einträge'; return; }
+  listings.forEach(item=>{
+    const el = document.createElement('article');
+    el.className = 'card';
+    el.innerHTML = `
+      <img src="${item.images && item.images.length? item.images[0] : 'https://source.unsplash.com/800x600/?krefeld'}" alt="${escapeHtml(item.title)}">
+      <div class="card-body">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:15px;font-weight:700">${escapeHtml(item.title)}</div>
+            <div class="meta">${escapeHtml(item.location)} • ${item.rooms} Zimmer • ${item.area} m²</div>
+          </div>
+          <div class="price">${formatPrice(item.price)}</div>
+        </div>
+        <p class="meta" style="margin-top:8px">${escapeHtml(item.desc || '')}</p>
+        <div class="actions" style="margin-top:auto">
+          <button class="small-btn" onclick='viewDetails("${item.id}")'>Details</button>
+          <button class="small-btn" onclick='contactMail("${item.title}")'>Anfragen</button>
+        </div>
+      </div>
+    `;
+    grid.appendChild(el);
 
-      // Use mailto as quick fallback:
-      const subject = encodeURIComponent('Website-Anfrage von ' + name);
-      const body = encodeURIComponent(msg + '\\n\\nKontakt: ' + name + ' | ' + email);
-      window.location.href = 'mailto:info@abdiwahid.de?subject=' + subject + '&body=' + body;
+    // marker
+    try{
+      if(item.coords && item.coords.length===2){
+        const m = L.marker(item.coords).bindPopup(`<strong>${escapeHtml(item.title)}</strong><br/>${escapeHtml(item.location)}<br/>${formatPrice(item.price)}`);
+        markers.addLayer(m);
+      }
+    }catch(e){}
+  });
+  document.getElementById('status').textContent = listings.length + ' Einträge';
+}
 
-      document.getElementById('formFeedback').textContent = 'Ihr E-Mail-Client wurde geöffnet. Alternativ schreiben Sie an info@abdiwahid.de';
+/* ===== Details / Contact actions ===== */
+function viewDetails(id){
+  const it = listings.find(x=>x.id===id);
+  if(!it){ alert('Eintrag nicht gefunden.'); return; }
+  const imgs = (it.images || []).map(u=>`<img src="${u}" style="width:100%;max-height:320px;object-fit:cover;margin-bottom:8px">`).join('');
+  const txt = `${imgs}<h3>${escapeHtml(it.title)}</h3><p><strong>${escapeHtml(it.location)}</strong> • ${it.rooms} Zimmer • ${it.area} m²</p><p>${escapeHtml(it.desc)}</p><p>${formatPrice(it.price)}</p>`;
+  const w = window.open('', '_blank', 'width=900,height=700');
+  w.document.write(`<html><head><title>${escapeHtml(it.title)}</title></head><body>${txt}<p>Kontakt: <a href="mailto:info@abdiwahid.de">info@abdiwahid.de</a></p></body></html>`);
+  w.document.close();
+}
+function contactMail(title){ location.href = `mailto:info@abdiwahid.de?subject=Anfrage%20${encodeURIComponent(title)}`; }
+
+/* ===== Create / Edit flow ===== */
+function openCreate(){
+  currentEditId = null;
+  document.getElementById('modalTitle').textContent = 'Neue Anzeige';
+  document.getElementById('itemForm').reset();
+  document.getElementById('imgPreview').innerHTML = '';
+  document.getElementById('deleteBtn').style.display = 'none';
+  showModal();
+}
+function showModal(){ document.getElementById('modal').classList.remove('hidden'); window.scrollTo({top:0,behavior:'smooth'}); }
+function closeModal(){ document.getElementById('modal').classList.add('hidden'); document.getElementById('formStatus').textContent = ''; }
+
+/* preview images on select */
+document.getElementById('images').addEventListener('change', function(e){
+  const prez = document.getElementById('imgPreview'); prez.innerHTML = '';
+  Array.from(this.files).slice(0,6).forEach(file=>{
+    const url = URL.createObjectURL(file);
+    const img = document.createElement('img'); img.src = url;
+    prez.appendChild(img);
+  });
+});
+
+/* Save item (upload images to Firebase Storage if configured) */
+async function saveItem(e){
+  e.preventDefault();
+  const title = document.getElementById('title').value.trim();
+  const location = document.getElementById('location').value.trim();
+  const rooms = Number(document.getElementById('rooms').value);
+  const area = Number(document.getElementById('area').value);
+  const price = Number(document.getElementById('price').value);
+  const desc = document.getElementById('desc').value.trim();
+  const files = document.getElementById('images').files;
+  document.getElementById('formStatus').textContent = 'Speichere...';
+
+  let imageUrls = [];
+  if(useFirebase && files.length){
+    // upload each file
+    for(let i=0;i<files.length;i++){
+      const f = files[i];
+      const path = 'listings/' + Date.now() + '_' + f.name.replace(/\s/g,'_');
+      const ref = _storage.ref().child(path);
+      try{
+        const snap = await ref.put(f);
+        const url = await snap.ref.getDownloadURL();
+        imageUrls.push(url);
+      }catch(err){
+        console.error('Upload error',err);
+      }
     }
-  </script>
+  }else{
+    // if no firebase, create object URLs for immediate preview (not persistent)
+    Array.from(files).forEach(f=>{
+      imageUrls.push(URL.createObjectURL(f));
+    });
+  }
+
+  const data = {
+    title, location, rooms, area, price, desc,
+    images: imageUrls.length? imageUrls : ["https://source.unsplash.com/800x600/?krefeld,house"],
+    coords: [51.333, 6.566],
+    createdAt: useFirebase ? firebase.firestore.FieldValue.serverTimestamp() : new Date().toISOString()
+  };
+
+  if(useFirebase){
+    try{
+      const docRef = await _db.collection('listings').add(data);
+      document.getElementById('formStatus').textContent = 'Gespeichert.';
+    }catch(err){
+      console.error(err);
+      document.getElementById('formStatus').textContent = 'Fehler beim Speichern.';
+    }
+  }else{
+    // push to local demo
+    data.id = 'local_' + Date.now();
+    data.createdAt = new Date().toISOString();
+    listings.unshift(data);
+    document.getElementById('formStatus').textContent = 'Demo: Lokal hinzugefügt (nicht persistent).';
+  }
+
+  closeModal();
+  await loadListings();
+}
+
+/* Delete item (only demo/local or firebase) */
+async function deleteItem(){
+  if(!currentEditId){ alert('Nichts zu löschen.'); return; }
+  if(!confirm('Eintrag wirklich löschen?')) return;
+  if(useFirebase){
+    try{ await _db.collection('listings').doc(currentEditId).delete(); alert('Gelöscht'); }
+    catch(e){ alert('Fehler: ' + e.message); }
+  }else{
+    listings = listings.filter(x=>x.id !== currentEditId);
+    alert('Lokal gelöscht');
+  }
+  closeModal();
+  loadListings();
+}
+
+/* ===== Contact form submit (client-side mailto or Formspree) ===== */
+function contactSubmit(e){
+  e.preventDefault();
+  const name = document.getElementById('cname').value.trim();
+  const email = document.getElementById('cemail').value.trim();
+  const msg = document.getElementById('cmsg').value.trim();
+  if(!name||!email||!msg) { document.getElementById('cfeedback').textContent='Bitte alle Felder ausfüllen.'; return; }
+  // mailto fallback
+  window.location.href = `mailto:info@abdiwahid.de?subject=${encodeURIComponent('Kontaktformular von ' + name)}&body=${encodeURIComponent(msg + '\\n\\nKontakt: ' + name + ' | ' + email)}`;
+  document.getElementById('cfeedback').textContent = 'E-Mail-Client geöffnet. Alternativ: info@abdiwahid.de';
+}
+
+/* ===== Admin quick auth (demo only) ===== */
+document.getElementById('adminBtn').addEventListener('click', ()=>{
+  const pw = prompt('Admin Passwort (Demo):');
+  // demo password: "admin123" (change for production)
+  if(pw === 'admin123'){
+    localStorage.setItem('isAdmin','1'); alert('Admin-Modus aktiviert. Du kannst jetzt Anzeigen erstellen / löschen.');
+    document.getElementById('adminBtn').textContent = 'Admin ✓';
+  } else {
+    alert('Falsches Passwort oder abgebrochen.');
+  }
+});
+
+/* Utility: escape HTML to avoid injection in string-built HTML */
+function escapeHtml(s){ if(!s) return ''; return s.replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
+
+/* Initialize */
+loadListings();
+
+/* Optional: allow deep-edit when clicking a card (not implemented fully here) */
+/* Future: implement auth, image resizing, pagination, filtering, search */
+
+</script>
 </body>
 </html>
