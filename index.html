@@ -1,266 +1,158 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Abdiwahid — IT & Tech Developments</title>
-  <meta name="description" content="Personal site for Abdiwahid, an IT professional focused on tech developments, articles and projects. Dark-mode-first theme." />
-  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0b0f14;
-      --panel: #0f1720;
-      --muted: #94a3b8;
-      --text: #e6eef8;
-      --accent: #7c5cff;
-      --accent-2: #00d4ff;
-      --glass: rgba(255,255,255,0.03);
-      --radius: 12px;
-      --maxw: 1100px;
-    }
-
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: 'Inter', system-ui, sans-serif;
-      background: radial-gradient(1200px 700px at 10% 10%, rgba(124,92,255,0.06), transparent 8%), radial-gradient(800px 500px at 90% 90%, rgba(0,212,255,0.03), transparent 8%), var(--bg);
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 32px 20px;
-    }
-
-    .site {
-      width: 100%;
-      max-width: var(--maxw);
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius: 18px;
-      box-shadow: 0 10px 30px rgba(2,6,23,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.03);
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 28px 32px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 12px;
-      overflow: hidden;
-      flex: 0 0 56px;
-      box-shadow: 0 6px 18px rgba(124,92,255,0.12);
-    }
-
-    .avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .brand h1 { margin: 0; font-size: 18px; }
-    .brand p { margin: 0; font-size: 13px; color: var(--muted); }
-
-    nav { display: flex; align-items: center; gap: 12px; }
-    .navlink { color: var(--muted); text-decoration: none; font-size: 14px; padding: 8px 12px; border-radius: 10px; }
-    .navlink:hover { background: var(--glass); color: var(--text); }
-
-    .actions { display: flex; gap: 10px; align-items: center; }
-    .btn { background: transparent; border: 1px solid rgba(255,255,255,0.04); padding: 8px 12px; border-radius: 10px; color: var(--text); cursor: pointer; }
-    .btn:hover { transform: translateY(-1px); }
-
-    main { display: grid; grid-template-columns: 1fr 360px; gap: 28px; padding: 28px 32px; }
-
-    .content { min-height: 360px; }
-    .hero {
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
-      padding: 28px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.02);
-    }
-
-    .hero h2 { margin: 0; font-size: 24px; }
-    .hero p { color: var(--muted); margin-top: 8px; }
-
-    .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
-    .tag { background: rgba(255,255,255,0.02); padding: 6px 10px; border-radius: 999px; font-size: 13px; color: var(--muted); }
-
-    .posts { margin-top: 20px; display: grid; gap: 14px; }
-    .post { padding: 16px; border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); border: 1px solid rgba(255,255,255,0.02); }
-    .post h3 { margin: 0; font-size: 16px; }
-    .post p { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
-    .meta { display: flex; gap: 10px; color: var(--muted); font-size: 13px; margin-top: 10px; }
-
-    .sidebar .card { background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); padding: 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.02); margin-bottom: 14px; }
-    .small { font-size: 13px; color: var(--muted); }
-
-    .projects { display: grid; gap: 10px; }
-    .project { padding: 12px; border-radius: 10px; background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent); border: 1px solid rgba(255,255,255,0.02); }
-    .project h4 { margin: 0; font-size: 14px; }
-    .project p { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
-
-    .subscribe input { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.04); background: transparent; color: var(--text); }
-    .subscribe button { width: 100%; margin-top: 8px; padding: 10px; border-radius: 10px; border: 0; background: linear-gradient(90deg,var(--accent),var(--accent-2)); color: #071026; font-weight: 600; }
-
-    footer { padding: 18px 32px; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.01)); }
-
-    @media (max-width: 920px) { main { grid-template-columns: 1fr; } }
-
-    a.ghost { color: var(--muted); text-decoration: none; padding: 6px 10px; border-radius: 8px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdiwahid Said Abdirahman</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0d1b2a; /* dunkelblau */
+            color: #e0e0e0;
+        }
+        header {
+            background-color: #112240; /* dunkleres blau */
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+        }
+        .logo {
+            font-weight: bold;
+            font-size: 28px;
+            color: #00bfff; /* hellblau für Logo */
+            margin-right: 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: normal;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background-color: #0d1b2a;
+            padding: 10px 0;
+        }
+        nav a {
+            color: #00bfff;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            background-color: #112240;
+        }
+        section {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        h2 {
+            color: #00bfff;
+            border-bottom: 1px solid #00bfff;
+            padding-bottom: 5px;
+        }
+        .card {
+            background-color: #112240;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        .card p, .card a {
+            color: #e0e0e0;
+        }
+        .card a {
+            color: #00bfff;
+        }
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0d1b2a;
+            color: #e0e0e0;
+            border: 1px solid #00bfff;
+        }
+        form button {
+            background-color: #00bfff;
+            color: #0d1b2a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        form button:hover {
+            background-color: #0096d6;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #112240;
+            color: #e0e0e0;
+        }
+    </style>
 </head>
 <body>
-  <div class="site">
-    <header>
-      <div class="brand">
-        <div class="avatar">
-          <img src="images/abdiwahid.jpg" alt="Abdiwahid" />
-        </div>
-        <div>
-          <h1>Abdiwahid</h1>
-          <p>IT Engineer — Tech developments & short essays</p>
-        </div>
-      </div>
 
-      <nav>
-        <a class="navlink" href="#about">About</a>
-        <a class="navlink" href="#posts">Articles</a>
-        <a class="navlink" href="#projects">Projects</a>
-        <a class="navlink" href="#contact">Contact</a>
-      </nav>
+<header>
+    <div class="logo">X</div>
+    <h1>Abdiwahid Said Abdirahman</h1>
+</header>
 
-      <div class="actions">
-        <button id="themeToggle" class="btn">🌙 Dark</button>
-      </div>
-    </header>
+<nav>
+    <a href="#about">Über mich</a>
+    <a href="#education">Bildung</a>
+    <a href="#contact">Kontakt</a>
+</nav>
 
-    <main>
-      <section class="content">
-        <div class="hero" id="about">
-          <h2>Hello — I'm Abdiwahid, an IT professional</h2>
-          <p>I write about system design, automation, and modern infrastructure. This site shares my insights, mini-projects, and thoughts on tech developments.</p>
+<section id="about">
+    <h2>Persönliche Daten</h2>
+    <div class="card">
+        <p><strong>Name:</strong> Abdiwahid Said Abdirahman</p>
+        <p><strong>Geburtsdatum:</strong> 23. Oktober 2006</p>
+        <p><strong>Geburtsort:</strong> Bualle, Somalia</p>
+        <p><strong>Adresse:</strong> Inratherstraße 325, 47803 Krefeld</p>
+        <p><strong>Telefon:</strong> 01521 6240058</p>
+        <p><strong>E-Mail:</strong> <a href="mailto:jamuus23@gmail.com">jamuus23@gmail.com</a></p>
+        <p><strong>Website:</strong> <a href="http://www.abdiwahid.de" target="_blank">www.abdiwahid.de</a></p>
+    </div>
 
-          <div class="tags">
-            <div class="tag">Cloud</div>
-            <div class="tag">DevOps</div>
-            <div class="tag">Automation</div>
-            <div class="tag">Web</div>
-            <div class="tag">Security</div>
-          </div>
-        </div>
+    <h2>Berufsziel</h2>
+    <div class="card">
+        <p>Engagierter und lernfreudiger Schüler der Internationalen Förderklasse mit dem Ziel, eine Ausbildung zum Fachinformatiker für Anwendungsentwicklung zu beginnen. Ich interessiere mich besonders für Programmierung, Softwareentwicklung und moderne Technologien und möchte aktiv an digitalen Lösungen mitwirken.</p>
+    </div>
+</section>
 
-        <div id="posts" class="posts">
-          <article class="post">
-            <h3>Why observability is more than logs</h3>
-/Users/jamuus/Desktop/IMG_1295.heic            <p>Instrumentation, traces, metrics and smarter debugging strategies — quick notes from real-world migrations.</p>
-            <div class="meta"><span>Oct 10, 2025</span> • <span>5 min read</span></div>
-          </article>
+<section id="education">
+    <h2>Bildungsweg</h2>
+    <div class="card">
+        <p><strong>Seit 08/2024 – voraussichtlich 07/2026:</strong> Internationale Förderklasse</p>
+    </div>
+</section>
 
-          <article class="post">
-            <h3>Small infra patterns for resilient teams</h3>
-            <p>Simple architecture decisions that keep systems stable and maintainable with minimal overhead.</p>
-            <div class="meta"><span>Sep 4, 2025</span> • <span>6 min read</span></div>
-          </article>
-        </div>
-      </section>
+<section id="contact">
+    <h2>Kontaktformular</h2>
+    <div class="card">
+        <form action="mailto:jamuus23@gmail.com" method="post" enctype="text/plain">
+            <input type="text" name="name" placeholder="Ihr Name" required>
+            <input type="email" name="email" placeholder="Ihre E-Mail" required>
+            <textarea name="message" rows="5" placeholder="Ihre Nachricht" required></textarea>
+            <button type="submit">Nachricht senden</button>
+        </form>
+    </div>
+</section>
 
-      <aside class="sidebar">
-        <div class="card">
-          <h3>About me</h3>
-          <p class="small">IT engineer passionate about platform engineering, automation, and continuous improvement. Visit <a class="ghost" href="https://abdiwahid.de">abdiwahid.de</a> for more.</p>
-        </div>
+<footer>
+    <p>&copy; 2025 Abdiwahid Said Abdirahman. Alle Rechte vorbehalten.</p>
+</footer>
 
-        <div class="card" id="projects">
-          <h4>Featured projects</h4>
-          <div class="projects">
-            <div class="project">
-              <h4>infra-watch</h4>
-              <p>Lightweight infrastructure monitor for distributed systems.</p>
-            </div>
-            <div class="project">
-              <h4>auto-deploy</h4>
-              <p>Smart deployment automation with integrated rollbacks.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="card subscribe" id="contact">
-          <h4>Stay in touch</h4>
-          <p class="small">Subscribe for short updates (no spam).</p>
-          <form onsubmit="event.preventDefault();subscribe();">
-            <input id="email" type="email" placeholder="you@domain.com" required />
-            <button type="submit">Subscribe</button>
-          </form>
-          <p id="subMsg" class="small" style="margin-top:8px;display:none"></p>
-        </div>
-
-        <div class="card">
-          <h4>Contact</h4>
-          <p class="small">Email: <a class="ghost" href="mailto:info@abdiwahid.de">info@abdiwahid.de</a></p>
-          <div class="socials">
-            <a class="ghost" href="https://github.com/abdiwahid">GitHub</a>
-            <a class="ghost" href="https://linkedin.com/in/abdiwahid">LinkedIn</a>
-          </div>
-        </div>
-      </aside>
-    </main>
-
-    <footer>
-      <div class="small">© 2025 Abdiwahid • All rights reserved</div>
-      <div class="small">Built with ❤️ • abdiwahid.de</div>
-    </footer>
-  </div>
-
-  <script>
-    const btn = document.getElementById('themeToggle');
-    const root = document.documentElement;
-    const initial = localStorage.getItem('theme') || 'dark';
-
-    function applyTheme(t) {
-      if (t === 'dark') {
-        document.body.style.background =
-          'radial-gradient(1200px 700px at 10% 10%, rgba(124,92,255,0.06), transparent 8%), radial-gradient(800px 500px at 90% 90%, rgba(0,212,255,0.03), transparent 8%), var(--bg)';
-        btn.textContent = '🌙 Dark';
-      } else {
-        document.body.style.background = 'linear-gradient(180deg,#f3f6ff,#fff)';
-        btn.textContent = '☀️ Light';
-        root.style.setProperty('--bg', '#f6f8fb');
-        root.style.setProperty('--text', '#071026');
-      }
-    }
-
-    applyTheme(initial);
-
-    btn.addEventListener('click', () => {
-      const cur = localStorage.getItem('theme') || 'dark';
-      const next = cur === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('theme', next);
-      location.reload();
-    });
-
-    function subscribe() {
-      const email = document.getElementById('email').value;
-      const msg = document.getElementById('subMsg');
-      if (!email) return;
-      msg.style.display = 'block';
-      msg.textContent = `Thanks — ${email}. I’ll reach out when there’s new content.`;
-      setTimeout(() => { msg.style.opacity = 0; }, 4000);
-    }
-  </script>
 </body>
 </html>
