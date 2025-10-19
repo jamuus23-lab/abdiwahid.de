@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio XTX</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0d1b2a; /* dunkelblau */
+            color: #e0e0e0;
+        }
+        header {
+            background-color: #112240;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 30px;
+        }
+        .logo {
+            font-weight: bold;
+            font-size: 28px;
+            color: #00bfff;
+        }
+        nav a {
+            color: #00bfff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            color: #ffffff;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        section {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        h2 {
+            color: #00bfff;
+            border-bottom: 2px solid #00bfff;
+            padding-bottom: 5px;
+        }
+        .card {
+            background-color: #112240;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+        .card p {
+            color: #e0e0e0;
+        }
+        form input, form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0d1b2a;
+            color: #e0e0e0;
+            border: 1px solid #00bfff;
+        }
+        form button {
+            background-color: #00bfff;
+            color: #0d1b2a;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
