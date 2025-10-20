@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdiwahid Said Abdirahman</title>
+    <title>XTX | Website im Aufbau</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -11,147 +11,97 @@
             padding: 0;
             background-color: #0d1b2a; /* dunkelblau */
             color: #e0e0e0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
+
         header {
-            background-color: #112240; /* dunkleres blau */
+            background-color: #112240;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             padding: 15px 30px;
         }
+
         .logo {
             font-weight: bold;
             font-size: 28px;
-            color: #00bfff; /* hellblau für Logo */
-            margin-right: 20px;
+            color: #00bfff;
         }
-        header h1 {
-            margin: 0;
-            font-size: 22px;
-            font-weight: normal;
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            background-color: #0d1b2a;
-            padding: 10px 0;
-        }
+
         nav a {
             color: #00bfff;
             text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 5px;
+            margin-left: 20px;
+            font-weight: bold;
             transition: 0.3s;
         }
+
         nav a:hover {
+            color: #ffffff;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .message-box {
             background-color: #112240;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            max-width: 600px;
         }
-        section {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        h2 {
+
+        .message-box h1 {
             color: #00bfff;
-            border-bottom: 1px solid #00bfff;
-            padding-bottom: 5px;
-        }
-        .card {
-            background-color: #112240;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-        }
-        .card p, .card a {
-            color: #e0e0e0;
-        }
-        .card a {
-            color: #00bfff;
-        }
-        form input, form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
             margin-bottom: 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #0d1b2a;
-            color: #e0e0e0;
-            border: 1px solid #00bfff;
+            font-size: 2em;
         }
-        form button {
-            background-color: #00bfff;
-            color: #0d1b2a;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
+
+        .message-box p {
+            color: #d0d0d0;
+            font-size: 1.1em;
+            line-height: 1.6;
         }
-        form button:hover {
-            background-color: #0096d6;
-        }
+
         footer {
+            background-color: #112240;
             text-align: center;
             padding: 20px;
-            background-color: #112240;
             color: #e0e0e0;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">X</div>
-    <h1>Abdiwahid Said Abdirahman</h1>
+    <div class="logo">XTX</div>
+    <nav>
+        <a href="#">Start</a>
+        <a href="#">Über uns</a>
+        <a href="#">Kontakt</a>
+    </nav>
 </header>
 
-<nav>
-    <a href="#about">Über mich</a>
-    <a href="#education">Bildung</a>
-    <a href="#contact">Kontakt</a>
-</nav>
-
-<section id="about">
-    <h2>Persönliche Daten</h2>
-    <div class="card">
-        <p><strong>Name:</strong> Abdiwahid Said Abdirahman</p>
-        <p><strong>Geburtsdatum:</strong> 23. Oktober 2006</p>
-        <p><strong>Geburtsort:</strong> Bualle, Somalia</p>
-        <p><strong>Adresse:</strong> Inratherstraße 325, 47803 Krefeld</p>
-        <p><strong>Telefon:</strong> 01521 6240058</p>
-        <p><strong>E-Mail:</strong> <a href="mailto:jamuus23@gmail.com">jamuus23@gmail.com</a></p>
-        <p><strong>Website:</strong> <a href="http://www.abdiwahid.de" target="_blank">www.abdiwahid.de</a></p>
+<main>
+    <div class="message-box">
+        <h1>Wir arbeiten an etwas Neuem</h1>
+        <p>Unsere Website wird derzeit überarbeitet, um Ihnen bald ein noch besseres digitales Erlebnis zu bieten.  
+        Bitte schauen Sie bald wieder vorbei — wir bauen spannende neue Entwicklungen auf unserer Plattform auf.</p>
+        <p>Vielen Dank für Ihre Geduld und Ihr Interesse.</p>
     </div>
-
-    <h2>Berufsziel</h2>
-    <div class="card">
-        <p>Engagierter und lernfreudiger Schüler der Internationalen Förderklasse mit dem Ziel, eine Ausbildung zum Fachinformatiker für Anwendungsentwicklung zu beginnen. Ich interessiere mich besonders für Programmierung, Softwareentwicklung und moderne Technologien und möchte aktiv an digitalen Lösungen mitwirken.</p>
-    </div>
-</section>
-
-<section id="education">
-    <h2>Bildungsweg</h2>
-    <div class="card">
-        <p><strong>Seit 08/2024 – voraussichtlich 07/2026:</strong> Internationale Förderklasse</p>
-    </div>
-</section>
-
-<section id="contact">
-    <h2>Kontaktformular</h2>
-    <div class="card">
-        <form action="mailto:jamuus23@gmail.com" method="post" enctype="text/plain">
-            <input type="text" name="name" placeholder="Ihr Name" required>
-            <input type="email" name="email" placeholder="Ihre E-Mail" required>
-            <textarea name="message" rows="5" placeholder="Ihre Nachricht" required></textarea>
-            <button type="submit">Nachricht senden</button>
-        </form>
-    </div>
-</section>
+</main>
 
 <footer>
-    <p>&copy; 2025 Abdiwahid Said Abdirahman. Alle Rechte vorbehalten.</p>
+    <p>&copy; 2025 XTX Digital Developments. Alle Rechte vorbehalten.</p>
 </footer>
 
 </body>
