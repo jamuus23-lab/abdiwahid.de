@@ -1,160 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>QUANTARIX Logo Preview</title>
-<style>
-  :root{
-    --bg: #0d1b2a;     /* dark navy */
-    --deep: #0f2a47;
-    --cyan-1: #00bfff; /* bright cyan */
-    --cyan-2: #39a9ff; /* secondary blue */
-    --muted: #cde8ff;
-  }
-
-  html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);display:flex;align-items:center;justify-content:center;color:var(--muted);}
-  .brand {
-    display:flex;
-    gap:22px;
-    align-items:center;
-    padding:28px;
-    border-radius:14px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-    box-shadow: 0 6px 24px rgba(2,8,23,0.6);
-  }
-
-  /* Logo container size */
-  .logo {
-    width:96px;
-    height:96px;
-    display:inline-block;
-    position:relative;
-    filter: drop-shadow(0 8px 18px rgba(0,180,255,0.06));
-    transition: transform .28s cubic-bezier(.2,.9,.2,1), filter .28s;
-  }
-  .logo:hover { transform: translateY(-4px) scale(1.03); filter: drop-shadow(0 18px 40px rgba(0,180,255,0.16)); }
-
-  /* Wordmark styling */
-  .wordmark {
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-  }
-  .wordmark .name {
-    font-weight:700;
-    letter-spacing:0.06em;
-    font-size:20px;
-    color: #eaf6ff;
-  }
-  .wordmark .tag {
-    font-size:12px;
-    color: #9fcff6;
-    text-transform:uppercase;
-    letter-spacing:0.18em;
-  }
-
-  /* Small responsive tweak */
-  @media (max-width:480px){
-    .brand{gap:12px;padding:18px}
-    .logo{width:72px;height:72px}
-    .wordmark .name{font-size:16px}
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdiwahid Said Abdirahman</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0d1b2a; /* dunkelblau */
+            color: #e0e0e0;
+        }
+        header {
+            background-color: #112240; /* dunkleres blau */
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+        }
+        .logo {
+            font-weight: bold;
+            font-size: 28px;
+            color: #00bfff; /* hellblau für Logo */
+            margin-right: 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: normal;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background-color: #0d1b2a;
+            padding: 10px 0;
+        }
+        nav a {
+            color: #00bfff;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            background-color: #112240;
+        }
+        section {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        h2 {
+            color: #00bfff;
+            border-bottom: 1px solid #00bfff;
+            padding-bottom: 5px;
+        }
+        .card {
+            background-color: #112240;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        .card p, .card a {
+            color: #e0e0e0;
+        }
+        .card a {
+            color: #00bfff;
+        }
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0d1b2a;
+            color: #e0e0e0;
+            border: 1px solid #00bfff;
+        }
+        form button {
+            background-color: #00bfff;
+            color: #0d1b2a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        form button:hover {
+            background-color: #0096d6;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #112240;
+            color: #e0e0e0;
+        }
+    </style>
 </head>
 <body>
 
-<div class="brand" aria-label="QUANTARIX brand">
-  <!-- Inline SVG logo (stylized Q + quant slash) -->
-  <svg class="logo" viewBox="0 0 100 100" role="img" aria-labelledby="title desc">
-    <title id="title">QUANTARIX logo mark</title>
-    <desc id="desc">A stylized Q ring with a diagonal quant slash and inner circuitry hint, gradient cyan on dark navy</desc>
+<header>
+    <div class="logo">X</div>
+    <h1>Abdiwahid Said Abdirahman</h1>
+</header>
 
-    <defs>
-      <!-- gradient for strokes/fills -->
-      <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
-        <stop offset="0" stop-color="#00d9ff"/>
-        <stop offset="0.45" stop-color="#00bfff"/>
-        <stop offset="1" stop-color="#2aa6ff"/>
-      </linearGradient>
+<nav>
+    <a href="#about">Über mich</a>
+    <a href="#education">Bildung</a>
+    <a href="#contact">Kontakt</a>
+</nav>
 
-      <!-- soft glow for outer ring -->
-      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="3.4" result="b"/>
-        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
+<section id="about">
+    <h2>Persönliche Daten</h2>
+    <div class="card">
+        <p><strong>Name:</strong> Abdiwahid Said Abdirahman</p>
+        <p><strong>Geburtsdatum:</strong> 23. Oktober 2006</p>
+        <p><strong>Geburtsort:</strong> Bualle, Somalia</p>
+        <p><strong>Adresse:</strong> Inratherstraße 325, 47803 Krefeld</p>
+        <p><strong>Telefon:</strong> 01521 6240058</p>
+        <p><strong>E-Mail:</strong> <a href="mailto:jamuus23@gmail.com">jamuus23@gmail.com</a></p>
+        <p><strong>Website:</strong> <a href="http://www.abdiwahid.de" target="_blank">www.abdiwahid.de</a></p>
+    </div>
 
-      <!-- subtle inner bevel -->
-      <radialGradient id="g2" cx="35%" cy="25%" r="90%">
-        <stop offset="0" stop-color="rgba(255,255,255,0.06)"/>
-        <stop offset="1" stop-color="rgba(0,0,0,0.22)"/>
-      </radialGradient>
+    <h2>Berufsziel</h2>
+    <div class="card">
+        <p>Engagierter und lernfreudiger Schüler der Internationalen Förderklasse mit dem Ziel, eine Ausbildung zum Fachinformatiker für Anwendungsentwicklung zu beginnen. Ich interessiere mich besonders für Programmierung, Softwareentwicklung und moderne Technologien und möchte aktiv an digitalen Lösungen mitwirken.</p>
+    </div>
+</section>
 
-      <!-- stroke dash for circuitry motif -->
-      <pattern id="p1" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(20)">
-        <rect width="3" height="1" fill="rgba(255,255,255,0.06)"></rect>
-      </pattern>
-    </defs>
+<section id="education">
+    <h2>Bildungsweg</h2>
+    <div class="card">
+        <p><strong>Seit 08/2024 – voraussichtlich 07/2026:</strong> Internationale Förderklasse</p>
+    </div>
+</section>
 
-    <!-- background circle (subtle) -->
-    <circle cx="50" cy="50" r="48" fill="url(#g2)" opacity="0.06"></circle>
+<section id="contact">
+    <h2>Kontaktformular</h2>
+    <div class="card">
+        <form action="mailto:jamuus23@gmail.com" method="post" enctype="text/plain">
+            <input type="text" name="name" placeholder="Ihr Name" required>
+            <input type="email" name="email" placeholder="Ihre E-Mail" required>
+            <textarea name="message" rows="5" placeholder="Ihre Nachricht" required></textarea>
+            <button type="submit">Nachricht senden</button>
+        </form>
+    </div>
+</section>
 
-    <!-- main ring (thick) -->
-    <path d="M50,10
-             A40,40 0 1,1 49.99,10
-             Z"
-          fill="none"
-          stroke="url(#g1)"
-          stroke-width="8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          filter="url(#glow)"
-          opacity="0.98" />
-
-    <!-- inner ring cut-out to shape Q tail -->
-    <!-- create a sliced segment to form the Q tail with gradient fill -->
-    <g transform="translate(0,0)">
-      <!-- diagonal slash / quant trace -->
-      <path d="M66 34 L78 20"
-            stroke="url(#g1)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
-            opacity="0.98" />
-
-      <!-- stylized tail (rounded rectangle) -->
-      <path d="M62 60
-               L78 76
-               A3 3 0 0 1 74 80
-               L58 64
-               Z"
-            fill="url(#g1)" opacity="0.98" />
-
-      <!-- small circuitry ticks inside ring to hint quant/data -->
-      <g transform="translate(0,0)" opacity="0.85">
-        <line x1="50" y1="22" x2="50" y2="30" stroke="rgba(255,255,255,0.12)" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="61" y1="28" x2="66" y2="33" stroke="rgba(255,255,255,0.10)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="39" y1="32" x2="34" y2="36" stroke="rgba(255,255,255,0.08)" stroke-width="1.2" stroke-linecap="round"/>
-        <rect x="47" y="38" width="6" height="1.6" fill="url(#p1)" rx="1"></rect>
-      </g>
-    </g>
-
-    <!-- crisp white highlight for top-left to add depth -->
-    <path d="M32 20 A30,30 0 0,1 68 20" stroke="rgba(255,255,255,0.06)" stroke-width="3" fill="none" stroke-linecap="round" />
-
-  </svg>
-
-  <!-- Wordmark: QUANTARIX -->
-  <div class="wordmark" aria-hidden="false">
-    <div class="name">QUANTARIX</div>
-    <div class="tag">Quantitative Systems &amp; Technologies</div>
-  </div>
-</div>
-
-<!-- Usage notes (non-critical) -->
-<!--
-  How to use:
-  - Copy the <svg> element and embed inline in your HTML where you need a logo.
-  - To create a favicon, export the SVG to PNG 32x32 or 64x64.
-  - To change colors: adjust the linearGradient stops (#00d9ff, #00bfff, #2aa6ff) and background.
--->
+<footer>
+    <p>&copy; 2025 Abdiwahid Said Abdirahman. Alle Rechte vorbehalten.</p>
+</footer>
 
 </body>
 </html>
