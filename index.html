@@ -1,209 +1,206 @@
-import React, { useEffect, useRef } from "react";
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import { Sun } from "lucide-react";
-
-// Quantrarix - Single-file React landing page
-// - Tailwind CSS required
-// - Framer Motion required: npm i framer-motion
-// - lucide-react optional for icons: npm i lucide-react
-// Usage: place your logo at public/logo.png or pass a prop `logoSrc`
-
-export default function QuantrarixLanding({ logoSrc = "/logo.png" }) {
-  const orbX = useMotionValue(0);
-  const orbY = useMotionValue(0);
-  const glow = useTransform(orbX, [-200, 0, 200], [0.6, 1.6, 0.6]);
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    function onMove(e) {
-      const rect = el.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      orbX.set(x);
-      orbY.set(y);
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QUANTARIX — Quantitative Systems & Technologies</title>
+  <meta name="description" content="QUANTARIX — Cinematic, dark-blue site for advanced human+AI systems. Contact: jamuus23@gmail.com" />
+  <style>
+    :root{
+      --bg-1:#02101a;
+      --bg-2:#071627;
+      --accent-1:#00b4ff;
+      --accent-2:#0ea5ff;
+      --muted: #9fb0c2;
+      --card: rgba(255,255,255,0.03);
+      --glass: rgba(255,255,255,0.04);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-    el.addEventListener("mousemove", onMove);
-    return () => el.removeEventListener("mousemove", onMove);
-  }, [orbX, orbY]);
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      min-height:100%;
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(3,40,70,0.45), transparent 18%),
+        linear-gradient(180deg,var(--bg-1) 0%, var(--bg-2) 100%);
+      color:#e6f0fb;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-y:scroll;
+    }
 
-  return (
-    <div
-      ref={containerRef}
-      className="min-h-screen w-full bg-quant-dark flex flex-col items-center text-slate-100"
-      style={{
-        background:
-          "radial-gradient(ellipse at 20% 10%, rgba(20,40,70,0.6) 0%, rgba(5,12,25,0.95) 40%), linear-gradient(180deg, #071027 0%, #02101a 100%)",
-      }}
-    >
-      {/* cinematic scanline + subtle vignette */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.0),rgba(0,0,0,0.35))] mix-blend-multiply" />
-        <div className="absolute inset-0 bg-[repeating-linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01) 1px, rgba(0,0,0,0) 2px)] opacity-5" />
-      </div>
+    /* container */
+    .wrap{max-width:1100px;margin:40px auto;padding:28px}
 
-      <header className="z-20 w-full max-w-6xl px-6 pt-8 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="relative w-14 h-14 rounded-full flex items-center justify-center">
-            <img src={logoSrc} alt="Quantrarix" className="w-full h-full object-contain drop-shadow-[0_8px_30px_rgba(0,150,255,0.15)]" />
-            <div className="absolute inset-0 rounded-full blur-xl opacity-60" style={{ boxShadow: "0 0 45px 18px rgba(10,140,230,0.18)" }} />
-          </div>
-          <div className="leading-tight">
-            <div className="text-xl font-semibold tracking-wider">QUANTARIX</div>
-            <div className="text-xs text-slate-300 uppercase">Quantitative Systems & Technologies</div>
-          </div>
-        </div>
-        <nav className="text-slate-300 text-sm hidden md:flex gap-6 items-center">
-          <a href="#about" className="hover:text-white">About</a>
-          <a href="#features" className="hover:text-white">Features</a>
-          <a href="#contact" className="hover:text-white">Contact</a>
-          <button className="ml-2 px-3 py-1 border border-slate-600 rounded-md text-sm hover:bg-white/5">Apply</button>
-        </nav>
-      </header>
+    /* header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{
+      width:64px;height:64px;border-radius:50%;overflow:hidden;
+      display:flex;align-items:center;justify-content:center;
+      background:conic-gradient(from 200deg at 50% 50%, rgba(0,180,255,0.08), rgba(5,40,70,0.02));
+      box-shadow:0 8px 40px rgba(0,140,255,0.08), inset 0 0 18px rgba(0,180,255,0.05);
+      border:1px solid rgba(255,255,255,0.03)
+    }
+    .logo img{width:72%;height:auto;display:block}
 
-      <main className="z-10 flex-1 w-full max-w-6xl px-6 flex flex-col items-center justify-center text-center py-20">
-        {/* Hero */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
-          className="w-full flex flex-col items-center"
-        >
-          <div className="relative">
-            {/* Halo glow behind logo: cinematic */}
-            <div className="mx-auto w-[320px] h-[320px] md:w-[420px] md:h-[420px] rounded-full flex items-center justify-center" style={{ filter: "blur(28px)", background: "radial-gradient(circle at 30% 30%, rgba(0,180,255,0.22), rgba(0,60,120,0.06) 40%)" }} />
+    .brand h1{margin:0;font-size:18px;letter-spacing:1px}
+    .brand p{margin:0;font-size:11px;color:var(--muted);text-transform:uppercase}
 
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.img
-                src={logoSrc}
-                alt="Quantrarix Logo"
-                initial={{ scale: 0.88, rotate: -6, opacity: 0 }}
-                animate={{ scale: 1, rotate: 0, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 80, damping: 12 }}
-                className="w-[180px] md:w-[240px] drop-shadow-[0_30px_80px_rgba(0,140,255,0.12)]"
-              />
-            </div>
+    nav{display:flex;gap:12px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-size:13px;padding:8px;border-radius:8px}
+    nav a:hover{color:#fff;background:rgba(255,255,255,0.02)}
 
-            {/* cinematic ring */}
-            <svg className="absolute -z-10 w-[520px] h-[520px] md:w-[680px] md:h-[680px]" viewBox="0 0 800 800">
-              <defs>
-                <radialGradient id="g1" cx="50%" cy="40%">
-                  <stop offset="0%" stopColor="#00b4ff" stopOpacity="0.18" />
-                  <stop offset="60%" stopColor="#0078b6" stopOpacity="0.06" />
-                  <stop offset="100%" stopColor="#00101a" stopOpacity="0" />
-                </radialGradient>
-              </defs>
-              <circle cx="400" cy="400" r="240" fill="url(#g1)" />
-            </svg>
-          </div>
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;margin-top:40px}
+    .hero-left{}
+    h2.title{font-size:44px;margin:0 0 10px 0;letter-spacing:2px}
+    p.lead{color:var(--muted);line-height:1.6;max-width:78%}
 
-          <h1 className="mt-10 text-4xl md:text-6xl font-extrabold leading-tight tracking-tight" style={{ textShadow: "0 8px 30px rgba(0,0,0,0.6)" }}>
-            QUANTARIX
-          </h1>
-          <p className="mt-4 max-w-2xl text-slate-300 text-lg md:text-xl">
-            Quantitative systems & technologies — cinematic, precise, built for human & AI collaboration.
-          </p>
+    .hero-cta{margin-top:18px;display:flex;gap:12px}
+    .btn{padding:12px 18px;border-radius:10px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#02101a;font-weight:600;border:none;cursor:pointer;box-shadow:0 12px 30px rgba(10,140,230,0.12)}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
 
-          <div className="mt-8 flex gap-4 items-center">
-            <a href="#contact" className="px-6 py-3 rounded-md bg-gradient-to-r from-sky-500 to-blue-600 font-medium shadow-lg">Get in touch</a>
-            <a href="#features" className="px-5 py-3 rounded-md border border-slate-600 text-sm hover:bg-white/3">Explore features</a>
-          </div>
-        </motion.section>
+    /* right card */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:14px; padding:18px; box-shadow:0 8px 40px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.03)}
+    .card .name{font-weight:700;font-size:18px}
+    .card .meta{color:var(--muted);font-size:13px;margin-top:6px}
+    .cv-thumb{margin-top:12px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+    .cv-thumb img{width:100%;height:auto;display:block}
 
-        {/* Interactive cinematic orb that reacts to mouse */}
-        <motion.div
-          style={{ x: orbX, y: orbY, scale: glow }}
-          className="pointer-events-none fixed right-12 bottom-12 w-28 h-28 rounded-full mix-blend-screen"
-        >
-          <div className="w-full h-full rounded-full" style={{ boxShadow: "0 0 120px 45px rgba(10,140,230,0.12)" }} />
-        </motion.div>
-      </main>
+    /* features grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:36px}
+    .feature{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+    .feature h3{margin:0 0 8px 0;font-size:16px}
+    .feature p{margin:0;color:var(--muted);line-height:1.5;font-size:14px}
 
-      <section id="features" className="z-20 w-full max-w-6xl px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card title="Cinematic UX" desc="Immersive visuals, subtle motion and readable content form a memorable product experience." icon={<Sun />} />
-          <Card title="Human + AI" desc="Interfaces that let humans and models collaborate naturally — not replace one another." icon={<Sun />} />
-          <Card title="Future-ready" desc="Scalable front-end architecture, performant assets and graceful degradations." icon={<Sun />} />
-        </div>
-      </section>
+    /* footer */
+    footer{margin-top:46px;padding:18px 0;color:var(--muted);font-size:13px;border-top:1px solid rgba(255,255,255,0.02)}
 
-      <section id="about" className="z-20 w-full max-w-6xl px-6 py-10">
-        <div className="bg-gradient-to-b from-white/2 to-white/1 rounded-2xl p-8 backdrop-blur-md border border-slate-800">
-          <h3 className="text-2xl font-semibold">About Quantrarix</h3>
-          <p className="mt-3 text-slate-300">We craft quantitative systems and cinematic experiences. Inspired by science fiction and built on engineering discipline — our interfaces amplify human judgment, supported by AI that explains and collaborates.</p>
-        </div>
-      </section>
+    /* subtle halo & ambient */
+    .halo{
+      position:fixed;right:-160px;top:-90px;width:520px;height:520px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, rgba(0,180,255,0.14), rgba(0,80,120,0.04) 45%, transparent 60%);
+      filter:blur(34px);pointer-events:none;mix-blend-mode:screen;opacity:0.9
+    }
+    .glint{position:fixed;left:-200px;bottom:-120px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle, rgba(10,140,230,0.08), transparent 40%);filter:blur(40px);pointer-events:none}
 
-      <footer id="contact" className="z-20 w-full max-w-6xl px-6 py-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div>
-            <div className="font-semibold">Abdiwahid Said Abdirahman</div>
-            <div className="text-sm text-slate-400">www.abdiwahid.de • jamuus23@gmail.com • +49 1521 6240058</div>
-          </div>
-          <div className="text-sm text-slate-400">© {new Date().getFullYear()} QUANTARIX — Built for humans & AI</div>
-        </div>
-      </footer>
+    /* small screens */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;gap:18px}
+      p.lead{max-width:100%}
+      .brand h1{font-size:16px}
+    }
+  </style>
+</head>
+<body>
+  <div class="halo" aria-hidden="true"></div>
+  <div class="glint" aria-hidden="true"></div>
 
-      {/* Tiny floating stars for atmosphere */}
-      <Stars />
-
-    </div>
-  );
-}
-
-function Card({ title, desc, icon }) {
-  return (
-    <motion.div whileHover={{ y: -6 }} className="rounded-xl p-6 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))] border border-slate-800">
-      <div className="flex items-start gap-4">
-        <div className="p-3 rounded-lg bg-white/3">
-          {icon}
+  <div class="wrap" role="main">
+    <header>
+      <div class="brand" aria-label="brand">
+        <div class="logo" role="img" aria-label="Quantrarix logo">
+          <!-- replace assets/logo.png with your logo -->
+          <img src="assets/logo.png" alt="Quantrarix logo">
         </div>
         <div>
-          <div className="font-semibold">{title}</div>
-          <div className="text-sm mt-2 text-slate-300">{desc}</div>
+          <h1>QUANTARIX</h1>
+          <p>Quantitative Systems &amp; Technologies</p>
         </div>
       </div>
-    </motion.div>
-  );
-}
 
-function Stars() {
-  // purely decorative - lightweight SVG repeated pattern
-  return (
-    <div className="pointer-events-none absolute inset-0 -z-20 opacity-30">
-      <svg width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="s1" cx="50%" cy="50%">
-            <stop offset="0%" stopColor="#67e8f9" stopOpacity="0.06" />
-            <stop offset="100%" stopColor="#67e8f9" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-        <g>
-          <circle cx="8%" cy="10%" r="1.6" fill="url(#s1)" />
-          <circle cx="20%" cy="30%" r="0.9" fill="#065f46" opacity="0.06" />
-          <circle cx="75%" cy="20%" r="1.2" fill="#0284c7" opacity="0.06" />
-          <circle cx="88%" cy="72%" r="0.7" fill="#60a5fa" opacity="0.05" />
-        </g>
-      </svg>
-    </div>
-  );
-}
+      <nav aria-label="main">
+        <a href="#about">About</a>
+        <a href="#focus">Focus Areas</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-/*
-  Tailwind CSS additions (place in tailwind.config.js's theme.extend.colors):
-  colors: {
-    'quant-dark': '#020b14',
-  }
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-left">
+        <h2 id="hero-title" class="title">QUANTARIX — Cinematic systems for human + AI collaboration</h2>
+        <p class="lead">QUANTARIX ist ein visionäres Unternehmen, das sich der Entwicklung von fortschrittlichen, ethisch getragenen Technologien und robusten Systemen widmet. Ziel ist es, Werkzeuge zu schaffen, die Menschen und KI zusammenbringen — für bessere Entscheidungen, Resilienz und verantwortungsvolle Innovation.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#contact">Kontakt</a>
+          <a class="btn secondary" href="assets/cv.jpg" target="_blank" rel="noopener">Lebenslauf ansehen</a>
+        </div>
+      </div>
 
-  Quick setup instructions:
-  1) Create a React app (Vite/Next/Create React App).
-  2) Install Tailwind and Framer Motion: npm i -D tailwindcss && npm i framer-motion lucide-react
-  3) Put your logo at public/logo.png or pass <QuantrarixLanding logoSrc="/path/to/logo.png" />
-  4) Use this component as the page root, add Tailwind base styles and build.
+      <aside class="card" aria-labelledby="contact-card">
+        <div id="contact-card" class="name">Abdiwahid Said Abdirahman</div>
+        <div class="meta">Inratherstraße 325, 47803 Krefeld · +49 1521 6240058</div>
+        <div class="meta">jamuus23@gmail.com · www.abdiwahid.de</div>
 
-  Notes on "one-time code": this single-file component is intentionally opinionated and designed
-  to be a starting point for a cinematic, HALO/AppleTV-like visual language. To reach the
-  "best website humans AND AI has never made before" you will iterate visuals, motion timings,
-  and integrate AI backends (LLMs, vector DBs, etc.) depending on features.
-*/
+        <div class="cv-thumb" aria-hidden="true">
+          <img src="assets/cv.jpg" alt="Vorschaubild Lebenslauf">
+        </div>
+      </aside>
+    </section>
+
+    <section id="about" aria-labelledby="about-title">
+      <h2 id="about-title" style="margin-top:36px;font-size:20px">Mission</h2>
+      <p style="color:var(--muted);max-width:900px">QUANTARIX strebt danach, Technologien zu entwickeln, die in sicherer, transparenter und verantwortungsvoller Weise Fähigkeiten erweitern — wobei die menschliche Aufsicht, ethische Richtlinien und robuste Sicherheit stets im Zentrum stehen. Die folgenden Fokusbereiche zeigen die strategische Ausrichtung des Unternehmens auf hohem, nicht-operativem Niveau.</p>
+    </section>
+
+    <section id="focus" aria-labelledby="focus-title">
+      <h2 id="focus-title" style="margin-top:26px;font-size:20px">Strategische Fokusbereiche</h2>
+
+      <div class="grid" role="list">
+        <article class="feature" role="listitem" aria-labelledby="f1">
+          <h3 id="f1">1. Künstliche Intelligenz &amp; Autonomie</h3>
+          <p>Entwicklung sicherer, transparenter KI-Systeme, die Entscheidungsunterstützung leisten, autonome Werkzeuge verantwortungsbewusst begleiten und die Zusammenarbeit zwischen Menschen und Maschinen verbessern.</p>
+        </article>
+
+        <article class="feature" role="listitem" aria-labelledby="f2">
+          <h3 id="f2">2. Fortschrittliche Materialien &amp; Fertigung</h3>
+          <p>Forschung an leichten, langlebigen Materialien sowie adaptiven Fertigungsprozessen zur Unterstützung von belastbaren Produkten und zuverlässigen Systemen — mit Fokus auf Robustheit und Nachhaltigkeit.</p>
+        </article>
+
+        <article class="feature" role="listitem" aria-labelledby="f3">
+          <h3 id="f3">3. Raumfahrt &amp; Orbitale Systeme</h3>
+          <p>Strategische Arbeit an resilienten Kommunikations- und Beobachtungssystemen zur Verbesserung globaler Konnektivität und situationalen Bewusstseins in anspruchsvollen Umgebungen.</p>
+        </article>
+
+        <article class="feature" role="listitem" aria-labelledby="f4">
+          <h3 id="f4">4. Energiebasierte &amp; Defensivsysteme (konzeptionell)</h3>
+          <p>Untersuchung von Schutzkonzepten, Überwachungs- und Schutzstrategien sowie legal-ethischer Bewertung moderner Energiesysteme und Abwehrtechnologien auf konzeptioneller Ebene.</p>
+        </article>
+
+        <article class="feature" role="listitem" aria-labelledby="f5">
+          <h3 id="f5">5. Cybersecurity &amp; Resilienz</h3>
+          <p>Fokus auf robuste Cyber-Sicherheitsstrategien, schwer zu kompromittierende Kommunikationsprotokolle und KI-gestützte Überwachung, um kritische Systeme und Daten resilienter zu machen.</p>
+        </article>
+
+        <article class="feature" role="listitem" aria-labelledby="f6">
+          <h3 id="f6">6. Menschliche Erweiterung &amp; Biotech (ethisch)</h3>
+          <p>Forschung an unterstützenden Technologien zur Verbesserung von Gesundheit, Leistungsfähigkeit und Sicherheit — mit klaren ethischen Leitplanken und medizinischer Kontrolle.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer id="contact" aria-labelledby="contact-title">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <div id="contact-title" style="font-weight:700">Kontakt</div>
+          <div style="color:var(--muted)">Abdiwahid Said Abdirahman · jamuus23@gmail.com · +49 1521 6240058</div>
+        </div>
+        <div style="color:var(--muted)">© <span id="year"></span> QUANTARIX — Quantitative Systems &amp; Technologies</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // small scripts: set year, smooth scroll
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const tgt = document.querySelector(a.getAttribute('href'));
+        if(tgt){ e.preventDefault(); tgt.scrollIntoView({behavior:'smooth',block:'start'}); }
+      });
+    });
+  </script>
+</body>
+</html>
