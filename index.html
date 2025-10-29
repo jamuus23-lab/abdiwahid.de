@@ -1,158 +1,209 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdiwahid Said Abdirahman</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #0d1b2a; /* dunkelblau */
-            color: #e0e0e0;
-        }
-        header {
-            background-color: #112240; /* dunkleres blau */
-            display: flex;
-            align-items: center;
-            padding: 15px 30px;
-        }
-        .logo {
-            font-weight: bold;
-            font-size: 28px;
-            color: #00bfff; /* hellblau für Logo */
-            margin-right: 20px;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 22px;
-            font-weight: normal;
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            background-color: #0d1b2a;
-            padding: 10px 0;
-        }
-        nav a {
-            color: #00bfff;
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        nav a:hover {
-            background-color: #112240;
-        }
-        section {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        h2 {
-            color: #00bfff;
-            border-bottom: 1px solid #00bfff;
-            padding-bottom: 5px;
-        }
-        .card {
-            background-color: #112240;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-        }
-        .card p, .card a {
-            color: #e0e0e0;
-        }
-        .card a {
-            color: #00bfff;
-        }
-        form input, form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #0d1b2a;
-            color: #e0e0e0;
-            border: 1px solid #00bfff;
-        }
-        form button {
-            background-color: #00bfff;
-            color: #0d1b2a;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        form button:hover {
-            background-color: #0096d6;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #112240;
-            color: #e0e0e0;
-        }
-    </style>
-</head>
-<body>
+import React, { useEffect, useRef } from "react";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import { Sun } from "lucide-react";
 
-<header>
-    <div class="logo">X</div>
-    <h1>Abdiwahid Said Abdirahman</h1>
-</header>
+// Quantrarix - Single-file React landing page
+// - Tailwind CSS required
+// - Framer Motion required: npm i framer-motion
+// - lucide-react optional for icons: npm i lucide-react
+// Usage: place your logo at public/logo.png or pass a prop `logoSrc`
 
-<nav>
-    <a href="#about">Über mich</a>
-    <a href="#education">Bildung</a>
-    <a href="#contact">Kontakt</a>
-</nav>
+export default function QuantrarixLanding({ logoSrc = "/logo.png" }) {
+  const orbX = useMotionValue(0);
+  const orbY = useMotionValue(0);
+  const glow = useTransform(orbX, [-200, 0, 200], [0.6, 1.6, 0.6]);
+  const containerRef = useRef(null);
 
-<section id="about">
-    <h2>Persönliche Daten</h2>
-    <div class="card">
-        <p><strong>Name:</strong> Abdiwahid Said Abdirahman</p>
-        <p><strong>Geburtsdatum:</strong> 23. Oktober 2006</p>
-        <p><strong>Geburtsort:</strong> Bualle, Somalia</p>
-        <p><strong>Adresse:</strong> Inratherstraße 325, 47803 Krefeld</p>
-        <p><strong>Telefon:</strong> 01521 6240058</p>
-        <p><strong>E-Mail:</strong> <a href="mailto:jamuus23@gmail.com">jamuus23@gmail.com</a></p>
-        <p><strong>Website:</strong> <a href="http://www.abdiwahid.de" target="_blank">www.abdiwahid.de</a></p>
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    function onMove(e) {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      orbX.set(x);
+      orbY.set(y);
+    }
+    el.addEventListener("mousemove", onMove);
+    return () => el.removeEventListener("mousemove", onMove);
+  }, [orbX, orbY]);
+
+  return (
+    <div
+      ref={containerRef}
+      className="min-h-screen w-full bg-quant-dark flex flex-col items-center text-slate-100"
+      style={{
+        background:
+          "radial-gradient(ellipse at 20% 10%, rgba(20,40,70,0.6) 0%, rgba(5,12,25,0.95) 40%), linear-gradient(180deg, #071027 0%, #02101a 100%)",
+      }}
+    >
+      {/* cinematic scanline + subtle vignette */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.0),rgba(0,0,0,0.35))] mix-blend-multiply" />
+        <div className="absolute inset-0 bg-[repeating-linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01) 1px, rgba(0,0,0,0) 2px)] opacity-5" />
+      </div>
+
+      <header className="z-20 w-full max-w-6xl px-6 pt-8 flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="relative w-14 h-14 rounded-full flex items-center justify-center">
+            <img src={logoSrc} alt="Quantrarix" className="w-full h-full object-contain drop-shadow-[0_8px_30px_rgba(0,150,255,0.15)]" />
+            <div className="absolute inset-0 rounded-full blur-xl opacity-60" style={{ boxShadow: "0 0 45px 18px rgba(10,140,230,0.18)" }} />
+          </div>
+          <div className="leading-tight">
+            <div className="text-xl font-semibold tracking-wider">QUANTARIX</div>
+            <div className="text-xs text-slate-300 uppercase">Quantitative Systems & Technologies</div>
+          </div>
+        </div>
+        <nav className="text-slate-300 text-sm hidden md:flex gap-6 items-center">
+          <a href="#about" className="hover:text-white">About</a>
+          <a href="#features" className="hover:text-white">Features</a>
+          <a href="#contact" className="hover:text-white">Contact</a>
+          <button className="ml-2 px-3 py-1 border border-slate-600 rounded-md text-sm hover:bg-white/5">Apply</button>
+        </nav>
+      </header>
+
+      <main className="z-10 flex-1 w-full max-w-6xl px-6 flex flex-col items-center justify-center text-center py-20">
+        {/* Hero */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          className="w-full flex flex-col items-center"
+        >
+          <div className="relative">
+            {/* Halo glow behind logo: cinematic */}
+            <div className="mx-auto w-[320px] h-[320px] md:w-[420px] md:h-[420px] rounded-full flex items-center justify-center" style={{ filter: "blur(28px)", background: "radial-gradient(circle at 30% 30%, rgba(0,180,255,0.22), rgba(0,60,120,0.06) 40%)" }} />
+
+            <div className="absolute inset-0 flex items-center justify-center">
+              <motion.img
+                src={logoSrc}
+                alt="Quantrarix Logo"
+                initial={{ scale: 0.88, rotate: -6, opacity: 0 }}
+                animate={{ scale: 1, rotate: 0, opacity: 1 }}
+                transition={{ type: "spring", stiffness: 80, damping: 12 }}
+                className="w-[180px] md:w-[240px] drop-shadow-[0_30px_80px_rgba(0,140,255,0.12)]"
+              />
+            </div>
+
+            {/* cinematic ring */}
+            <svg className="absolute -z-10 w-[520px] h-[520px] md:w-[680px] md:h-[680px]" viewBox="0 0 800 800">
+              <defs>
+                <radialGradient id="g1" cx="50%" cy="40%">
+                  <stop offset="0%" stopColor="#00b4ff" stopOpacity="0.18" />
+                  <stop offset="60%" stopColor="#0078b6" stopOpacity="0.06" />
+                  <stop offset="100%" stopColor="#00101a" stopOpacity="0" />
+                </radialGradient>
+              </defs>
+              <circle cx="400" cy="400" r="240" fill="url(#g1)" />
+            </svg>
+          </div>
+
+          <h1 className="mt-10 text-4xl md:text-6xl font-extrabold leading-tight tracking-tight" style={{ textShadow: "0 8px 30px rgba(0,0,0,0.6)" }}>
+            QUANTARIX
+          </h1>
+          <p className="mt-4 max-w-2xl text-slate-300 text-lg md:text-xl">
+            Quantitative systems & technologies — cinematic, precise, built for human & AI collaboration.
+          </p>
+
+          <div className="mt-8 flex gap-4 items-center">
+            <a href="#contact" className="px-6 py-3 rounded-md bg-gradient-to-r from-sky-500 to-blue-600 font-medium shadow-lg">Get in touch</a>
+            <a href="#features" className="px-5 py-3 rounded-md border border-slate-600 text-sm hover:bg-white/3">Explore features</a>
+          </div>
+        </motion.section>
+
+        {/* Interactive cinematic orb that reacts to mouse */}
+        <motion.div
+          style={{ x: orbX, y: orbY, scale: glow }}
+          className="pointer-events-none fixed right-12 bottom-12 w-28 h-28 rounded-full mix-blend-screen"
+        >
+          <div className="w-full h-full rounded-full" style={{ boxShadow: "0 0 120px 45px rgba(10,140,230,0.12)" }} />
+        </motion.div>
+      </main>
+
+      <section id="features" className="z-20 w-full max-w-6xl px-6 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card title="Cinematic UX" desc="Immersive visuals, subtle motion and readable content form a memorable product experience." icon={<Sun />} />
+          <Card title="Human + AI" desc="Interfaces that let humans and models collaborate naturally — not replace one another." icon={<Sun />} />
+          <Card title="Future-ready" desc="Scalable front-end architecture, performant assets and graceful degradations." icon={<Sun />} />
+        </div>
+      </section>
+
+      <section id="about" className="z-20 w-full max-w-6xl px-6 py-10">
+        <div className="bg-gradient-to-b from-white/2 to-white/1 rounded-2xl p-8 backdrop-blur-md border border-slate-800">
+          <h3 className="text-2xl font-semibold">About Quantrarix</h3>
+          <p className="mt-3 text-slate-300">We craft quantitative systems and cinematic experiences. Inspired by science fiction and built on engineering discipline — our interfaces amplify human judgment, supported by AI that explains and collaborates.</p>
+        </div>
+      </section>
+
+      <footer id="contact" className="z-20 w-full max-w-6xl px-6 py-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div>
+            <div className="font-semibold">Abdiwahid Said Abdirahman</div>
+            <div className="text-sm text-slate-400">www.abdiwahid.de • jamuus23@gmail.com • +49 1521 6240058</div>
+          </div>
+          <div className="text-sm text-slate-400">© {new Date().getFullYear()} QUANTARIX — Built for humans & AI</div>
+        </div>
+      </footer>
+
+      {/* Tiny floating stars for atmosphere */}
+      <Stars />
+
     </div>
+  );
+}
 
-    <h2>Berufsziel</h2>
-    <div class="card">
-        <p>Engagierter und lernfreudiger Schüler der Internationalen Förderklasse mit dem Ziel, eine Ausbildung zum Fachinformatiker für Anwendungsentwicklung zu beginnen. Ich interessiere mich besonders für Programmierung, Softwareentwicklung und moderne Technologien und möchte aktiv an digitalen Lösungen mitwirken.</p>
+function Card({ title, desc, icon }) {
+  return (
+    <motion.div whileHover={{ y: -6 }} className="rounded-xl p-6 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))] border border-slate-800">
+      <div className="flex items-start gap-4">
+        <div className="p-3 rounded-lg bg-white/3">
+          {icon}
+        </div>
+        <div>
+          <div className="font-semibold">{title}</div>
+          <div className="text-sm mt-2 text-slate-300">{desc}</div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function Stars() {
+  // purely decorative - lightweight SVG repeated pattern
+  return (
+    <div className="pointer-events-none absolute inset-0 -z-20 opacity-30">
+      <svg width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="s1" cx="50%" cy="50%">
+            <stop offset="0%" stopColor="#67e8f9" stopOpacity="0.06" />
+            <stop offset="100%" stopColor="#67e8f9" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <g>
+          <circle cx="8%" cy="10%" r="1.6" fill="url(#s1)" />
+          <circle cx="20%" cy="30%" r="0.9" fill="#065f46" opacity="0.06" />
+          <circle cx="75%" cy="20%" r="1.2" fill="#0284c7" opacity="0.06" />
+          <circle cx="88%" cy="72%" r="0.7" fill="#60a5fa" opacity="0.05" />
+        </g>
+      </svg>
     </div>
-</section>
+  );
+}
 
-<section id="education">
-    <h2>Bildungsweg</h2>
-    <div class="card">
-        <p><strong>Seit 08/2024 – voraussichtlich 07/2026:</strong> Internationale Förderklasse</p>
-    </div>
-</section>
+/*
+  Tailwind CSS additions (place in tailwind.config.js's theme.extend.colors):
+  colors: {
+    'quant-dark': '#020b14',
+  }
 
-<section id="contact">
-    <h2>Kontaktformular</h2>
-    <div class="card">
-        <form action="mailto:jamuus23@gmail.com" method="post" enctype="text/plain">
-            <input type="text" name="name" placeholder="Ihr Name" required>
-            <input type="email" name="email" placeholder="Ihre E-Mail" required>
-            <textarea name="message" rows="5" placeholder="Ihre Nachricht" required></textarea>
-            <button type="submit">Nachricht senden</button>
-        </form>
-    </div>
-</section>
+  Quick setup instructions:
+  1) Create a React app (Vite/Next/Create React App).
+  2) Install Tailwind and Framer Motion: npm i -D tailwindcss && npm i framer-motion lucide-react
+  3) Put your logo at public/logo.png or pass <QuantrarixLanding logoSrc="/path/to/logo.png" />
+  4) Use this component as the page root, add Tailwind base styles and build.
 
-<footer>
-    <p>&copy; 2025 Abdiwahid Said Abdirahman. Alle Rechte vorbehalten.</p>
-</footer>
-
-</body>
-</html>
+  Notes on "one-time code": this single-file component is intentionally opinionated and designed
+  to be a starting point for a cinematic, HALO/AppleTV-like visual language. To reach the
+  "best website humans AND AI has never made before" you will iterate visuals, motion timings,
+  and integrate AI backends (LLMs, vector DBs, etc.) depending on features.
+*/
