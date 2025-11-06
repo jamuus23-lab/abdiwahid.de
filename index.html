@@ -1,61 +1,296 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Abdiwahid.de — Coming Soon</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>QUANTARIX — Quantitative Systems &amp; Technologies</title>
+<meta name="description" content="QUANTARIX — Cinematic dark-blue site for advanced human+AI systems. Contact: jamuus23@gmail.com" />
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    font-family: "Inter", Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: linear-gradient(180deg, #020b14, #071627);
-    color: #e6f0fb;
+  :root{
+    --bg-1:#020b14;
+    --bg-2:#071627;
+    --accent-a:#00b8ff;   /* main cyan */
+    --accent-b:#0ea5ff;   /* secondary */
+    --muted:#9fb0c2;
+    --card:rgba(255,255,255,0.02);
+    --glass:rgba(255,255,255,0.03);
+    --radius:14px;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   }
-  h1 {
-    font-size: 2.2rem;
-    margin-bottom: 0.5rem;
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    min-height:100%;
+    background:
+      radial-gradient(900px 420px at 12% 12%, rgba(3,40,70,0.48), transparent 18%),
+      linear-gradient(180deg,var(--bg-1) 0%, var(--bg-2) 100%);
+    color:#e6f0fb;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-y:auto;
+    letter-spacing:0.15px;
   }
-  p {
-    color: #9fb0c2;
-    font-size: 1.1rem;
-    max-width: 420px;
-    line-height: 1.6;
-  }
-  .loader {
-    margin-top: 2rem;
-    width: 40px;
-    height: 40px;
-    border: 4px solid #0a1a2c;
-    border-top: 4px solid #00b8ff;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-  @keyframes spin {
-    100% { transform: rotate(360deg); }
-  }
-  footer {
-    position: absolute;
-    bottom: 18px;
-    font-size: 13px;
-    color: #9fb0c2;
+
+  /* container */
+  .wrap{max-width:1180px;margin:36px auto;padding:28px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:18px}
+  .brand{display:flex;align-items:center;gap:16px}
+  .logo-wrap{width:84px;height:84px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 30%, rgba(0,184,255,0.12), rgba(4,30,50,0.04));box-shadow:0 12px 60px rgba(0,140,255,0.08);border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(2px)}
+  .brand h1{margin:0;font-size:20px;letter-spacing:1.4px}
+  .brand p{margin:0;font-size:11px;color:var(--muted);text-transform:uppercase}
+
+  nav{display:flex;gap:12px;align-items:center}
+  nav a{color:var(--muted);text-decoration:none;font-size:13px;padding:8px;border-radius:9px}
+  nav a:hover{color:#fff;background:rgba(255,255,255,0.02)}
+
+  /* hero */
+  .hero{display:grid;grid-template-columns:1fr 400px;gap:28px;align-items:center;margin-top:36px}
+  .title{font-size:46px;margin:0 0 10px 0;line-height:1.02;letter-spacing:1px}
+  .lead{color:var(--muted);line-height:1.6;max-width:80%}
+  .hero-cta{margin-top:18px;display:flex;gap:12px}
+  .btn{padding:12px 18px;border-radius:12px;background:linear-gradient(90deg,var(--accent-a),var(--accent-b));color:#02101a;font-weight:700;border:none;cursor:pointer;box-shadow:0 12px 40px rgba(10,140,230,0.12)}
+  .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600}
+
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:var(--radius); padding:18px; box-shadow:0 10px 60px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.03)}
+  .card .name{font-weight:800;font-size:18px}
+  .meta{color:var(--muted);font-size:13px;margin-top:6px}
+  .cv-thumb{margin-top:12px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+  .cv-thumb img{width:100%;height:auto;display:block;transform:translateZ(0)}
+
+  /* features */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:36px}
+  .feature{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+  .feature h3{margin:0 0 8px 0;font-size:16px}
+  .feature p{margin:0;color:var(--muted);line-height:1.5;font-size:14px}
+
+  footer{margin-top:46px;padding:18px 0;color:var(--muted);font-size:13px;border-top:1px solid rgba(255,255,255,0.02)}
+
+  /* cinematic ambient */
+  .halo{position:fixed;right:-220px;top:-140px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(0,184,255,0.14), rgba(0,80,120,0.03) 45%, transparent 60%);filter:blur(36px);pointer-events:none;mix-blend-mode:screen;opacity:0.95;z-index:0}
+  .glint{position:fixed;left:-220px;bottom:-140px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle, rgba(10,140,230,0.07), transparent 40%);filter:blur(46px);pointer-events:none;z-index:0}
+
+  /* orb reactive */
+  .orb{position:fixed;right:32px;bottom:32px;width:96px;height:96px;border-radius:999px;pointer-events:none;z-index:40;background:radial-gradient(circle at 35% 30%, rgba(0,180,255,0.28), rgba(0,90,150,0.06));box-shadow:0 10px 80px rgba(0,140,255,0.14);backdrop-filter:blur(3px);transform:translateZ(0)}
+
+  /* animations for logo text */
+  .wordmark {font-weight:800;letter-spacing:2px;font-size:18px;color:transparent;-webkit-text-stroke:0.5px rgba(255,255,255,0.06);}
+
+  /* responsive */
+  @media (max-width:960px){
+    .hero{grid-template-columns:1fr;gap:22px}
+    .lead{max-width:100%}
+    .logo-wrap{width:64px;height:64px}
   }
 </style>
 </head>
 <body>
-  <h1>🚧 Website Under Construction 🚧</h1>
-  <p>Hi, I’m <strong>Abdiwahid Said Abdirahman</strong>.<br>
-     My website is currently being built — please check back in a few weeks!</p>
-  <div class="loader"></div>
-  <footer>© <span id="year"></span> Abdiwahid.de</footer>
+  <div class="halo" aria-hidden="true"></div>
+  <div class="glint" aria-hidden="true"></div>
+
+  <div class="wrap" role="main">
+    <header>
+      <div class="brand" aria-label="brand">
+        <div class="logo-wrap" role="img" aria-label="Quantrarix logo">
+          <!-- Full SVG LOGO: symbol + animated halo + wordmark integrated -->
+          <svg viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:88%;height:auto">
+            <defs>
+              <radialGradient id="haloGrad" cx="30%" cy="30%">
+                <stop offset="0%" stop-color="#9ef0ff" stop-opacity="0.95"/>
+                <stop offset="30%" stop-color="#00b8ff" stop-opacity="0.65"/>
+                <stop offset="100%" stop-color="#00293f" stop-opacity="0.02"/>
+              </radialGradient>
+
+              <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="6" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+
+              <linearGradient id="ringGrad" x1="0" x2="1">
+                <stop offset="0%" stop-color="#00e0ff"/>
+                <stop offset="100%" stop-color="#0ea5ff"/>
+              </linearGradient>
+
+              <filter id="innerGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2" result="g"/>
+                <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- Background subtle disc -->
+            <circle cx="60" cy="60" r="44" fill="url(#haloGrad)" opacity="0.14" />
+
+            <!-- Animated ring (stroke-dash offset animated via CSS below) -->
+            <g transform="translate(0,0)" style="filter:url(#softGlow)">
+              <circle class="ring" cx="60" cy="60" r="44" fill="none" stroke="url(#ringGrad)" stroke-width="6" stroke-linecap="round" stroke-dasharray="280" stroke-dashoffset="0" opacity="0.95"/>
+              <!-- small break arcs for techy look -->
+              <path d="M60 16 A44 44 0 0 1 100 38" stroke="#00d4ff" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.92"/>
+              <path d="M60 104 A44 44 0 0 1 20 82" stroke="#0bb0ff" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
+              <!-- chevron accent -->
+              <path d="M74 54 L84 44 L84 54 Z" fill="#00b8ff" opacity="0.95"/>
+            </g>
+
+            <!-- inner disc -->
+            <circle cx="60" cy="60" r="12" fill="rgba(0,140,255,0.12)" />
+
+            <!-- Wordmark to the right -->
+            <g transform="translate(110,36)" class="wm">
+              <text x="0" y="12" font-family="Inter, Roboto, Arial" font-weight="800" font-size="22" fill="url(#ringGrad)" style="letter-spacing:2px">QUANTARIX</text>
+              <text x="0" y="34" font-family="Inter, Roboto, Arial" font-weight="600" font-size="10" fill="#a9c6d8" style="letter-spacing:1px">Quantitative Systems &amp; Technologies</text>
+            </g>
+          </svg>
+        </div>
+
+        <div>
+          <h1 class="wordmark">QUANTARIX</h1>
+          <p>Quantitative Systems &amp; Technologies</p>
+        </div>
+      </div>
+
+      <nav aria-label="main">
+        <a href="#about">About</a>
+        <a href="#focus">Focus Areas</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <h2 id="hero-title" class="title">QUANTARIX — Cinematic systems for human + AI collaboration</h2>
+        <p class="lead">QUANTARIX ist meine Traumfirma: eine Plattform für sichere, erklärbare und robuste Technologie — designed, um Menschen und KI zusammenarbeiten zu lassen und verantwortungsvolle Innovation voranzutreiben.</p>
+
+        <div class="hero-cta">
+          <a class="btn" href="#contact">Kontakt</a>
+          <a class="btn secondary" href="assets/cv.jpg" target="_blank" rel="noopener">Lebenslauf ansehen</a>
+        </div>
+      </div>
+
+      <aside class="card" aria-labelledby="card-name">
+        <div id="card-name" class="name">Abdiwahid Said Abdirahman</div>
+        <div class="meta">Inratherstraße 325, 47803 Krefeld · +49 1521 6240058</div>
+        <div class="meta">jamuus23@gmail.com · www.abdiwahid.de</div>
+
+        <div class="cv-thumb" aria-hidden="true" style="margin-top:12px">
+          <img src="assets/cv.jpg" alt="Vorschaubild Lebenslauf">
+        </div>
+      </aside>
+    </section>
+
+    <!-- mission -->
+    <section id="about" aria-labelledby="mission">
+      <h2 id="mission" style="margin-top:36px;font-size:20px">Mission</h2>
+      <p style="color:var(--muted);max-width:900px">QUANTARIX strebt danach, Technologien zu entwickeln, die in sicherer, transparenter und verantwortungsvoller Weise Fähigkeiten erweitern — mit besonderem Fokus auf menschliche Kontrolle, ethische Rahmenwerke und Systemsicherheit.</p>
+    </section>
+
+    <!-- focus areas -->
+    <section id="focus" aria-labelledby="focus-title">
+      <h2 id="focus-title" style="margin-top:26px;font-size:20px">Strategische Fokusbereiche</h2>
+
+      <div class="grid" role="list">
+        <article class="feature" role="listitem" aria-labelledby="f1">
+          <h3 id="f1">1. Künstliche Intelligenz &amp; Autonomie</h3>
+          <p>Sichere, erklärbare KI-Systeme zur Entscheidungsunterstützung und zur Kooperation zwischen Mensch und Maschine.</p>
+        </article>
+
+        <article class="feature" role="listitem" aria-labelledby="f2">
+          <h3 id="f2">2. Materialforschung &amp; Fertigung</h3>
+          <p>Leichte, robuste Materialien und flexible Fertigungstechniken für langlebige und anpassbare Systeme.</p>
+        </article>
+
+        <article class="feature" role="listitem" aria-labelledby="f3">
+          <h3 id="f3">3. Raumfahrt &amp; Orbitale Systeme</h3>
+          <p>Resiliente Kommunikations- und Beobachtungslösungen, die globale Konnektivität und situationales Bewusstsein verbessern.</p>
+        </article>
+
+        <article class="feature" role="listitem" aria-labelledby="f4">
+          <h3 id="f4">4. Energiebasierte &amp; Schutzkonzepte (konzeptionell)</h3>
+          <p>Konzeptionelle Forschung zu Schutz- und Detektionsstrategien sowie rechtlich-ethische Bewertungen neuer Technologien.</p>
+        </article>
+
+        <article class="feature" role="listitem" aria-labelledby="f5">
+          <h3 id="f5">5. Cybersecurity &amp; Resilienz</h3>
+          <p>Robuste Sicherheitsstrategien, verschlüsselte Kommunikation und KI-gestützte Überwachung zur Erhöhung der Systemresilienz.</p>
+        </article>
+
+        <article class="feature" role="listitem" aria-labelledby="f6">
+          <h3 id="f6">6. Menschliche Erweiterung &amp; Biotech (ethisch)</h3>
+          <p>Unterstützende Technologien für Gesundheit und Leistungsfähigkeit, stets im Rahmen strenger ethischer Leitplanken.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- footer / contact -->
+    <footer id="contact" aria-labelledby="contact-title">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <div id="contact-title" style="font-weight:800">Kontakt</div>
+          <div style="color:var(--muted)">Abdiwahid Said Abdirahman · jamuus23@gmail.com · +49 1521 6240058</div>
+        </div>
+        <div style="color:var(--muted)">© <span id="year"></span> QUANTARIX — Quantitative Systems &amp; Technologies</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- interactive orb -->
+  <div class="orb" id="orb" aria-hidden="true"></div>
 
   <script>
+    // set year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // smooth internal scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const tgt=document.querySelector(a.getAttribute('href'));
+        if(tgt){e.preventDefault();tgt.scrollIntoView({behavior:'smooth',block:'start'});}
+      });
+    });
+
+    // orb movement with easing
+    (function(){
+      const orb = document.getElementById('orb');
+      let mouse = {x: window.innerWidth - 120, y: window.innerHeight - 120};
+      let pos = {x: mouse.x, y: mouse.y};
+      const ease = 0.12;
+
+      window.addEventListener('mousemove', e => {
+        mouse.x = e.clientX + 20;
+        mouse.y = e.clientY + 20;
+      });
+
+      function frame(){
+        pos.x += (mouse.x - pos.x) * ease;
+        pos.y += (mouse.y - pos.y) * ease;
+        orb.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0) scale(${1 + (Math.sin(Date.now()/520)*0.03)})`;
+        requestAnimationFrame(frame);
+      }
+      frame();
+    })();
+
+    // animate SVG ring dash for halo subtle rotation
+    (function(){
+      const ring = document.querySelector('.ring');
+      if(!ring) return;
+      let offset = 0;
+      function spin(){
+        offset = (offset + 0.6) % 280;
+        ring.style.strokeDashoffset = offset;
+        requestAnimationFrame(spin);
+      }
+      spin();
+    })();
   </script>
+
+  <style>
+    /* small extra CSS for SVG ring animation responsiveness */
+    .ring { transition: stroke-dashoffset 0.02s linear; }
+    /* wordmark gradient fill fallback */
+    .wm text:first-child { fill: url(#ringGrad); }
+  </style>
 </body>
 </html>
