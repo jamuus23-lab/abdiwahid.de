@@ -3,62 +3,288 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>QUANTARIX — We are working on it</title>
+<title>QUANTARIX — Quantitative Systems &amp; Technologies</title>
+<meta name="description" content="QUANTARIX — Cinematic dark-blue site for human+AI collaboration. Contact: jamuus23@gmail.com" />
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(180deg, #020b14 0%, #071627 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #e6f0fb;
+  :root{
+    --bg-1:#020b14; --bg-2:#071627;
+    --accent-a:#00b8ff; --accent-b:#0ea5ff;
+    --muted:#9fb0c2; --card:rgba(255,255,255,0.02);
+    --glass:rgba(255,255,255,0.03); --radius:14px;
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    text-align: center;
   }
-  .logo {
-    width: 160px;
-    max-width: 80%;
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; min-height:100%;
+    background:
+      radial-gradient(900px 420px at 12% 12%, rgba(3,40,70,0.48), transparent 18%),
+      linear-gradient(180deg,var(--bg-1) 0%, var(--bg-2) 100%);
+    color:#e6f0fb; -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale; overflow-y:auto;
   }
-  h1 {
-    font-size: 22px;
-    color: #00b8ff;
-    margin-top: 24px;
-    font-weight: 600;
-    letter-spacing: 1px;
-  }
+  .wrap{max-width:1180px;margin:36px auto;padding:28px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:18px}
+  .brand{display:flex;align-items:center;gap:16px}
+  .logo-wrap{width:84px;height:84px;border-radius:999px;display:flex;align-items:center;justify-content:center;
+            background:radial-gradient(circle at 30% 30%, rgba(0,184,255,0.12), rgba(4,30,50,0.04));
+            box-shadow:0 12px 60px rgba(0,140,255,0.08);border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(2px)}
+  .brand h1{margin:0;font-size:20px;letter-spacing:1.4px}
+  .brand p{margin:0;font-size:11px;color:var(--muted);text-transform:uppercase}
+  nav{display:flex;gap:12px;align-items:center}
+  .lang-switch{display:flex;gap:8px;align-items:center}
+  .lang-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:6px 10px;border-radius:8px;color:var(--muted);cursor:pointer;font-size:13px}
+  .lang-btn.active{background:linear-gradient(90deg,var(--accent-a),var(--accent-b));color:#02101a;border:0}
+  .hero{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;margin-top:36px}
+  .title{font-size:44px;margin:0 0 10px 0;line-height:1.02;letter-spacing:1px}
+  .lead{color:var(--muted);line-height:1.6;max-width:80%}
+  .card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:0 10px 60px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.03)}
+  .name{font-weight:800;font-size:18px}
+  .meta{color:var(--muted);font-size:13px;margin-top:6px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:36px}
+  .feature{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+  .feature h3{margin:0 0 8px 0;font-size:16px}
+  .feature p{margin:0;color:var(--muted);line-height:1.5;font-size:14px}
+  footer{margin-top:46px;padding:18px 0;color:var(--muted);font-size:13px;border-top:1px solid rgba(255,255,255,0.02)}
+  .halo{position:fixed;right:-220px;top:-140px;width:700px;height:700px;border-radius:50%;
+        background:radial-gradient(circle at 30% 30%, rgba(0,184,255,0.14), rgba(0,80,120,0.03) 45%, transparent 60%);
+        filter:blur(36px);pointer-events:none;mix-blend-mode:screen;opacity:0.95;z-index:0}
+  .orb{position:fixed;right:32px;bottom:32px;width:96px;height:96px;border-radius:999px;pointer-events:none;z-index:40;
+       background:radial-gradient(circle at 35% 30%, rgba(0,180,255,0.28), rgba(0,90,150,0.06));
+       box-shadow:0 10px 80px rgba(0,140,255,0.14);backdrop-filter:blur(3px);transform:translateZ(0)}
+  @media (max-width:960px){.hero{grid-template-columns:1fr;gap:22px}.lead{max-width:100%}.logo-wrap{width:64px;height:64px}}
+  /* small helper for hiding/showing language blocks */
+  .lang { display: none; }
+  .lang.active { display: block; }
+  /* smooth fade when switching */
+  .fade { transition: opacity 260ms ease; opacity: 1; }
+  .fade.hidden { opacity: 0; transition: opacity 260ms ease; }
 </style>
 </head>
 <body>
-  <!-- QUANTARIX logo -->
-  <svg class="logo" viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <radialGradient id="haloGrad" cx="30%" cy="30%">
-        <stop offset="0%" stop-color="#9ef0ff" stop-opacity="0.95"/>
-        <stop offset="30%" stop-color="#00b8ff" stop-opacity="0.65"/>
-        <stop offset="100%" stop-color="#00293f" stop-opacity="0.02"/>
-      </radialGradient>
-      <linearGradient id="ringGrad" x1="0" x2="1">
-        <stop offset="0%" stop-color="#00e0ff"/>
-        <stop offset="100%" stop-color="#0ea5ff"/>
-      </linearGradient>
-    </defs>
+  <div class="halo" aria-hidden="true"></div>
 
-    <circle cx="60" cy="60" r="44" fill="url(#haloGrad)" opacity="0.14" />
-    <g style="filter:blur(1px)">
-      <circle cx="60" cy="60" r="44" fill="none" stroke="url(#ringGrad)" stroke-width="6" stroke-linecap="round" opacity="0.95"/>
-      <path d="M60 16 A44 44 0 0 1 100 38" stroke="#00d4ff" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.92"/>
-      <path d="M60 104 A44 44 0 0 1 20 82" stroke="#0bb0ff" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
-      <path d="M74 54 L84 44 L84 54 Z" fill="#00b8ff" opacity="0.95"/>
-    </g>
-    <circle cx="60" cy="60" r="12" fill="rgba(0,140,255,0.12)" />
-    <g transform="translate(110,36)">
-      <text x="0" y="12" font-weight="800" font-size="22" fill="url(#ringGrad)">QUANTARIX</text>
-      <text x="0" y="34" font-weight="600" font-size="10" fill="#a9c6d8">Quantitative Systems &amp; Technologies</text>
-    </g>
-  </svg>
+  <div class="wrap" role="main">
+    <header>
+      <div class="brand">
+        <div class="logo-wrap" aria-hidden="true">
+          <!-- QUANTARIX logo (embedded SVG, animated ring) -->
+          <svg viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg" style="width:88%;height:auto">
+            <defs>
+              <radialGradient id="haloGrad" cx="30%" cy="30%">
+                <stop offset="0%" stop-color="#9ef0ff" stop-opacity="0.95"/>
+                <stop offset="30%" stop-color="#00b8ff" stop-opacity="0.65"/>
+                <stop offset="100%" stop-color="#00293f" stop-opacity="0.02"/>
+              </radialGradient>
+              <linearGradient id="ringGrad" x1="0" x2="1">
+                <stop offset="0%" stop-color="#00e0ff"/>
+                <stop offset="100%" stop-color="#0ea5ff"/>
+              </linearGradient>
+            </defs>
 
-  <h1>We are working on it — Bitte</h1>
+            <circle cx="60" cy="60" r="44" fill="url(#haloGrad)" opacity="0.14" />
+            <g style="filter:blur(1px)">
+              <circle class="ring" cx="60" cy="60" r="44" fill="none" stroke="url(#ringGrad)" stroke-width="6" stroke-linecap="round" stroke-dasharray="280" stroke-dashoffset="0" opacity="0.95"/>
+              <path d="M60 16 A44 44 0 0 1 100 38" stroke="#00d4ff" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.92"/>
+              <path d="M60 104 A44 44 0 0 1 20 82" stroke="#0bb0ff" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
+              <path d="M74 54 L84 44 L84 54 Z" fill="#00b8ff" opacity="0.95"/>
+            </g>
+            <circle cx="60" cy="60" r="12" fill="rgba(0,140,255,0.12)" />
+            <g transform="translate(110,36)">
+              <text x="0" y="12" font-family="Inter, Roboto, Arial" font-weight="800" font-size="22" fill="url(#ringGrad)">QUANTARIX</text>
+              <text x="0" y="34" font-family="Inter, Roboto, Arial" font-weight="600" font-size="10" fill="#a9c6d8">Quantitative Systems &amp; Technologies</text>
+            </g>
+          </svg>
+        </div>
+
+        <div>
+          <h1>QUANTARIX</h1>
+          <p>Quantitative Systems &amp; Technologies</p>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#about" data-scroll>About</a>
+        <a href="#focus" data-scroll>Focus Areas</a>
+      </nav>
+
+      <div class="lang-switch" role="navigation" aria-label="language switch">
+        <button class="lang-btn active" data-lang="de" aria-pressed="true">DE</button>
+        <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        <button class="lang-btn" data-lang="zh" aria-pressed="false">中文</button>
+      </div>
+    </header>
+
+    <!-- ===== HERO (multilingual blocks) ===== -->
+    <section class="hero">
+      <div>
+        <div class="lang lang-de active fade" data-lang="de">
+          <h2 class="title">QUANTARIX — Cinematische Systeme für Mensch-KI-Zusammenarbeit</h2>
+          <p class="lead">QUANTARIX ist meine Traumfirma: eine Plattform für sichere, erklärbare und robuste Technologien — entwickelt, um Menschen und KI effektiv und verantwortungsvoll zusammenwirken zu lassen.</p>
+        </div>
+
+        <div class="lang lang-en fade hidden" data-lang="en">
+          <h2 class="title">QUANTARIX — Cinematic systems for human-AI collaboration</h2>
+          <p class="lead">QUANTARIX is my dream company: a platform for secure, explainable and robust technologies — built to enable responsible collaboration between humans and AI.</p>
+        </div>
+
+        <div class="lang lang-zh fade hidden" data-lang="zh">
+          <h2 class="title">QUANTARIX — 为人类与人工智能协作打造的电影感系统</h2>
+          <p class="lead">QUANTARIX 是我的梦想公司：构建安全、可解释且稳健的技术平台，旨在实现人类与人工智能的负责任协同。</p>
+        </div>
+      </div>
+
+      <aside class="card">
+        <!-- Contact details (always visible, not translated) -->
+        <div class="name">Abdiwahid Said Abdirahman</div>
+        <div class="meta">Inratherstraße 325, 47803 Krefeld · +49 1521 6240058</div>
+        <div class="meta">jamuus23@gmail.com · www.abdiwahid.de</div>
+      </aside>
+    </section>
+
+    <!-- ===== MISSION ===== -->
+    <section id="about">
+      <div class="lang lang-de active fade" data-lang="de">
+        <h2 style="margin-top:36px;font-size:20px">Mission</h2>
+        <p style="color:var(--muted);max-width:900px">QUANTARIX entwickelt Technologien, die in sicherer, transparenter und verantwortungsvoller Weise Fähigkeiten erweitern — mit besonderem Fokus auf menschliche Aufsicht, ethische Rahmen und System-Sicherheit.</p>
+      </div>
+
+      <div class="lang lang-en fade hidden" data-lang="en">
+        <h2 style="margin-top:36px;font-size:20px">Mission</h2>
+        <p style="color:var(--muted);max-width:900px">QUANTARIX builds technologies that expand capabilities in a secure, transparent and responsible way — with particular emphasis on human oversight, ethical frameworks and system safety.</p>
+      </div>
+
+      <div class="lang lang-zh fade hidden" data-lang="zh">
+        <h2 style="margin-top:36px;font-size:20px">使命</h2>
+        <p style="color:var(--muted);max-width:900px">QUANTARIX 开发旨在以安全、透明和负责任方式扩展能力的技术，特别强调人的监督、伦理框架和系统安全。</p>
+      </div>
+    </section>
+
+    <!-- ===== FOCUS AREAS ===== -->
+    <section id="focus">
+      <div class="lang lang-de active fade" data-lang="de">
+        <h2 style="margin-top:26px;font-size:20px">Strategische Fokusbereiche</h2>
+        <div class="grid">
+          <article class="feature"><h3>1. Künstliche Intelligenz &amp; Autonomie</h3><p>Sichere, erklärbare KI-Systeme und Entscheidungsunterstützung für verantwortungsvolle Automatisierung.</p></article>
+          <article class="feature"><h3>2. Fortschrittliche Materialien &amp; Fertigung</h3><p>Materialforschung und flexible Fertigungsprozesse zur Unterstützung belastbarer Systeme.</p></article>
+          <article class="feature"><h3>3. Raumfahrt &amp; Orbitale Systeme</h3><p>Resiliente Kommunikations- und Beobachtungslösungen für globale Konnektivität und Awareness.</p></article>
+          <article class="feature"><h3>4. Energiebasierte &amp; Schutzkonzepte (konzeptionell)</h3><p>Konzeptionelle Forschung zu Schutzstrategien, Detektion und rechtlich-ethischer Bewertung.</p></article>
+          <article class="feature"><h3>5. Cybersecurity &amp; Resilienz</h3><p>Robuste Sicherheitsarchitekturen, verschlüsselte Kommunikation und KI-gestützte Erkennung.</p></article>
+          <article class="feature"><h3>6. Menschliche Erweiterung &amp; Biotech (ethisch)</h3><p>Unterstützende Technologien für Gesundheit und Leistungsfähigkeit mit klaren ethischen Leitplanken.</p></article>
+        </div>
+      </div>
+
+      <div class="lang lang-en fade hidden" data-lang="en">
+        <h2 style="margin-top:26px;font-size:20px">Strategic Focus Areas</h2>
+        <div class="grid">
+          <article class="feature"><h3>1. Artificial Intelligence &amp; Autonomy</h3><p>Safe, explainable AI systems and decision support for responsible automation.</p></article>
+          <article class="feature"><h3>2. Advanced Materials &amp; Manufacturing</h3><p>Material research and flexible manufacturing to support resilient systems.</p></article>
+          <article class="feature"><h3>3. Space &amp; Orbital Systems</h3><p>Resilient communication and surveillance solutions for global connectivity and awareness.</p></article>
+          <article class="feature"><h3>4. Directed Energy &amp; Defensive Concepts (conceptual)</h3><p>Conceptual research for protection strategies, detection and legal-ethical assessment.</p></article>
+          <article class="feature"><h3>5. Cybersecurity &amp; Resilience</h3><p>Robust security architectures, encrypted communications and AI-driven detection.</p></article>
+          <article class="feature"><h3>6. Human Augmentation &amp; Biotech (ethical)</h3><p>Assistive technologies for health and performance within strict ethical guardrails.</p></article>
+        </div>
+      </div>
+
+      <div class="lang lang-zh fade hidden" data-lang="zh">
+        <h2 style="margin-top:26px;font-size:20px">战略重点领域</h2>
+        <div class="grid">
+          <article class="feature"><h3>1. 人工智能与自主性</h3><p>安全、可解释的人工智能系统与决策支持，推动负责任的自动化。</p></article>
+          <article class="feature"><h3>2. 高级材料与制造</h3><p>材料研究与灵活制造，支持具有弹性的系统。</p></article>
+          <article class="feature"><h3>3. 太空与轨道系统</h3><p>用于全球连接与态势感知的弹性通信与监测解决方案。</p></article>
+          <article class="feature"><h3>4. 能量武器与防护概念（概念性）</h3><p>关于防护策略、探测及法律伦理评估的概念性研究。</p></article>
+          <article class="feature"><h3>5. 网络安全与弹性</h3><p>稳健的安全架构、加密通信与基于人工智能的检测。</p></article>
+          <article class="feature"><h3>6. 人体增强与生物技术（伦理）</h3><p>在严格伦理框架下用于健康与性能的辅助技术。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer / contact (contact stays constant across languages) -->
+    <footer id="contact" aria-labelledby="contact-title">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <div id="contact-title" style="font-weight:800">Kontakt</div>
+          <div style="color:var(--muted)"><strong>Abdiwahid Said Abdirahman</strong><br/>
+            Inratherstraße 325, 47803 Krefeld · +49 1521 6240058<br/>
+            jamuus23@gmail.com · www.abdiwahid.de
+          </div>
+        </div>
+        <div style="color:var(--muted)">© <span id="year"></span> QUANTARIX — Quantitative Systems &amp; Technologies</div>
+      </div>
+    </footer>
+  </div>
+
+  <div class="orb" id="orb"></div>
+
+<script>
+  // set year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // language switcher logic
+  const btns = document.querySelectorAll('.lang-btn');
+  const blocks = document.querySelectorAll('.lang');
+  function setLang(lang){
+    // update buttons
+    btns.forEach(b=>{
+      const is = b.getAttribute('data-lang')===lang;
+      b.classList.toggle('active', is);
+      b.setAttribute('aria-pressed', is ? 'true' : 'false');
+    });
+    // switch blocks
+    blocks.forEach(bl=>{
+      if(bl.getAttribute('data-lang')===lang){
+        bl.classList.remove('hidden'); bl.classList.add('active');
+        // ensure fade visible
+        requestAnimationFrame(()=>{ bl.classList.remove('hidden'); });
+      } else {
+        bl.classList.add('hidden'); bl.classList.remove('active');
+      }
+    });
+  }
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.addEventListener('click', ()=> setLang(b.getAttribute('data-lang')));
+  });
+
+  // default language: de (German)
+  setLang('de');
+
+  // orb movement (ambient)
+  (function(){
+    const orb = document.getElementById('orb');
+    let mouse = {x: window.innerWidth - 120, y: window.innerHeight - 120};
+    let pos = {x: mouse.x, y: mouse.y};
+    const ease = 0.12;
+    window.addEventListener('mousemove', e => { mouse.x = e.clientX + 24; mouse.y = e.clientY + 24; });
+    function frame(){
+      pos.x += (mouse.x - pos.x) * ease;
+      pos.y += (mouse.y - pos.y) * ease;
+      orb.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0) scale(${1 + (Math.sin(Date.now()/520)*0.03)})`;
+      requestAnimationFrame(frame);
+    }
+    frame();
+  })();
+
+  // animated ring dash
+  (function(){
+    const ring = document.querySelector('.ring');
+    if(!ring) return;
+    let offset = 0;
+    function spin(){
+      offset = (offset + 0.6) % 280;
+      ring.style.strokeDashoffset = offset;
+      requestAnimationFrame(spin);
+    }
+    spin();
+  })();
+
+  // smooth scroll for header links
+  document.querySelectorAll('a[data-scroll]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      const tgt = document.querySelector(a.getAttribute('href'));
+      if(tgt) tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+</script>
 </body>
 </html>
