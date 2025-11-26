@@ -1,64 +1,151 @@
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>QUANTARIX — We are working on it</title>
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(180deg, #020b14 0%, #071627 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #e6f0fb;
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    text-align: center;
-  }
-  .logo {
-    width: 160px;
-    max-width: 80%;
-  }
-  h1 {
-    font-size: 22px;
-    color: #00b8ff;
-    margin-top: 24px;
-    font-weight: 600;
-    letter-spacing: 1px;
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Abdiwahid Said Abdirahman – Ausbildung als Fachinformatiker</title>
+  <meta name="description" content="Persönliche Website von Abdiwahid Said Abdirahman – Suche nach einem Ausbildungsplatz als Fachinformatiker." />
+
+  <style>
+    :root{
+      --bg-1:#031025;
+      --bg-2:#051a34;
+      --accent:#2aa8ff;
+      --text:#e8f2ff;
+      --muted:#9fb4cc;
+      --card:rgba(255,255,255,0.05);
+      --radius:14px;
+      font-family: Inter, Arial, sans-serif;
+    }
+    *{box-sizing:border-box;}
+
+    body{
+      margin:0;
+      background:linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      color:var(--text);
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      padding:24px;
+      align-items:center;
+      background:rgba(0,0,0,0.2);
+      backdrop-filter:blur(6px);
+    }
+
+    nav a{
+      margin-left:20px;
+      color:var(--text);
+      text-decoration:none;
+      font-size:15px;
+    }
+
+    .hero{
+      max-width:1180px;
+      margin:40px auto;
+      padding:20px;
+      display:grid;
+      grid-template-columns:1fr 320px;
+      gap:32px;
+      align-items:center;
+    }
+
+    .hero h1{
+      font-size:42px;
+      margin:0 0 10px;
+    }
+
+    .hero p{
+      color:var(--muted);
+      line-height:1.6;
+      max-width:80%;
+    }
+
+    .card{
+      background:var(--card);
+      padding:18px;
+      border-radius:var(--radius);
+    }
+
+    .section{
+      max-width:1180px;
+      margin:40px auto;
+      padding:20px;
+    }
+
+    .section h2{
+      font-size:26px;
+      margin-bottom:14px;
+    }
+
+    }
+
+    }
+
+    footer{
+      text-align:center;
+      padding:30px 0;
+      color:var(--muted);
+      margin-top:40px;
+    }
+  </style>
 </head>
+
 <body>
-  <!-- QUANTARIX logo -->
-  <svg class="logo" viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <radialGradient id="haloGrad" cx="30%" cy="30%">
-        <stop offset="0%" stop-color="#9ef0ff" stop-opacity="0.95"/>
-        <stop offset="30%" stop-color="#00b8ff" stop-opacity="0.65"/>
-        <stop offset="100%" stop-color="#00293f" stop-opacity="0.02"/>
-      </radialGradient>
-      <linearGradient id="ringGrad" x1="0" x2="1">
-        <stop offset="0%" stop-color="#00e0ff"/>
-        <stop offset="100%" stop-color="#0ea5ff"/>
-      </linearGradient>
-    </defs>
+  <header>
+    <div><strong>Abdiwahid Said Abdirahman</strong></div>
+    <nav>
+      <a href="#about">Über mich</a>
+      <a href="#skills">Fähigkeiten</a>
+      <a href="#ausbildung">Ausbildungssuche</a>
+      
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
 
-    <circle cx="60" cy="60" r="44" fill="url(#haloGrad)" opacity="0.14" />
-    <g style="filter:blur(1px)">
-      <circle cx="60" cy="60" r="44" fill="none" stroke="url(#ringGrad)" stroke-width="6" stroke-linecap="round" opacity="0.95"/>
-      <path d="M60 16 A44 44 0 0 1 100 38" stroke="#00d4ff" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.92"/>
-      <path d="M60 104 A44 44 0 0 1 20 82" stroke="#0bb0ff" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
-      <path d="M74 54 L84 44 L84 54 Z" fill="#00b8ff" opacity="0.95"/>
-    </g>
-    <circle cx="60" cy="60" r="12" fill="rgba(0,140,255,0.12)" />
-    <g transform="translate(110,36)">
-      <text x="0" y="12" font-weight="800" font-size="22" fill="url(#ringGrad)">QUANTARIX</text>
-      <text x="0" y="34" font-weight="600" font-size="10" fill="#a9c6d8">Quantitative Systems &amp; Technologies</text>
-    </g>
-  </svg>
+  <section class="hero">
+    <div>
+      <h1>Ich suche einen Ausbildungsplatz<br>als Fachinformatiker</h1>
+      <p>Motiviert, zuverlässig und bereit für meinen Einstieg in die IT-Welt. Ich suche eine Ausbildungsstelle als Fachinformatiker – Fachrichtung Anwendungsentwicklung oder Systemintegration.</p>
+    </div>
 
-  <h1>We are working on it — Bitte</h1>
+    <aside class="card">
+      <strong>Kontaktdaten</strong><br>
+      Abdiwahid Said Abdirahman<br>
+      Inratherstraße 325<br>
+      47803 Krefeld<br>
+      Telefon: +49 1521 6240058<br>
+      E‑Mail: jamuus23@gmail.com<br>
+      Website: www.abdiwahid.de
+    </aside>
+  </section>
+
+  <section id="about" class="section">
+    <h2>Über mich</h2>
+    <p>Ich bin motiviert, zielstrebig und habe großes Interesse an IT, Softwareentwicklung und Technologie. Ich möchte meine Fähigkeiten weiterentwickeln und suche daher eine Ausbildungsstelle, in der ich wachsen und aktiv mitarbeiten kann.</p>
+  </section>
+
+  <section id="skills" class="section">
+    <h2>Fähigkeiten</h2>
+    <ul>
+      <li>Grundkenntnisse in HTML, CSS und JavaScript</li>
+      <li>Gute PC‑Kenntnisse und technisches Verständnis</li>
+      <li>Schnelles Lernen und Teamfähigkeit</li>
+      <li>Interesse an Programmierung und IT‑Systemen</li>
+    </ul>
+  </section>
+
+  <section id="ausbildung" class="section">
+    <h2>Warum ich der richtige Azubi bin</h2>
+    <p>Ich suche ein Unternehmen, bei dem ich mich einbringen kann und das bereit ist, mich auf meinem Weg als zukünftiger Fachinformatiker zu unterstützen. Ich bin zuverlässig, engagiert und arbeite fleißig an meinen Fähigkeiten.</p>
+  </section>
+
+  
+
+  <footer id="kontakt">
+    © 2025 Abdiwahid Said Abdirahman – Persönliche Website
+  </footer>
+
 </body>
 </html>
