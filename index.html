@@ -3,149 +3,234 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Abdiwahid Said Abdirahman – Ausbildung als Fachinformatiker</title>
-  <meta name="description" content="Persönliche Website von Abdiwahid Said Abdirahman – Suche nach einem Ausbildungsplatz als Fachinformatiker." />
+  <title>Abdiwahid Said Abdirahman – Fachinformatiker</title>
+  <meta name="description" content="Persönliche Website – Ausbildungssuche als Fachinformatiker" />
 
   <style>
     :root{
-      --bg-1:#031025;
-      --bg-2:#051a34;
-      --accent:#2aa8ff;
-      --text:#e8f2ff;
-      --muted:#9fb4cc;
-      --card:rgba(255,255,255,0.05);
-      --radius:14px;
-      font-family: Inter, Arial, sans-serif;
+      --navy-900:#020b1c;
+      --navy-800:#041633;
+      --navy-700:#07224d;
+      --blue-accent:#2aa8ff;
+      --blue-glow:#6cc6ff;
+      --text-main:#eaf2ff;
+      --text-muted:#a9bfd9;
+      --card-bg:rgba(255,255,255,0.06);
+      --border:rgba(255,255,255,0.08);
+      --radius:16px;
+      --max:1180px;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
     }
+
     *{box-sizing:border-box;}
 
     body{
       margin:0;
-      background:linear-gradient(180deg,var(--bg-1),var(--bg-2));
-      color:var(--text);
+      background:
+        radial-gradient(900px 400px at 10% -10%, #0b2b55 0%, transparent 60%),
+        linear-gradient(180deg, var(--navy-900), var(--navy-800));
+      color:var(--text-main);
     }
 
+    /* ===== FRAME ===== */
+    .frame{
+      min-height:100vh;
+      border:1px solid var(--border);
+      margin:18px;
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+      box-shadow:0 40px 120px rgba(0,0,0,.55);
+      overflow:hidden;
+    }
+
+    /* ===== HEADER ===== */
     header{
       display:flex;
       justify-content:space-between;
-      padding:24px;
       align-items:center;
-      background:rgba(0,0,0,0.2);
-      backdrop-filter:blur(6px);
+      padding:22px 28px;
+      background:linear-gradient(180deg, rgba(4,22,51,.9), rgba(4,22,51,.6));
+      backdrop-filter: blur(8px);
+      border-bottom:1px solid var(--border);
+    }
+
+    /* ===== LOGO ===== */
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .logo-mark{
+      width:44px;
+      height:44px;
+      border-radius:12px;
+      background:linear-gradient(135deg, var(--blue-accent), var(--blue-glow));
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      color:#031025;
+      box-shadow:0 0 22px rgba(42,168,255,.55);
+    }
+
+    .logo-text strong{
+      display:block;
+      font-size:15px;
+      letter-spacing:.3px;
+    }
+
+    .logo-text span{
+      font-size:12px;
+      color:var(--text-muted);
     }
 
     nav a{
-      margin-left:20px;
-      color:var(--text);
+      margin-left:22px;
+      color:var(--text-main);
       text-decoration:none;
-      font-size:15px;
+      font-size:14px;
+      position:relative;
     }
 
+    nav a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0;
+      height:2px;
+      background:var(--blue-accent);
+      transition:.25s ease;
+    }
+
+    nav a:hover::after{width:100%;}
+
+    /* ===== HERO ===== */
     .hero{
-      max-width:1180px;
-      margin:40px auto;
-      padding:20px;
+      max-width:var(--max);
+      margin:70px auto 40px;
+      padding:0 28px;
       display:grid;
-      grid-template-columns:1fr 320px;
-      gap:32px;
+      grid-template-columns:1.3fr .7fr;
+      gap:40px;
       align-items:center;
     }
 
     .hero h1{
-      font-size:42px;
-      margin:0 0 10px;
+      font-size:44px;
+      line-height:1.15;
+      margin:0 0 14px;
     }
 
     .hero p{
-      color:var(--muted);
-      line-height:1.6;
-      max-width:80%;
+      color:var(--text-muted);
+      line-height:1.7;
+      max-width:90%;
     }
 
     .card{
-      background:var(--card);
-      padding:18px;
+      background:var(--card-bg);
+      border:1px solid var(--border);
       border-radius:var(--radius);
+      padding:22px;
     }
 
+    /* ===== SECTIONS ===== */
     .section{
-      max-width:1180px;
-      margin:40px auto;
-      padding:20px;
+      max-width:var(--max);
+      margin:70px auto;
+      padding:0 28px;
     }
 
     .section h2{
-      font-size:26px;
+      font-size:28px;
       margin-bottom:14px;
     }
 
+    .section p, .section li{
+      color:var(--text-muted);
+      line-height:1.7;
     }
 
-    }
+    ul{padding-left:18px;}
 
+    /* ===== FOOTER ===== */
     footer{
       text-align:center;
-      padding:30px 0;
-      color:var(--muted);
-      margin-top:40px;
+      padding:40px 0 50px;
+      color:var(--text-muted);
+      border-top:1px solid var(--border);
+      margin-top:80px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      nav{display:none;}
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div><strong>Abdiwahid Said Abdirahman</strong></div>
-    <nav>
-      <a href="#about">Über mich</a>
-      <a href="#skills">Fähigkeiten</a>
-      <a href="#ausbildung">Ausbildungssuche</a>
-      
-      <a href="#kontakt">Kontakt</a>
-    </nav>
-  </header>
+  <div class="frame">
 
-  <section class="hero">
-    <div>
-      <h1>Ich suche einen Ausbildungsplatz<br>als Fachinformatiker</h1>
-      <p>Motiviert, zuverlässig und bereit für meinen Einstieg in die IT-Welt. Ich suche eine Ausbildungsstelle als Fachinformatiker – Fachrichtung Anwendungsentwicklung oder Systemintegration.</p>
-    </div>
+    <header>
+      <div class="logo">
+        <div class="logo-mark">A</div>
+        <div class="logo-text">
+          <strong>Abdiwahid Said Abdirahman</strong>
+          <span>Future Fachinformatiker</span>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">Über mich</a>
+        <a href="#skills">Fähigkeiten</a>
+        <a href="#ausbildung">Ausbildung</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </header>
 
-    <aside class="card">
-      <strong>Kontaktdaten</strong><br>
-      Abdiwahid Said Abdirahman<br>
-      Inratherstraße 325<br>
-      47803 Krefeld<br>
-      Telefon: +49 1521 6240058<br>
-      E‑Mail: jamuus23@gmail.com<br>
-      Website: www.abdiwahid.de
-    </aside>
-  </section>
+    <section class="hero">
+      <div>
+        <h1>Ausbildungsplatz<br>als Fachinformatiker</h1>
+        <p>Motiviert, lernbereit und technikbegeistert. Ich suche eine Ausbildungsstelle als Fachinformatiker – Anwendungsentwicklung oder Systemintegration.</p>
+      </div>
 
-  <section id="about" class="section">
-    <h2>Über mich</h2>
-    <p>Ich bin motiviert, zielstrebig und habe großes Interesse an IT, Softwareentwicklung und Technologie. Ich möchte meine Fähigkeiten weiterentwickeln und suche daher eine Ausbildungsstelle, in der ich wachsen und aktiv mitarbeiten kann.</p>
-  </section>
+      <aside class="card">
+        <strong>Kontaktdaten</strong><br><br>
+        Abdiwahid Said Abdirahman<br>
+        Inratherstraße 325<br>
+        47803 Krefeld<br><br>
+        Telefon: +49 1521 6240058<br>
+        E-Mail: jamuus23@gmail.com<br>
+        Website: www.abdiwahid.de
+      </aside>
+    </section>
 
-  <section id="skills" class="section">
-    <h2>Fähigkeiten</h2>
-    <ul>
-      <li>Grundkenntnisse in HTML, CSS und JavaScript</li>
-      <li>Gute PC‑Kenntnisse und technisches Verständnis</li>
-      <li>Schnelles Lernen und Teamfähigkeit</li>
-      <li>Interesse an Programmierung und IT‑Systemen</li>
-    </ul>
-  </section>
+    <section id="about" class="section">
+      <h2>Über mich</h2>
+      <p>Ich bin zielstrebig, zuverlässig und habe großes Interesse an IT, Software und modernen Technologien. Mein Ziel ist es, mich fachlich und persönlich weiterzuentwickeln.</p>
+    </section>
 
-  <section id="ausbildung" class="section">
-    <h2>Warum ich der richtige Azubi bin</h2>
-    <p>Ich suche ein Unternehmen, bei dem ich mich einbringen kann und das bereit ist, mich auf meinem Weg als zukünftiger Fachinformatiker zu unterstützen. Ich bin zuverlässig, engagiert und arbeite fleißig an meinen Fähigkeiten.</p>
-  </section>
+    <section id="skills" class="section">
+      <h2>Fähigkeiten</h2>
+      <ul>
+        <li>HTML, CSS & JavaScript (Grundlagen)</li>
+        <li>Technisches Verständnis & PC-Kenntnisse</li>
+        <li>Teamfähigkeit & schnelles Lernen</li>
+        <li>Großes Interesse an IT-Systemen</li>
+      </ul>
+    </section>
 
-  
+    <section id="ausbildung" class="section">
+      <h2>Warum ich?</h2>
+      <p>Ich bin engagiert, lernbereit und motiviert, Verantwortung zu übernehmen. Ich suche ein Unternehmen, das mich fördert und mir echte Praxiserfahrung ermöglicht.</p>
+    </section>
 
-  <footer id="kontakt">
-    © 2025 Abdiwahid Said Abdirahman – Persönliche Website
-  </footer>
+    <footer id="kontakt">
+      © 2025 Abdiwahid Said Abdirahman – Persönliche Website
+    </footer>
 
+  </div>
 </body>
 </html>
