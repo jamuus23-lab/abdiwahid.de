@@ -1,236 +1,200 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Abdiwahid Said Abdirahman – Fachinformatiker</title>
-  <meta name="description" content="Persönliche Website – Ausbildungssuche als Fachinformatiker" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>QUANTARIX — Quantitative Systems & Technologies</title>
+<meta name="description" content="QUANTARIX — Cinematic aqua-tech systems for human–AI collaboration, resilience and security." />
 
-  <style>
-    :root{
-      --navy-900:#020b1c;
-      --navy-800:#041633;
-      --navy-700:#07224d;
-      --blue-accent:#2aa8ff;
-      --blue-glow:#6cc6ff;
-      --text-main:#eaf2ff;
-      --text-muted:#a9bfd9;
-      --card-bg:rgba(255,255,255,0.06);
-      --border:rgba(255,255,255,0.08);
-      --radius:16px;
-      --max:1180px;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
-    }
+<style>
+:root{
+  --bg-1:#020b14; --bg-2:#071627;
+  --accent-a:#00b8ff; --accent-b:#0ea5ff;
+  --muted:#9fb0c2; --card:rgba(255,255,255,0.02);
+  --radius:14px;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:
+    radial-gradient(900px 420px at 12% 12%, rgba(3,40,70,.48), transparent 18%),
+    linear-gradient(180deg,var(--bg-1),var(--bg-2));
+  color:#e6f0fb;
+}
 
-    *{box-sizing:border-box;}
+.wrap{max-width:1180px;margin:36px auto;padding:28px}
+header{display:flex;justify-content:space-between;align-items:center;gap:18px}
 
-    body{
-      margin:0;
-      background:
-        radial-gradient(900px 400px at 10% -10%, #0b2b55 0%, transparent 60%),
-        linear-gradient(180deg, var(--navy-900), var(--navy-800));
-      color:var(--text-main);
-    }
+.brand{display:flex;align-items:center;gap:16px}
+.logo{
+  width:72px;height:72px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, rgba(0,184,255,.18), rgba(4,30,50,.06));
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.05);
+  box-shadow:0 20px 60px rgba(0,140,255,.15);
+  font-weight:900;font-size:22px;color:#8fe9ff;
+}
 
-    /* ===== FRAME ===== */
-    .frame{
-      min-height:100vh;
-      border:1px solid var(--border);
-      margin:18px;
-      border-radius:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
-      box-shadow:0 40px 120px rgba(0,0,0,.55);
-      overflow:hidden;
-    }
+nav a{
+  color:#e6f0fb;text-decoration:none;
+  margin-left:18px;font-size:14px;
+  position:relative;
+}
+nav a::after{
+  content:"";position:absolute;left:0;bottom:-6px;
+  width:0;height:2px;background:var(--accent-a);
+  transition:.3s;
+}
+nav a:hover::after{width:100%}
 
-    /* ===== HEADER ===== */
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:22px 28px;
-      background:linear-gradient(180deg, rgba(4,22,51,.9), rgba(4,22,51,.6));
-      backdrop-filter: blur(8px);
-      border-bottom:1px solid var(--border);
-    }
+.hero{
+  display:grid;
+  grid-template-columns:1fr 380px;
+  gap:28px;
+  margin-top:42px;
+}
+.title{
+  font-size:44px;line-height:1.05;margin:0 0 12px;
+}
+.lead{
+  color:var(--muted);line-height:1.6;max-width:85%;
+}
 
-    /* ===== LOGO ===== */
-    .logo{
-      display:flex;
-      align-items:center;
-      gap:14px;
-    }
+.card{
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:var(--radius);
+  padding:20px;
+  box-shadow:0 10px 60px rgba(0,0,0,.6);
+}
 
-    .logo-mark{
-      width:44px;
-      height:44px;
-      border-radius:12px;
-      background:linear-gradient(135deg, var(--blue-accent), var(--blue-glow));
-      display:grid;
-      place-items:center;
-      font-weight:800;
-      color:#031025;
-      box-shadow:0 0 22px rgba(42,168,255,.55);
-    }
+.section{margin-top:56px}
+.section h2{font-size:20px;margin-bottom:10px}
+.section p{color:var(--muted);line-height:1.7;max-width:900px}
 
-    .logo-text strong{
-      display:block;
-      font-size:15px;
-      letter-spacing:.3px;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+  margin-top:18px;
+}
+.feature{
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.04);
+  border-radius:12px;
+  padding:18px;
+}
+.feature h3{margin:0 0 6px;font-size:16px}
+.feature p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
 
-    .logo-text span{
-      font-size:12px;
-      color:var(--text-muted);
-    }
+footer{
+  margin-top:64px;
+  padding-top:22px;
+  border-top:1px solid rgba(255,255,255,.04);
+  color:var(--muted);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  font-size:13px;
+}
 
-    nav a{
-      margin-left:22px;
-      color:var(--text-main);
-      text-decoration:none;
-      font-size:14px;
-      position:relative;
-    }
+.halo{
+  position:fixed;right:-220px;top:-140px;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, rgba(0,184,255,.18), rgba(0,80,120,.04) 45%, transparent 60%);
+  filter:blur(40px);pointer-events:none;
+}
 
-    nav a::after{
-      content:"";
-      position:absolute;
-      left:0;
-      bottom:-6px;
-      width:0;
-      height:2px;
-      background:var(--blue-accent);
-      transition:.25s ease;
-    }
-
-    nav a:hover::after{width:100%;}
-
-    /* ===== HERO ===== */
-    .hero{
-      max-width:var(--max);
-      margin:70px auto 40px;
-      padding:0 28px;
-      display:grid;
-      grid-template-columns:1.3fr .7fr;
-      gap:40px;
-      align-items:center;
-    }
-
-    .hero h1{
-      font-size:44px;
-      line-height:1.15;
-      margin:0 0 14px;
-    }
-
-    .hero p{
-      color:var(--text-muted);
-      line-height:1.7;
-      max-width:90%;
-    }
-
-    .card{
-      background:var(--card-bg);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:22px;
-    }
-
-    /* ===== SECTIONS ===== */
-    .section{
-      max-width:var(--max);
-      margin:70px auto;
-      padding:0 28px;
-    }
-
-    .section h2{
-      font-size:28px;
-      margin-bottom:14px;
-    }
-
-    .section p, .section li{
-      color:var(--text-muted);
-      line-height:1.7;
-    }
-
-    ul{padding-left:18px;}
-
-    /* ===== FOOTER ===== */
-    footer{
-      text-align:center;
-      padding:40px 0 50px;
-      color:var(--text-muted);
-      border-top:1px solid var(--border);
-      margin-top:80px;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media(max-width:900px){
-      .hero{grid-template-columns:1fr;}
-      nav{display:none;}
-    }
-  </style>
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr}
+  .lead{max-width:100%}
+}
+</style>
 </head>
 
 <body>
-  <div class="frame">
+<div class="halo"></div>
 
-    <header>
-      <div class="logo">
-        <div class="logo-mark">A</div>
-        <div class="logo-text">
-          <strong>Abdiwahid Said Abdirahman</strong>
-          <span>Future Fachinformatiker</span>
-        </div>
-      </div>
-      <nav>
-        <a href="#about">Über mich</a>
-        <a href="#skills">Fähigkeiten</a>
-        <a href="#ausbildung">Ausbildung</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
-    </header>
+<div class="wrap">
 
-    <section class="hero">
-      <div>
-        <h1>Ausbildungsplatz<br>als Fachinformatiker</h1>
-        <p>Motiviert, lernbereit und technikbegeistert. Ich suche eine Ausbildungsstelle als Fachinformatiker – Anwendungsentwicklung oder Systemintegration.</p>
-      </div>
-
-      <aside class="card">
-        <strong>Kontaktdaten</strong><br><br>
-        Abdiwahid Said Abdirahman<br>
-        Inratherstraße 325<br>
-        47803 Krefeld<br><br>
-        Telefon: +49 1521 6240058<br>
-        E-Mail: jamuus23@gmail.com<br>
-        Website: www.abdiwahid.de
-      </aside>
-    </section>
-
-    <section id="about" class="section">
-      <h2>Über mich</h2>
-      <p>Ich bin zielstrebig, zuverlässig und habe großes Interesse an IT, Software und modernen Technologien. Mein Ziel ist es, mich fachlich und persönlich weiterzuentwickeln.</p>
-    </section>
-
-    <section id="skills" class="section">
-      <h2>Fähigkeiten</h2>
-      <ul>
-        <li>HTML, CSS & JavaScript (Grundlagen)</li>
-        <li>Technisches Verständnis & PC-Kenntnisse</li>
-        <li>Teamfähigkeit & schnelles Lernen</li>
-        <li>Großes Interesse an IT-Systemen</li>
-      </ul>
-    </section>
-
-    <section id="ausbildung" class="section">
-      <h2>Warum ich?</h2>
-      <p>Ich bin engagiert, lernbereit und motiviert, Verantwortung zu übernehmen. Ich suche ein Unternehmen, das mich fördert und mir echte Praxiserfahrung ermöglicht.</p>
-    </section>
-
-    <footer id="kontakt">
-      © 2025 Abdiwahid Said Abdirahman – Persönliche Website
-    </footer>
-
+<header>
+  <div class="brand">
+    <div class="logo">Q</div>
+    <div>
+      <strong>QUANTARIX</strong><br>
+      <span style="color:var(--muted);font-size:12px">Quantitative Systems & Technologies</span>
+    </div>
   </div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#focus">Focus</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h1 class="title">Cinematic Systems<br>for Human–AI Collaboration</h1>
+    <p class="lead">
+      QUANTARIX is a conceptual technology platform focused on secure,
+      explainable and resilient systems designed for responsible
+      human–AI interaction.
+    </p>
+  </div>
+
+  <aside class="card">
+    <strong>ENTITY STATUS</strong><br><br>
+    Independent technology concept<br>
+    Research · Systems · Security<br>
+    No personal or private data displayed
+  </aside>
+</section>
+
+<section id="about" class="section">
+  <h2>Mission</h2>
+  <p>
+    QUANTARIX explores advanced system architectures that combine
+    human oversight with intelligent automation. The focus is on
+    transparency, robustness and long-term resilience.
+  </p>
+</section>
+
+<section id="focus" class="section">
+  <h2>Strategic Focus Areas</h2>
+  <div class="grid">
+    <div class="feature">
+      <h3>Artificial Intelligence & Autonomy</h3>
+      <p>Explainable and controlled AI systems for decision support.</p>
+    </div>
+    <div class="feature">
+      <h3>Cybersecurity & Resilience</h3>
+      <p>Secure architectures, encrypted systems and threat detection.</p>
+    </div>
+    <div class="feature">
+      <h3>Advanced Systems Engineering</h3>
+      <p>Robust design principles for complex digital infrastructures.</p>
+    </div>
+    <div class="feature">
+      <h3>Human-Centered Technology</h3>
+      <p>Ethical frameworks and human-in-the-loop control models.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <strong>QUANTARIX</strong><br>
+    Public concept site · No contact data published
+  </div>
+  <div>
+    © <span id="year"></span> QUANTARIX
+  </div>
+</footer>
+
+</div>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
