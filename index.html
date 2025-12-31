@@ -1,199 +1,168 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>QUANTARIX — Quantitative Systems & Technologies</title>
-<meta name="description" content="QUANTARIX — Cinematic aqua-tech systems for human–AI collaboration, resilience and security." />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TransitGo – Trains & Buses</title>
 
 <style>
 :root{
-  --bg-1:#020b14; --bg-2:#071627;
-  --accent-a:#00b8ff; --accent-b:#0ea5ff;
-  --muted:#9fb0c2; --card:rgba(255,255,255,0.02);
-  --radius:14px;
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  --ns-blue:#003082;
+  --light:#f4f6fb;
 }
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  background:
-    radial-gradient(900px 420px at 12% 12%, rgba(3,40,70,.48), transparent 18%),
-    linear-gradient(180deg,var(--bg-1),var(--bg-2));
-  color:#e6f0fb;
+*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;}
+body{margin:0;background:var(--light);}
+
+header{
+  background:var(--ns-blue);
+  color:white;
+  padding:15px 20px;
+  font-size:1.4rem;
+  font-weight:bold;
 }
 
-.wrap{max-width:1180px;margin:36px auto;padding:28px}
-header{display:flex;justify-content:space-between;align-items:center;gap:18px}
-
-.brand{display:flex;align-items:center;gap:16px}
-.logo{
-  width:72px;height:72px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%, rgba(0,184,255,.18), rgba(4,30,50,.06));
-  display:flex;align-items:center;justify-content:center;
-  border:1px solid rgba(255,255,255,.05);
-  box-shadow:0 20px 60px rgba(0,140,255,.15);
-  font-weight:900;font-size:22px;color:#8fe9ff;
+nav{
+  display:flex;
+  background:white;
+  box-shadow:0 2px 5px rgba(0,0,0,.1);
+}
+nav button{
+  flex:1;
+  padding:15px;
+  border:none;
+  background:white;
+  font-size:1rem;
+  cursor:pointer;
+}
+nav button.active{
+  border-bottom:4px solid var(--ns-blue);
+  font-weight:bold;
 }
 
-nav a{
-  color:#e6f0fb;text-decoration:none;
-  margin-left:18px;font-size:14px;
-  position:relative;
+section{
+  display:none;
+  padding:20px;
 }
-nav a::after{
-  content:"";position:absolute;left:0;bottom:-6px;
-  width:0;height:2px;background:var(--accent-a);
-  transition:.3s;
-}
-nav a:hover::after{width:100%}
-
-.hero{
-  display:grid;
-  grid-template-columns:1fr 380px;
-  gap:28px;
-  margin-top:42px;
-}
-.title{
-  font-size:44px;line-height:1.05;margin:0 0 12px;
-}
-.lead{
-  color:var(--muted);line-height:1.6;max-width:85%;
-}
+section.active{display:block;}
 
 .card{
-  background:var(--card);
-  border:1px solid rgba(255,255,255,.05);
-  border-radius:var(--radius);
-  padding:20px;
-  box-shadow:0 10px 60px rgba(0,0,0,.6);
+  background:white;
+  padding:15px;
+  margin-bottom:15px;
+  border-radius:8px;
+  box-shadow:0 4px 10px rgba(0,0,0,.05);
 }
 
-.section{margin-top:56px}
-.section h2{font-size:20px;margin-bottom:10px}
-.section p{color:var(--muted);line-height:1.7;max-width:900px}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:18px;
-  margin-top:18px;
-}
-.feature{
-  background:var(--card);
-  border:1px solid rgba(255,255,255,.04);
-  border-radius:12px;
-  padding:18px;
-}
-.feature h3{margin:0 0 6px;font-size:16px}
-.feature p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
-
-footer{
-  margin-top:64px;
-  padding-top:22px;
-  border-top:1px solid rgba(255,255,255,.04);
-  color:var(--muted);
-  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
-  font-size:13px;
+input,select{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:6px;
+  border:1px solid #ccc;
 }
 
-.halo{
-  position:fixed;right:-220px;top:-140px;
-  width:700px;height:700px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%, rgba(0,184,255,.18), rgba(0,80,120,.04) 45%, transparent 60%);
-  filter:blur(40px);pointer-events:none;
+button.primary{
+  background:var(--ns-blue);
+  color:white;
+  padding:12px;
+  border:none;
+  border-radius:6px;
+  width:100%;
+  font-size:1rem;
 }
 
-@media(max-width:960px){
-  .hero{grid-template-columns:1fr}
-  .lead{max-width:100%}
+.route{
+  border-left:5px solid var(--ns-blue);
+  padding-left:10px;
+  margin:10px 0;
 }
+.time{font-weight:bold;}
 </style>
 </head>
 
 <body>
-<div class="halo"></div>
 
-<div class="wrap">
+<header>🚆 TransitGo</header>
 
-<header>
-  <div class="brand">
-    <div class="logo">Q</div>
-    <div>
-      <strong>QUANTARIX</strong><br>
-      <span style="color:var(--muted);font-size:12px">Quantitative Systems & Technologies</span>
-    </div>
-  </div>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#focus">Focus</a>
-  </nav>
-</header>
+<nav>
+  <button class="active" onclick="openTab('planner')">Planner</button>
+  <button onclick="openTab('departures')">Departures</button>
+  <button onclick="openTab('map')">Map</button>
+</nav>
 
-<section class="hero">
-  <div>
-    <h1 class="title">Cinematic Systems<br>for Human–AI Collaboration</h1>
-    <p class="lead">
-      QUANTARIX is a conceptual technology platform focused on secure,
-      explainable and resilient systems designed for responsible
-      human–AI interaction.
-    </p>
+<!-- ROUTE PLANNER -->
+<section id="planner" class="active">
+  <div class="card">
+    <h3>Route Planner</h3>
+    <input id="from" placeholder="From (e.g. Amsterdam)" />
+    <input id="to" placeholder="To (e.g. Rotterdam)" />
+    <select id="mode">
+      <option>Train</option>
+      <option>Bus</option>
+      <option>Train + Bus</option>
+    </select>
+    <button class="primary" onclick="planRoute()">Plan Route</button>
   </div>
 
-  <aside class="card">
-    <strong>ENTITY STATUS</strong><br><br>
-    Independent technology concept<br>
-    Research · Systems · Security<br>
-    No personal or private data displayed
-  </aside>
+  <div id="results"></div>
 </section>
 
-<section id="about" class="section">
-  <h2>Mission</h2>
-  <p>
-    QUANTARIX explores advanced system architectures that combine
-    human oversight with intelligent automation. The focus is on
-    transparency, robustness and long-term resilience.
-  </p>
-</section>
+<!-- DEPARTURES -->
+<section id="departures">
+  <div class="card">
+    <h3>Live Departures (Demo)</h3>
 
-<section id="focus" class="section">
-  <h2>Strategic Focus Areas</h2>
-  <div class="grid">
-    <div class="feature">
-      <h3>Artificial Intelligence & Autonomy</h3>
-      <p>Explainable and controlled AI systems for decision support.</p>
+    <div class="route">
+      <div class="time">14:05</div>
+      Intercity → Rotterdam (Platform 5)
     </div>
-    <div class="feature">
-      <h3>Cybersecurity & Resilience</h3>
-      <p>Secure architectures, encrypted systems and threat detection.</p>
+
+    <div class="route">
+      <div class="time">14:12</div>
+      Sprinter → Utrecht (Platform 2)
     </div>
-    <div class="feature">
-      <h3>Advanced Systems Engineering</h3>
-      <p>Robust design principles for complex digital infrastructures.</p>
-    </div>
-    <div class="feature">
-      <h3>Human-Centered Technology</h3>
-      <p>Ethical frameworks and human-in-the-loop control models.</p>
+
+    <div class="route">
+      <div class="time">14:20</div>
+      Bus 48 → Airport
     </div>
   </div>
 </section>
 
-<footer>
-  <div>
-    <strong>QUANTARIX</strong><br>
-    Public concept site · No contact data published
+<!-- MAP -->
+<section id="map">
+  <div class="card">
+    <h3>Network Map</h3>
+    <p>🗺️ Interactive map placeholder</p>
+    <p>Integrate Google Maps / Mapbox here.</p>
   </div>
-  <div>
-    © <span id="year"></span> QUANTARIX
-  </div>
-</footer>
-
-</div>
+</section>
 
 <script>
-document.getElementById("year").textContent = new Date().getFullYear();
+function openTab(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+  document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  event.target.classList.add("active");
+}
+
+function planRoute(){
+  const from=document.getElementById("from").value;
+  const to=document.getElementById("to").value;
+  const mode=document.getElementById("mode").value;
+
+  document.getElementById("results").innerHTML=`
+    <div class="card">
+      <h4>Route Found</h4>
+      <div class="route">
+        <div class="time">14:30 – 15:25</div>
+        ${mode}<br>
+        ${from} → ${to}<br>
+        Duration: 55 min
+      </div>
+    </div>
+  `;
+}
 </script>
 
 </body>
