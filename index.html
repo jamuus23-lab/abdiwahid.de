@@ -2,174 +2,124 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Live Journey Planner | abdiwahid.de</title>
+<title>Live Transit Planner — abdiwahid.de</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Leaflet Map -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f7fb;
-}
-header {
-  background: #003566;
-  color: white;
-  padding: 15px;
-  text-align: center;
-}
-#map {
-  height: 45vh;
-}
-.container {
-  padding: 15px;
-}
-button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  font-size: 16px;
-  border: none;
-  background: #0077b6;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-}
-button:hover {
-  background: #005f8f;
-}
-.result {
-  background: white;
-  margin-top: 15px;
-  padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 0 6px rgba(0,0,0,0.1);
-}
-.transport {
-  margin-bottom: 10px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #ddd;
-}
-.badge {
-  display: inline-block;
-  padding: 3px 7px;
-  background: #e63946;
-  color: white;
-  border-radius: 4px;
-  font-size: 12px;
-}
+  body { font-family: Arial, sans-serif; margin:0; background:#f4f7fb;}
+  header { background:#003366; color:white; text-align:center; padding:15px;}
+  #map { height:45vh;}
+  .container { padding:15px;}
+  button{width:100%; padding:12px; margin:8px 0; font-size:16px; background:#0077b6; color:white; border:none; cursor:pointer; border-radius:4px;}
+  button:hover{background:#005f8f;}
+  .result {background:white; padding:12px; border-radius:8px; margin-top:12px; box-shadow: 0 0 6px rgba(0,0,0,0.1);}
+  .line {font-size:18px; font-weight:bold;}
+  .platform {font-weight:bold; color:#e63946;}
 </style>
 </head>
-
 <body>
 
 <header>
-  <h2>Live Transport Planner</h2>
-  <p>Germany 🇩🇪 & Netherlands 🇳🇱 — Real-Time</p>
+  <h2>Live Transit Planner — abdiwahid.de</h2>
+  <p>Real‑Time Trains (NS + DB) & Buses (DE/NL)</p>
 </header>
 
 <div id="map"></div>
 
 <div class="container">
   <button onclick="useMyLocation()">📍 Use My Location</button>
-  <button onclick="loadDepartures()">🚆 Show All Nearby Departures</button>
+  <button onclick="showNearby()">📅 Show Nearby Departures</button>
   <div id="output"></div>
 </div>
 
-<!-- Leaflet -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script>
-let map = L.map('map').setView([52.52, 13.405], 6);
+let map = L.map('map').setView([52.37, 4.90], 7);
 let marker;
+let nsApiKey = "YOUR_NS_API_KEY_HERE"; // NS real‑time API key
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap'
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+  attribution:'© OpenStreetMap'
 }).addTo(map);
 
-// Click map to set location
-map.on('click', function(e) {
-  setLocation(e.latlng.lat, e.latlng.lng);
-});
+map.on('click', e => setLocation(e.latlng.lat, e.latlng.lng));
 
-// Use browser GPS
-function useMyLocation() {
-  navigator.geolocation.getCurrentPosition(
-    pos => setLocation(pos.coords.latitude, pos.coords.longitude),
-    err => alert("Location permission denied")
-  );
+function useMyLocation(){
+  navigator.geolocation.getCurrentPosition(pos => {
+    setLocation(pos.coords.latitude, pos.coords.longitude);
+  }, _ => alert("Location denied"));
 }
 
-function setLocation(lat, lon) {
-  if (marker) map.removeLayer(marker);
-  marker = L.marker([lat, lon]).addTo(map)
-    .bindPopup("Your selected location").openPopup();
+function setLocation(lat, lon){
+  if(marker) map.removeLayer(marker);
+  marker = L.marker([lat, lon]).addTo(map);
   map.setView([lat, lon], 14);
   window.currentLat = lat;
   window.currentLon = lon;
 }
 
-// Load departures (ALL transport types)
-async function loadDepartures() {
-  if (!window.currentLat) {
-    alert("Please select or allow your location first");
-    return;
-  }
-
-  document.getElementById("output").innerHTML =
-    "<div class='result'>Loading real-time data…</div>";
+async function showNearby(){
+  if(!window.currentLat) return alert("Select location first");
+  document.getElementById('output').innerHTML = `<div class="result">Loading…</div>`;
 
   try {
-    // Find nearest stop
+    // find nearest stop
     const stopsRes = await fetch(
       `https://v5.db.transport.rest/locations/nearby?latitude=${currentLat}&longitude=${currentLon}&distance=1000`
     );
     const stops = await stopsRes.json();
+    if(!stops.length) throw "No nearby stations";
 
-    if (!stops.length) throw "No stations found nearby";
+    let station = stops[0];
+    let outHtml = `<div class="result"><h3>Nearby: ${station.name}</h3>`;
 
-    const stopId = stops[0].id;
+    // NS Real‑Time departures
+    const nsUrl = `https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/departures?station=${encodeURIComponent(station.name)}&subscription-key=${nsApiKey}`;
+    const nsRes = await fetch(nsUrl);
+    const nsData = await nsRes.json();
 
-    // Get real-time departures
+    if(nsData.departures){
+      outHtml += `<h4>NS Departures (NL, realtime)</h4>`;
+      nsData.departures.forEach(d => {
+        outHtml += `
+          <div>
+            <span class="line">${d.trip.serviceJourney.journeyPattern.line.name}</span>
+            ➡ ${d.trip.destinationName}<br>
+            🕒 Planned: ${new Date(d.plannedDateTime).toLocaleTimeString()}<br>
+            🕒 Real (if present): ${d.actualDateTime ? new Date(d.actualDateTime).toLocaleTimeString() : "–"}<br>
+            📍 Platform: <span class="platform">${d.plannedTrack}</span><br><br>
+          </div>
+        `;
+      });
+    }
+
+    // DB & NL (transport.rest) departures
     const depRes = await fetch(
-      `https://v5.db.transport.rest/stops/${stopId}/departures?duration=30`
+      `https://v5.db.transport.rest/stops/${encodeURIComponent(station.id)}/departures?duration=30`
     );
-    const deps = await depRes.json();
+    const depData = await depRes.json();
+    if(depData.departures){
+      outHtml += `<h4>Transport.rest Departures (DE/NL)</h4>`;
+      depData.departures.forEach(d => {
+        outHtml += `
+          <div>
+            <span class="line">${d.line.name}</span> (${d.line.product})<br>
+            ➡ ${d.direction}<br>
+            🕒 ${new Date(d.when).toLocaleTimeString()}<br>
+            📍 Platform: <span class="platform">${d.platform ?? "–"}</span><br><br>
+          </div>
+        `;
+      });
+    }
 
-    renderDepartures(deps, stops[0].name);
+    outHtml += `</div>`;
+    document.getElementById('output').innerHTML = outHtml;
 
-  } catch (e) {
-    document.getElementById("output").innerHTML =
-      `<div class='result'>Error: ${e}</div>`;
+  } catch(err){
+    document.getElementById('output').innerHTML = `<div class="result">Error: ${err}</div>`;
   }
-}
-
-function renderDepartures(data, stationName) {
-  let html = `<div class="result">
-    <h3>📍 ${stationName}</h3>`;
-
-  if (!data.departures.length) {
-    html += "<p>No departures available.</p></div>";
-    document.getElementById("output").innerHTML = html;
-    return;
-  }
-
-  data.departures.forEach(d => {
-    html += `
-      <div class="transport">
-        <strong>${d.line.name}</strong>
-        <span class="badge">${d.line.product}</span><br>
-        ➡ ${d.direction}<br>
-        🕒 ${new Date(d.when).toLocaleTimeString()} 
-        ${d.platform ? " | Platform " + d.platform : ""}
-      </div>
-    `;
-  });
-
-  html += "</div>";
-  document.getElementById("output").innerHTML = html;
 }
 </script>
 
