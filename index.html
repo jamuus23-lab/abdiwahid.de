@@ -2,125 +2,86 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Live Transit Planner — abdiwahid.de</title>
+<title>Real-Time Satellite Tracker</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
 
 <style>
-  body { font-family: Arial, sans-serif; margin:0; background:#f4f7fb;}
-  header { background:#003366; color:white; text-align:center; padding:15px;}
-  #map { height:45vh;}
-  .container { padding:15px;}
-  button{width:100%; padding:12px; margin:8px 0; font-size:16px; background:#0077b6; color:white; border:none; cursor:pointer; border-radius:4px;}
-  button:hover{background:#005f8f;}
-  .result {background:white; padding:12px; border-radius:8px; margin-top:12px; box-shadow: 0 0 6px rgba(0,0,0,0.1);}
-  .line {font-size:18px; font-weight:bold;}
-  .platform {font-weight:bold; color:#e63946;}
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b132b;
+    color: white;
+  }
+  header {
+    background: #1c2541;
+    padding: 15px;
+    text-align: center;
+  }
+  #map {
+    height: 85vh;
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <h2>Live Transit Planner — abdiwahid.de</h2>
-  <p>Real‑Time Trains (NS + DB) & Buses (DE/NL)</p>
+  <h2>🛰️ Real-Time Satellite Tracker</h2>
+  <p>Live ISS Position (Updated Every 5 Seconds)</p>
 </header>
 
 <div id="map"></div>
 
-<div class="container">
-  <button onclick="useMyLocation()">📍 Use My Location</button>
-  <button onclick="showNearby()">📅 Show Nearby Departures</button>
-  <div id="output"></div>
-</div>
-
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-let map = L.map('map').setView([52.37, 4.90], 7);
-let marker;
-let nsApiKey = "YOUR_NS_API_KEY_HERE"; // NS real‑time API key
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-  attribution:'© OpenStreetMap'
+<script>
+const API_KEY = "YOUR_N2YO_API_KEY"; // 🔑 PUT YOUR API KEY HERE
+const SAT_ID = 25544; // ISS
+const OBS_LAT = 0;
+const OBS_LON = 0;
+const OBS_ALT = 0;
+
+let map = L.map("map").setView([0, 0], 2);
+
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "© OpenStreetMap"
 }).addTo(map);
 
-map.on('click', e => setLocation(e.latlng.lat, e.latlng.lng));
+let marker = L.marker([0, 0]).addTo(map);
+let pathLine = L.polyline([], { color: "lime" }).addTo(map);
 
-function useMyLocation(){
-  navigator.geolocation.getCurrentPosition(pos => {
-    setLocation(pos.coords.latitude, pos.coords.longitude);
-  }, _ => alert("Location denied"));
-}
-
-function setLocation(lat, lon){
-  if(marker) map.removeLayer(marker);
-  marker = L.marker([lat, lon]).addTo(map);
-  map.setView([lat, lon], 14);
-  window.currentLat = lat;
-  window.currentLon = lon;
-}
-
-async function showNearby(){
-  if(!window.currentLat) return alert("Select location first");
-  document.getElementById('output').innerHTML = `<div class="result">Loading…</div>`;
-
+async function updateSatellite() {
   try {
-    // find nearest stop
-    const stopsRes = await fetch(
-      `https://v5.db.transport.rest/locations/nearby?latitude=${currentLat}&longitude=${currentLon}&distance=1000`
-    );
-    const stops = await stopsRes.json();
-    if(!stops.length) throw "No nearby stations";
+    const url = `https://api.n2yo.com/rest/v1/satellite/positions/${SAT_ID}/${OBS_LAT}/${OBS_LON}/${OBS_ALT}/1/&apiKey=${API_KEY}`;
+    const res = await fetch(url);
+    const data = await res.json();
 
-    let station = stops[0];
-    let outHtml = `<div class="result"><h3>Nearby: ${station.name}</h3>`;
+    const pos = data.positions[0];
+    const lat = pos.satlatitude;
+    const lon = pos.satlongitude;
 
-    // NS Real‑Time departures
-    const nsUrl = `https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/departures?station=${encodeURIComponent(station.name)}&subscription-key=${nsApiKey}`;
-    const nsRes = await fetch(nsUrl);
-    const nsData = await nsRes.json();
+    marker.setLatLng([lat, lon]);
+    marker.bindPopup(`
+      <b>ISS</b><br>
+      Latitude: ${lat.toFixed(2)}<br>
+      Longitude: ${lon.toFixed(2)}<br>
+      Altitude: ${pos.sataltitude.toFixed(1)} km
+    `);
 
-    if(nsData.departures){
-      outHtml += `<h4>NS Departures (NL, realtime)</h4>`;
-      nsData.departures.forEach(d => {
-        outHtml += `
-          <div>
-            <span class="line">${d.trip.serviceJourney.journeyPattern.line.name}</span>
-            ➡ ${d.trip.destinationName}<br>
-            🕒 Planned: ${new Date(d.plannedDateTime).toLocaleTimeString()}<br>
-            🕒 Real (if present): ${d.actualDateTime ? new Date(d.actualDateTime).toLocaleTimeString() : "–"}<br>
-            📍 Platform: <span class="platform">${d.plannedTrack}</span><br><br>
-          </div>
-        `;
-      });
-    }
+    pathLine.addLatLng([lat, lon]);
+    map.setView([lat, lon], map.getZoom());
 
-    // DB & NL (transport.rest) departures
-    const depRes = await fetch(
-      `https://v5.db.transport.rest/stops/${encodeURIComponent(station.id)}/departures?duration=30`
-    );
-    const depData = await depRes.json();
-    if(depData.departures){
-      outHtml += `<h4>Transport.rest Departures (DE/NL)</h4>`;
-      depData.departures.forEach(d => {
-        outHtml += `
-          <div>
-            <span class="line">${d.line.name}</span> (${d.line.product})<br>
-            ➡ ${d.direction}<br>
-            🕒 ${new Date(d.when).toLocaleTimeString()}<br>
-            📍 Platform: <span class="platform">${d.platform ?? "–"}</span><br><br>
-          </div>
-        `;
-      });
-    }
-
-    outHtml += `</div>`;
-    document.getElementById('output').innerHTML = outHtml;
-
-  } catch(err){
-    document.getElementById('output').innerHTML = `<div class="result">Error: ${err}</div>`;
+  } catch (err) {
+    console.error("Satellite error:", err);
   }
 }
+
+updateSatellite();
+setInterval(updateSatellite, 5000);
 </script>
 
 </body>
