@@ -1,0 +1,40 @@
+name: Deploy Frontend to Vercel
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'frontend/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VITE_API_BASE: ${{ secrets.VITE_API_BASE }}
+        run: |
+          # Deploy the frontend folder to Vercel. Requires VERCEL_TOKEN to be set in repository secrets.
+          # Optionally set VERCEL_ORG_ID and VERCEL_PROJECT_ID for an existing Vercel project.
+          npx vercel@latest --prod --token "$VERCEL_TOKEN" --confirm --cwd frontend --build-env VITE_API_BASE="$VITE_API_BASE"
