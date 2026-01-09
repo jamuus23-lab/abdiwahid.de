@@ -1,88 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Real-Time Satellite Tracker</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
-
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0b132b;
-    color: white;
-  }
-  header {
-    background: #1c2541;
-    padding: 15px;
-    text-align: center;
-  }
-  #map {
-    height: 85vh;
-  }
-</style>
-</head>
-<body>
-
-<header>
-  <h2>🛰️ Real-Time Satellite Tracker</h2>
-  <p>Live ISS Position (Updated Every 5 Seconds)</p>
-</header>
-
-<div id="map"></div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<script>
-const API_KEY = "YOUR_N2YO_API_KEY"; // 🔑 PUT YOUR API KEY HERE
-const SAT_ID = 25544; // ISS
-const OBS_LAT = 0;
-const OBS_LON = 0;
-const OBS_ALT = 0;
-
-let map = L.map("map").setView([0, 0], 2);
-
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution: "© OpenStreetMap"
-}).addTo(map);
-
-let marker = L.marker([0, 0]).addTo(map);
-let pathLine = L.polyline([], { color: "lime" }).addTo(map);
-
-async function updateSatellite() {
-  try {
-    const url = `https://api.n2yo.com/rest/v1/satellite/positions/${SAT_ID}/${OBS_LAT}/${OBS_LON}/${OBS_ALT}/1/&apiKey=${API_KEY}`;
-    const res = await fetch(url);
-    const data = await res.json();
-
-    const pos = data.positions[0];
-    const lat = pos.satlatitude;
-    const lon = pos.satlongitude;
-
-    marker.setLatLng([lat, lon]);
-    marker.bindPopup(`
-      <b>ISS</b><br>
-      Latitude: ${lat.toFixed(2)}<br>
-      Longitude: ${lon.toFixed(2)}<br>
-      Altitude: ${pos.sataltitude.toFixed(1)} km
-    `);
-
-    pathLine.addLatLng([lat, lon]);
-    map.setView([lat, lon], map.getZoom());
-
-  } catch (err) {
-    console.error("Satellite error:", err);
-  }
-}
-
-updateSatellite();
-setInterval(updateSatellite, 5000);
-</script>
-
-</body>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>abdiwahid transit — frontend</title>
+    <script type="module" crossorigin src="/assets/index-b21f6cd4.js"></script>
+    <link rel="stylesheet" href="/assets/index-33e7412d.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    
+  </body>
 </html>
