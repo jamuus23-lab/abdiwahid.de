@@ -25,6 +25,15 @@ jobs:
         working-directory: frontend
         run: npm run build
 
+      - name: Add CNAME to built site (preserve custom domain)
+        run: |
+          if [ -f CNAME ]; then
+            echo "Found CNAME, copying to frontend/dist/"
+            cp CNAME frontend/dist/CNAME
+          else
+            echo "No CNAME file in repository root; skipping"
+          fi
+
       - name: Deploy to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
