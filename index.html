@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meine Persönliche Website</title>
+
+  <style>
+    :root {
+      --dark-blue: #0b1c2d;
+      --blue: #123a63;
+      --light: #f4f7fb;
+      --text: #1a1a1a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background: var(--light);
+      color: var(--text);
+      padding: 30px;
+    }
+
+    /* Dark Blue Frame */
+    .frame {
+      border: 8px solid var(--dark-blue);
+      border-radius: 16px;
+      max-width: 1000px;
+      margin: auto;
+      background: #fff;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--dark-blue), var(--blue));
+      color: white;
+      padding: 40px;
+      border-radius: 8px 8px 0 0;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      opacity: 0.9;
+      font-size: 1.1rem;
+    }
+
+    section {
+      padding: 40px;
+    }
+
+    section h2 {
+      color: var(--dark-blue);
+      margin-bottom: 15px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #f8faff;
+      border-left: 6px solid var(--dark-blue);
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #eef2f7;
+      border-radius: 0 0 8px 8px;
+      font-size: 0.9rem;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+
+    <header>
+      <h1>Dein Name</h1>
+      <p>Persönliche Website · Portfolio · Profil</p>
+    </header>
+
+    <section>
+      <h2>Über mich</h2>
+      <p>
+        Hallo! Ich bin <strong>Dein Name</strong>.  
+        Das ist meine persönliche Website mit einem eleganten Dark-Blue-Frame-Design.
+      </p>
+    </section>
+
+    <section>
+      <h2>Meine Bereiche</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>💼 Portfolio</h3>
+          <p>Meine Projekte, Arbeiten und Referenzen.</p>
+        </div>
+        <div class="card">
+          <h3>🧠 Skills</h3>
+          <p>Web, Design, Technik, Kreativität.</p>
+        </div>
+        <div class="card">
+          <h3>📩 Kontakt</h3>
+          <p>Email oder Social-Media-Links.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Kontakt</h2>
+      <p>
+        📧 Email: <a href="mailto:deine@email.de">deine@email.de</a><br/>
+        🌐 Website: www.deineseite.de
+      </p>
+    </section>
+
+    <footer>
+      © 2025 · Dein Name · Dark Blue Personal Website
+    </footer>
+
+  </div>
+</body>
+</html>
